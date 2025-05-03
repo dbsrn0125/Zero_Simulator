@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: Pendulum
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00310034003500300062006600360066002d0031003100360062002d0063003500350032002d0034003600330062002d003200640039003200650039003500310032003900320032007d00
+  modelName: Pendulum
+  coSimulation:
+    modelIdentifier: Pendulum
+  modelVariables:
+  - name: Torque
+    valueReference: 0
+    description: Torque
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Angle
+    valueReference: 1
+    description: Angle
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 2
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 
+  - name: DampingCoefficient
+    valueReference: 3
+    description: DampingCoefficient
+    causality: parameter
+    variability: tunable
+    initial: exact
+    type: 0
+    start: 0
+  - name: InitialAngle
+    valueReference: 4
+    description: InitialAngle
+    causality: parameter
+    variability: tunable
+    initial: exact
+    type: 0
+    start: 0
