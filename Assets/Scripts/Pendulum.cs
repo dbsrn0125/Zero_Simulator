@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMI2;
 
-public class Pendulum : MonoBehaviour
+public class Pendulum : MonoBehaviour, IFloatDataProvider
 {
     private FMU fmu;
     public float initialAngle = 45;
@@ -53,4 +53,8 @@ public class Pendulum : MonoBehaviour
         fmu.Dispose();
     }
 
+    public double GetData()
+    {
+        return fmu.GetReal("Angle");
+    }
 }
