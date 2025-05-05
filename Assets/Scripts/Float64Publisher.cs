@@ -18,7 +18,7 @@ public class Float64Publisher : MonoBehaviour
     public MonoBehaviour dataSourceProvider;
 
     private ROSConnection ros;
-    private IFloatDataProvider dataProvider;
+    private IFloatProvider dataProvider;
     private float timeElapsed;
     private Float64Msg message;
     private bool isDataSourceValid = false;
@@ -32,7 +32,7 @@ public class Float64Publisher : MonoBehaviour
         //데이터 소스 컴포넌트에서 IFloatDataProvider 인터페이스 가져오기 시도
         if(dataSourceProvider!=null)
         {
-            dataProvider = dataSourceProvider as IFloatDataProvider;
+            dataProvider = dataSourceProvider as IFloatProvider;
             if(dataProvider==null)
             {
                 Debug.LogError($"'{dataSourceProvider.gameObject.name}' GameObject의 '{dataSourceProvider.GetType().Name}' 컴포넌트가 IFloatDataProvider 인터페이스를 구현하지 않았습니다.", this);

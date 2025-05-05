@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 517254296}
   - component: {fileID: 517254295}
   - component: {fileID: 517254298}
+  - component: {fileID: 517254300}
   - component: {fileID: 517254299}
   m_Layer: 0
   m_Name: Cylinder
@@ -499,12 +500,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17139533ec52814ba077d8d634cf03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialAngle: 45
-  dampingCoefficient: 0.001
+  initialAngle: 0
+  dampingCoefficient: 0
   fmuName: Pendulum
-  angleX: 0
-  angleZ: 0
-  torque: 0
+  targetAngleDegrees: 180
 --- !u!114 &517254299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,12 +513,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 517254293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b05cf18d684b1247b45562cccac422c, type: 3}
+  m_Script: {fileID: 11500000, guid: d16e202ad3d7e2a4982b58e61c9880af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topicName: /inverted_pendulum/angle
-  publishRateHz: 30
-  dataSourceProvider: {fileID: 517254298}
+  topicName: /inverted_pendulum/setpoint_state
+  publishRateHz: 50
+  dataProviderComponent: {fileID: 517254298}
+--- !u!114 &517254300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517254293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461761e3ffff5bf499496a2dc5ece2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /inverted_pendulum/torque_cmd
+  OnMeesageReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 517254298}
+        m_TargetAssemblyTypeName: Pendulum, Assembly-CSharp
+        m_MethodName: Torque
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &705487149
 PrefabInstance:
   m_ObjectHideFlags: 0

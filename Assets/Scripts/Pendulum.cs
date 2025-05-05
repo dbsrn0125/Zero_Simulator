@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMI2;
+using FMI2; 
 
-public class Pendulum : MonoBehaviour, IFloatDataProvider
+public class Pendulum : MonoBehaviour, ISetpointStateProvider
 {
     private FMU fmu;
     public float initialAngle = 45;
     public float dampingCoefficient = 0.00001f;
     public string fmuName;
-    public float angleX = 0f;
-    public float angleZ = 0f;
-    public float torque = 0f;
+    public double torque;
+    [Tooltip("PID 제어 목표 각도 (Degrees)")]
+    public double targetAngleDegrees = 0.0;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +22,11 @@ public class Pendulum : MonoBehaviour, IFloatDataProvider
     // Update is called once per frame
     void FixedUpdate()
     {
+        //customTorque();
         fmu.DoStep(Time.timeAsDouble, Time.deltaTime);
         //Debug.Log(fmu.GetReal("Angle"));
-        float angleY = (float)fmu.GetReal("Angle");
-        transform.localRotation = Quaternion.Euler(angleX, angleY, angleZ);
+        double angleY = GetCurrentAngle();
+        transform.localRotation = Quaternion.Euler(0, (float)angleY, 0);
     }
     public void SetDampingCoefficient(float e)
     {
@@ -43,7 +44,11 @@ public class Pendulum : MonoBehaviour, IFloatDataProvider
         fmu.SetReal("DampingCoefficient", dampingCoefficient);
         
     }
-    public void Torque()
+    public void customTorque()
+    {
+        fmu.SetReal("Torque", torque);
+    }
+    public void Torque(double torque)
     {
         fmu.SetReal("Torque", torque);
     }
@@ -52,9 +57,30 @@ public class Pendulum : MonoBehaviour, IFloatDataProvider
         // clean up
         fmu.Dispose();
     }
+    private static double NormalizeAngleDeg(double angleDeg)
+    {
+        double remainder = angleDeg % 360.0;
+        if (remainder <= -180)
+            return remainder + 360.0;
+        else if (remainder >= 180)
+            return remainder - 360.0;
+        else
+            return remainder;
+    }
+    public double GetTargetAngle()
+    {
+        return targetAngleDegrees;
+    }
+
+    public double GetCurrentAngle()
+    {
+        double currentAngle = fmu.GetReal("Angle");
+        //Debug.Log(currentAngle);
+        return currentAngle;
+    }
 
     public double GetData()
     {
-        return fmu.GetReal("Angle");
+        throw new System.NotImplementedException();
     }
 }
