@@ -50,6 +50,7 @@ public class Pendulum : MonoBehaviour, ISetpointStateProvider
     }
     public void Torque(double torque)
     {
+        Debug.Log(torque);
         fmu.SetReal("Torque", torque);
     }
     void OnDestroy()
@@ -77,10 +78,5 @@ public class Pendulum : MonoBehaviour, ISetpointStateProvider
         double currentAngle = fmu.GetReal("Angle");
         //Debug.Log(currentAngle);
         return currentAngle;
-    }
-
-    public double GetData()
-    {
-        throw new System.NotImplementedException();
     }
 }
