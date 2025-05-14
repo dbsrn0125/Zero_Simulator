@@ -1852,6 +1852,16 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6651909451955175202, guid: f7d4e8c2f3d58f1409012f5daa944fd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6736742106840024634, guid: f7d4e8c2f3d58f1409012f5daa944fd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 685029317639594137, guid: f7d4e8c2f3d58f1409012f5daa944fd7, type: 3}
