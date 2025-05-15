@@ -13,28 +13,28 @@ namespace RosMessageTypes.ZeroInterfaces
         public const string k_RosMessageName = "zero_interfaces/CmdVel";
         public override string RosMessageName => k_RosMessageName;
 
-        public double fl_vel;
-        public double bl_vel;
-        public double fr_vel;
-        public double br_vel;
-        public double fl_ang;
-        public double bl_ang;
-        public double fr_ang;
-        public double br_ang;
+        public float fl_vel;
+        public float bl_vel;
+        public float fr_vel;
+        public float br_vel;
+        public float fl_ang;
+        public float bl_ang;
+        public float fr_ang;
+        public float br_ang;
 
         public CmdVelMsg()
         {
-            this.fl_vel = 0.0;
-            this.bl_vel = 0.0;
-            this.fr_vel = 0.0;
-            this.br_vel = 0.0;
-            this.fl_ang = 0.0;
-            this.bl_ang = 0.0;
-            this.fr_ang = 0.0;
-            this.br_ang = 0.0;
+            this.fl_vel = 0.0f;
+            this.bl_vel = 0.0f;
+            this.fr_vel = 0.0f;
+            this.br_vel = 0.0f;
+            this.fl_ang = 0.0f;
+            this.bl_ang = 0.0f;
+            this.fr_ang = 0.0f;
+            this.br_ang = 0.0f;
         }
 
-        public CmdVelMsg(double fl_vel, double bl_vel, double fr_vel, double br_vel, double fl_ang, double bl_ang, double fr_ang, double br_ang)
+        public CmdVelMsg(float fl_vel, float bl_vel, float fr_vel, float br_vel, float fl_ang, float bl_ang, float fr_ang, float br_ang)
         {
             this.fl_vel = fl_vel;
             this.bl_vel = bl_vel;

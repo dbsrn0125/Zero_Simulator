@@ -1,8 +1,8 @@
-float64 fl_vel
-float64 bl_vel
-float64 fr_vel
-float64 br_vel
-float64 fl_ang
-float64 bl_ang
-float64 fr_ang
-float64 br_ang
+float32 fl_vel
+float32 bl_vel
+float32 fr_vel
+float32 br_vel
+float32 fl_ang
+float32 bl_ang
+float32 fr_ang
+float32 br_ang
