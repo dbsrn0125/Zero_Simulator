@@ -79,4 +79,9 @@ public class Pendulum : MonoBehaviour, ISetpointStateProvider
         //Debug.Log(currentAngle);
         return currentAngle;
     }
+
+    public void FMUInputs()
+    {
+
+    }
 }

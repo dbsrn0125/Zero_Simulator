@@ -2,135 +2,168 @@ using UnityEngine;
 
 public class GroundSensor : MonoBehaviour
 {
-    // Inspector에서 실제 바퀴의 "메쉬를 가진" GameObject의 Transform을 할당
-    public Transform wheelMeshTransform; // 예: "0.6_Tirefinal.stp-1" Transform
-
-    public Vector3[] rayOriginsLocal = new Vector3[3]; // 이제 "바퀴 메쉬의 실제 중심" 기준 로컬 오프셋
+    [Header("References & Setup")]
+    public Transform wheelTransform;
+    public Vector3[] rayOriginsLocal = new Vector3[3];
     public LayerMask groundLayer;
     public float maxRayDistance = 2.0f;
+    public float nominalWheelRadius_R0 = 0.093f;
+
+    [Header("Debug Visualization")]
     public float normalRayLength = 0.3f;
     public float gizmoRadius = 0.02f;
+    public bool drawDebugRays = true;
 
-    public bool isContacting { get; private set; }
-    public float[] rayDistances { get; private set; } = new float[3];
-    public Vector3 groundNormal_World { get; private set; }
-    private Vector3[] hitPoints_World = new Vector3[3];
+    // Output Data
+    public bool IsContacting { get; private set; }
+    public float CalculatedPenetrationDepth { get; private set; }
+    public Vector3 CalculatedWorldNormal { get; private set; }
+    public float CurrentFrictionCoefficient { get; private set; } // 이 값을 어떻게 결정할지 로직 추가 필요
+    public Vector3 AverageContactPoint_World { get; private set; }
+
+    // 내부 계산용 변수들 (길이가 rayOriginsLocal.Length와 같아야 함)
+    private float[] rayDistances; // Awake에서 초기화
+    private Vector3[] hitPoints_World; // Awake에서 초기화
     private int contactCount = 0;
-
-    private Vector3 actualWheelCenter_World_Cached; // 매번 계산하지 않도록 캐싱 가능
-    private Quaternion wheelRotation_World_Cached;
 
     void Awake()
     {
-        if (wheelMeshTransform == null)
+        // wheelTransform 할당 로직은 이전과 동일 (Inspector 할당 권장)
+        if (wheelTransform == null)
         {
-            Debug.LogError(gameObject.name + ": 'Wheel Mesh Transform'이 Inspector에서 할당되지 않았습니다!", this.gameObject);
+            if (transform.parent != null)
+            {
+                wheelTransform = transform.parent;
+                Debug.LogWarningFormat("{0}: 'wheelTransform'이 Inspector에 할당되지 않아 부모 Transform ({1})을 사용합니다.", gameObject.name, wheelTransform.name);
+            }
+            // ... (이하 null 체크 및 비활성화 로직 동일) ...
+        }
+
+        if (rayOriginsLocal == null || rayOriginsLocal.Length == 0)
+        {
+            Debug.LogErrorFormat("{0}: 'rayOriginsLocal' 배열이 설정되지 않았습니다! Inspector에서 Ray 시작점 오프셋을 정의해주세요.", gameObject.name);
             this.enabled = false;
             return;
         }
+
+        // 배열 초기화 (rayOriginsLocal.Length 사용)
+        rayDistances = new float[rayOriginsLocal.Length];
+        hitPoints_World = new Vector3[rayOriginsLocal.Length];
     }
 
     void FixedUpdate()
     {
-        if (wheelMeshTransform == null) return;
+        if (wheelTransform == null) return;
 
-        // 1. 바퀴 메쉬의 실제 월드 중심과 현재 월드 회전을 가져옵니다.
-        // MeshFilter를 통해 메쉬의 로컬 바운딩 박스 중심을 가져와 월드 좌표로 변환합니다.
-        MeshFilter meshFilter = wheelMeshTransform.GetComponent<MeshFilter>();
-        if (meshFilter == null || meshFilter.sharedMesh == null)
-        {
-            Debug.LogError(gameObject.name + ": 'Wheel Mesh Transform'에 MeshFilter 또는 Mesh가 없습니다!", wheelMeshTransform.gameObject);
-            actualWheelCenter_World_Cached = wheelMeshTransform.position; //Fallback: Pivot 위치 사용
-        }
-        else
-        {
-            // 메쉬의 로컬 중심점을 가져와서, wheelMeshTransform의 현재 월드 변환을 적용
-            Vector3 meshLocalCenter = meshFilter.sharedMesh.bounds.center;
-            actualWheelCenter_World_Cached = wheelMeshTransform.TransformPoint(meshLocalCenter);
-        }
-        wheelRotation_World_Cached = wheelMeshTransform.rotation;
-
-
-        // Debug.Log(gameObject.name + " Actual Wheel Center World: " + actualWheelCenter_World_Cached);
-
-        isContacting = false;
+        IsContacting = false;
         contactCount = 0;
         Vector3 accumulatedNormal = Vector3.zero;
+        Vector3 accumulatedHitPoint = Vector3.zero;
 
         for (int i = 0; i < rayOriginsLocal.Length; i++)
         {
-            // 이제 rayOriginsLocal은 "바퀴 메쉬의 실제 중심"을 (0,0,0)으로 봤을 때의 로컬 오프셋입니다.
-            Vector3 worldOffset = wheelRotation_World_Cached * rayOriginsLocal[i];
-            Vector3 rayStartPoint_World = actualWheelCenter_World_Cached + worldOffset;
-
-            Vector3 rayDirection_World = -(wheelRotation_World_Cached * Vector3.up); // 바퀴의 로컬 '아래' 방향 (월드 기준)
+            Vector3 worldOffset = wheelTransform.rotation * rayOriginsLocal[i];
+            Vector3 rayStartPoint_World = wheelTransform.position + worldOffset;
+            Vector3 rayDirection_World = -wheelTransform.up;
 
             RaycastHit hitInfo;
             if (Physics.Raycast(rayStartPoint_World, rayDirection_World, out hitInfo, maxRayDistance, groundLayer))
             {
-                // ... (이전과 동일한 충돌 처리 로직) ...
-                isContacting = true;
+                IsContacting = true;
                 contactCount++;
                 rayDistances[i] = hitInfo.distance;
                 accumulatedNormal += hitInfo.normal;
                 hitPoints_World[i] = hitInfo.point;
-                Debug.DrawRay(rayStartPoint_World, rayDirection_World * hitInfo.distance, Color.green);
+                accumulatedHitPoint += hitInfo.point;
+
+                if (drawDebugRays) Debug.DrawRay(rayStartPoint_World, rayDirection_World * hitInfo.distance, Color.green);
             }
             else
             {
-                // ... (이전과 동일한 비충돌 처리 로직) ...
                 rayDistances[i] = maxRayDistance;
                 hitPoints_World[i] = rayStartPoint_World + rayDirection_World * maxRayDistance;
-                Debug.DrawRay(rayStartPoint_World, rayDirection_World * maxRayDistance, Color.red);
+                if (drawDebugRays) Debug.DrawRay(rayStartPoint_World, rayDirection_World * maxRayDistance, Color.red);
             }
         }
 
-        // ... (groundNormal_World 계산 및 법선 벡터 그리기 로직은 이전과 유사하게,
-        //      단, Debug Ray 시작점을 actualWheelCenter_World_Cached 기준으로 하거나 representativeContactPoint 사용) ...
         if (contactCount > 0)
         {
-            groundNormal_World = (accumulatedNormal / contactCount).normalized;
-            // 법선 벡터 그리기 (예: 계산된 실제 바퀴 중심에서)
-            Debug.DrawRay(actualWheelCenter_World_Cached, groundNormal_World * normalRayLength, Color.magenta, Time.fixedDeltaTime);
+            CalculatedWorldNormal = (accumulatedNormal / contactCount).normalized;
+            AverageContactPoint_World = accumulatedHitPoint / contactCount;
+
+            float min_L_ray = maxRayDistance;
+            // 실제 충돌한 Ray들 중에서 min_L_ray를 찾아야 함
+            bool actualHitOccurred = false;
+            for (int i = 0; i < rayOriginsLocal.Length; i++)
+            {
+                if (rayDistances[i] < maxRayDistance) // 실제 충돌이 일어난 Ray
+                {
+                    if (rayDistances[i] < min_L_ray)
+                    {
+                        min_L_ray = rayDistances[i];
+                    }
+                    actualHitOccurred = true;
+                }
+            }
+
+            // 실제 충돌이 있었을 때만 penetration depth 계산
+            CalculatedPenetrationDepth = actualHitOccurred ? Mathf.Max(0, nominalWheelRadius_R0 - min_L_ray) : 0f;
+
+            // 마찰 계수 결정 로직 (TODO)
+            // 예시: RaycastHit의 collider 태그나 material을 보고 결정
+            // RaycastHit firstValidHit = new RaycastHit(); // 첫번째 유효 충돌 정보 찾기
+            // for(int i=0; i<rayOriginsLocal.Length; ++i) { if(rayDistances[i] < maxRayDistance) { /* 어떻게 hitInfo를 가져올지 고민 필요. Physics.Raycast를 다시 쏘거나, RaycastHit[]을 저장 */ break; }}
+            // CurrentFrictionCoefficient = DetermineFrictionFromHit(firstValidHit); 
+            CurrentFrictionCoefficient = 0.7f; // 임시 고정값
+
+            if (drawDebugRays) Debug.DrawRay(AverageContactPoint_World, CalculatedWorldNormal * normalRayLength, Color.magenta, Time.fixedDeltaTime);
         }
         else
         {
-            groundNormal_World = Vector3.up;
+            CalculatedPenetrationDepth = 0f;
+            CalculatedWorldNormal = Vector3.up;
+            CurrentFrictionCoefficient = 0.7f;
+            AverageContactPoint_World = wheelTransform.position - wheelTransform.up * nominalWheelRadius_R0;
         }
     }
 
+    // OnDrawGizmosSelected()는 이전과 거의 동일, referenceTransform 부분만 명확히
     void OnDrawGizmosSelected()
     {
-        // Gizmo를 그릴 때도 실제 바퀴 메쉬의 중심을 기준으로 rayOriginsLocal 오프셋을 시각화해야 합니다.
-        if (wheelMeshTransform == null)
+        Transform currentWheelTransformForGizmos = wheelTransform; // 현재 할당된 wheelTransform 사용
+        if (currentWheelTransformForGizmos == null && !Application.isPlaying)
         {
-            if (!Application.isPlaying && transform.parent != null) wheelMeshTransform = transform.parent; // 에디터용 임시
-            else if (!Application.isPlaying) wheelMeshTransform = transform;
-            if (wheelMeshTransform == null) return;
+            // 에디터에서만, 그리고 wheelTransform이 아직 할당 안됐을 때 임시로 부모나 자신을 시도
+            if (transform.parent != null) currentWheelTransformForGizmos = transform.parent;
+            else currentWheelTransformForGizmos = transform;
         }
 
-        Vector3 effectiveCenter_World;
-        Quaternion effectiveRotation_World = wheelMeshTransform.rotation; // 회전은 Pivot의 회전을 그대로 사용
-
-        MeshFilter mf = wheelMeshTransform.GetComponent<MeshFilter>();
-        if (mf != null && mf.sharedMesh != null)
-        {
-            effectiveCenter_World = wheelMeshTransform.TransformPoint(mf.sharedMesh.bounds.center);
-        }
-        else
-        {
-            effectiveCenter_World = wheelMeshTransform.position; // Fallback
-        }
+        if (currentWheelTransformForGizmos == null || rayOriginsLocal == null || rayOriginsLocal.Length == 0) return;
 
         Gizmos.color = Color.yellow;
-        if (rayOriginsLocal != null)
+        foreach (Vector3 localOffset in rayOriginsLocal)
         {
-            foreach (Vector3 localOffsetFromTrueCenter in rayOriginsLocal)
-            {
-                Vector3 worldOffset = effectiveRotation_World * localOffsetFromTrueCenter;
-                Vector3 worldPoint = effectiveCenter_World + worldOffset;
-                Gizmos.DrawSphere(worldPoint, gizmoRadius);
-            }
+            Vector3 worldOffset = currentWheelTransformForGizmos.rotation * localOffset;
+            Vector3 worldPoint = currentWheelTransformForGizmos.position + worldOffset;
+            Gizmos.DrawSphere(worldPoint, gizmoRadius);
+        }
+
+        if (Application.isPlaying && IsContacting && drawDebugRays)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(AverageContactPoint_World, CalculatedWorldNormal * normalRayLength);
         }
     }
+
+    // (선택적) 마찰계수 결정 헬퍼 함수 예시
+    // private float DetermineFrictionFromHit(RaycastHit hit)
+    // {
+    //     if (hit.collider != null)
+    //     {
+    //         if (hit.collider.CompareTag("Asphalt")) return 0.8f;
+    //         if (hit.collider.CompareTag("Sand")) return 0.3f;
+    //         // ... 기타 지면 종류 ...
+    //     }
+    //     return 0.7f; // 기본값
+    // }
 }
