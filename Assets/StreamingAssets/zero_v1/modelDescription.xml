@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-18T12:40:39Z" generationTool="Simulink (R2024b)" guid="{a05f5fa5-4d26-36c4-2964-d884c8c101d6}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.56">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-18T16:37:12Z" generationTool="Simulink (R2024b)" guid="{7cc55b23-ad1e-f493-16e6-36596ab25107}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.61">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="zero_v1"/>
   <UnitDefinitions>
     <Unit name="1"/>
