@@ -1,0 +1,428 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: zero_v1
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00610030003500660035006600610035002d0034006400320036002d0033003600630034002d0032003900360034002d006400380038003400630038006300310030003100640036007d00
+  modelName: zero_v1
+  coSimulation:
+    modelIdentifier: zero_v1
+  modelVariables:
+  - name: LFSteeringAngleInput
+    valueReference: 0
+    description: LF Steering Angle input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBSteeringAngleInput
+    valueReference: 1
+    description: LB Steering Angle input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFTireAngularVelocityInput
+    valueReference: 2
+    description: RF Tire Angular Velocity input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFSteeringAngleInput
+    valueReference: 3
+    description: RF Steering Angle input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBSteeringAngleInput
+    valueReference: 4
+    description: RB Steering Angle input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFIs_contacting_in
+    valueReference: 5
+    description: RF is_contacting_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFPenetration_depth_in
+    valueReference: 6
+    description: RF penetration_depth_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFGround_normal_world_in_vec[1]
+    valueReference: 7
+    description: RF ground_normal_world_in_vec(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFGround_normal_world_in_vec[2]
+    valueReference: 8
+    description: RF ground_normal_world_in_vec(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFGround_normal_world_in_vec[3]
+    valueReference: 9
+    description: RF ground_normal_world_in_vec(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RFFriction_coeff_in
+    valueReference: 10
+    description: RF friction_coeff_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBTireAngularVelocityInput
+    valueReference: 11
+    description: RB Tire Angular Velocity input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBIs_contacting_in
+    valueReference: 12
+    description: RB is_contacting_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBPenetration_depth_in
+    valueReference: 13
+    description: RB penetration_depth_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBGround_normal_world_in_vec[1]
+    valueReference: 14
+    description: RB ground_normal_world_in_vec(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBGround_normal_world_in_vec[2]
+    valueReference: 15
+    description: RB ground_normal_world_in_vec(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBGround_normal_world_in_vec[3]
+    valueReference: 16
+    description: RB ground_normal_world_in_vec(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RBFriction_coeff_in
+    valueReference: 17
+    description: RB friction_coeff_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFTireAngularVelocityInput
+    valueReference: 18
+    description: LF Tire Angular Velocity input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFIs_contacting_in
+    valueReference: 19
+    description: LF is_contacting_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFPenetration_depth_in
+    valueReference: 20
+    description: LF penetration_depth_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFGround_normal_world_in_vec[1]
+    valueReference: 21
+    description: LF ground_normal_world_in_vec(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFGround_normal_world_in_vec[2]
+    valueReference: 22
+    description: LF ground_normal_world_in_vec(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFGround_normal_world_in_vec[3]
+    valueReference: 23
+    description: LF ground_normal_world_in_vec(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFFriction_coeff_in
+    valueReference: 24
+    description: LF friction_coeff_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBTireAngularVelocityInput
+    valueReference: 25
+    description: LB Tire Angular Velocity input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBIs_contacting_in
+    valueReference: 26
+    description: LB is_contacting_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBPenetration_depth_in
+    valueReference: 27
+    description: LB penetration_depth_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBGround_normal_world_in_vec[1]
+    valueReference: 28
+    description: LB ground_normal_world_in_vec(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBGround_normal_world_in_vec[2]
+    valueReference: 29
+    description: LB ground_normal_world_in_vec(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBGround_normal_world_in_vec[3]
+    valueReference: 30
+    description: LB ground_normal_world_in_vec(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LBFriction_coeff_in
+    valueReference: 31
+    description: LB friction_coeff_in
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LFTireAngleOutput
+    valueReference: 32
+    description: LF Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: LFSteeringAngleOutput
+    valueReference: 33
+    description: LF Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: LBTireAngleOutput
+    valueReference: 34
+    description: LB Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: LBSteeringAngleOutput
+    valueReference: 35
+    description: LB Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RFTireAngleOutput
+    valueReference: 36
+    description: RF Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RFSteeringAngleOutput
+    valueReference: 37
+    description: RF Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RBTireAngleOutput
+    valueReference: 38
+    description: RB Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RBSteeringAngleOutput
+    valueReference: 39
+    description: RB Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RightSuspensionAngleOutput
+    valueReference: 40
+    description: Right Suspension Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: LeftSuspensionAngleOutput
+    valueReference: 41
+    description: Left Suspension Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: DifferentialBarOutput
+    valueReference: 42
+    description: Differential Bar output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_position_x
+    valueReference: 43
+    description: zero_position.x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_position_y
+    valueReference: 44
+    description: zero_position.y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_position_z
+    valueReference: 45
+    description: zero_position.z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[1,1]
+    valueReference: 46
+    description: zero_orientation(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[2,1]
+    valueReference: 47
+    description: zero_orientation(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[3,1]
+    valueReference: 48
+    description: zero_orientation(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[4,1]
+    valueReference: 49
+    description: zero_orientation(4,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 50
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 

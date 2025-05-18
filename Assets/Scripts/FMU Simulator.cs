@@ -6,15 +6,13 @@ using RosMessageTypes.ZeroInterfaces;
 
 public class FMUSimulator : MonoBehaviour
 {
-    private FMU fmu;
+    public FMU fmu;
     public string fmuName;
     public List<GroundSensor> groundSensors = new List<GroundSensor>(4);
 
     private Dictionary<WheelLocation, float> targetWheelSpeeds = new Dictionary<WheelLocation, float>();
     private Dictionary<WheelLocation, float> targetSteeringAngles = new Dictionary<WheelLocation, float>();
     private GroundContactInfo[] currentGroundContacts = new GroundContactInfo[4];
-    private double currentSimTime = 0.0;
-    private double fmuStepSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,35 +24,48 @@ public class FMUSimulator : MonoBehaviour
             targetWheelSpeeds[loc] = 0.0f;
             currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
         }
-        fmuStepSize = Time.fixedDeltaTime;
-        currentSimTime = Time.fixedTimeAsDouble;
     }
 
+    Quaternion correctionRotation = Quaternion.Euler(180f, 0f, 0f);
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateGroundContactData();
-        fmu.DoStep(currentSimTime, fmuStepSize);
+        FMUInput();
+        fmu.DoStep(Time.timeAsDouble, Time.fixedDeltaTime);
+        zero6dof();
     }
+    void zero6dof()
+    {
+        double x, y, z, qw, qx, qy, qz;
+        x = fmu.GetReal("zero_position_x");
+        y = fmu.GetReal("zero_position_y");
+        z = fmu.GetReal("zero_position_z");
+        transform.position=new Vector3(-(float)x, (float)z, -(float)y);
 
+        qx = fmu.GetReal("zero_orientation[1,1]");
+        qy = fmu.GetReal("zero_orientation[2,1]");
+        qz = fmu.GetReal("zero_orientation[3,1]");
+        qw = fmu.GetReal("zero_orientation[4,1]");
+        new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
+    }
     public void Reset()
     {
         fmu.Reset();
-        fmu.SetupExperiment(Time.timeAsDouble);
+        fmu.SetupExperiment(Time.fixedTimeAsDouble);
         fmu.EnterInitializationMode();
     }
 
 
     public void UpdateControlCommands(CmdVelMsg message)
     {
-        targetWheelSpeeds[WheelLocation.FL] = message.fl_vel;
-        targetWheelSpeeds[WheelLocation.BL] = message.bl_vel;
-        targetWheelSpeeds[WheelLocation.FR] = message.fr_vel;
-        targetWheelSpeeds[WheelLocation.BR] = message.br_vel;
-        targetSteeringAngles[WheelLocation.FL] = message.fl_ang;
-        targetSteeringAngles[WheelLocation.BL] = message.bl_ang;
-        targetSteeringAngles[WheelLocation.FR] = message.fr_ang;
-        targetSteeringAngles[WheelLocation.BR] = message.br_ang;
+        targetWheelSpeeds[WheelLocation.LF] = message.fl_vel;
+        targetWheelSpeeds[WheelLocation.LB] = message.bl_vel;
+        targetWheelSpeeds[WheelLocation.RF] = message.fr_vel;
+        targetWheelSpeeds[WheelLocation.RB] = message.br_vel;
+        targetSteeringAngles[WheelLocation.LF] = message.fl_ang;
+        targetSteeringAngles[WheelLocation.LB] = message.bl_ang;
+        targetSteeringAngles[WheelLocation.RF] = message.fr_ang;
+        targetSteeringAngles[WheelLocation.RB] = message.br_ang;
     }
 
     public void UpdateGroundContactData()
@@ -79,8 +90,7 @@ public class FMUSimulator : MonoBehaviour
                     groundSensors[i].IsContacting,
                     groundSensors[i].CalculatedPenetrationDepth,
                     groundSensors[i].CalculatedWorldNormal,
-                    groundSensors[i].CurrentFrictionCoefficient,
-                    groundSensors[i].AverageContactPoint_World
+                    groundSensors[i].CurrentFrictionCoefficient
                 );
             }
             else
@@ -89,6 +99,40 @@ public class FMUSimulator : MonoBehaviour
                 currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
             }
         }
+    }
+    public void FMUInput()
+    {
+        UpdateGroundContactData();
+        foreach(WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation))) 
+        {
+            try
+            {
+                fmu.SetReal($"{loc}TireAngularVelocityInput", targetWheelSpeeds[loc]);
+                fmu.SetReal($"{loc}SteeringAngleInput", targetSteeringAngles[loc]);
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError($"FMU SetReal for Control Command (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
+            }
+        }
+        for (int i = 0; i < currentGroundContacts.Length; ++i) 
+        {
+            WheelLocation loc= (WheelLocation)i;
+            GroundContactInfo contactInfo = currentGroundContacts[i];
+            try
+            {
+                fmu.SetReal($"{loc}Is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
+                fmu.SetReal($"{loc}Penetration_depth_in",contactInfo.PenetrationDepth);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[1]",contactInfo.WorldNormal.x);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", contactInfo.WorldNormal.y);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.z);
+                fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
+            }
+        }            
     }
     void OnDestroy()
     {

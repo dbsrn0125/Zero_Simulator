@@ -1,7 +1,7 @@
 public enum WheelLocation
 {
-    FL, //Left Front
-    FR, //Right Front
-    BL, //Left Back
-    BR  //Right Back
+    LF, //Left Front
+    RF, //Right Front
+    LB, //Left Back
+    RB  //Right Back
 }
