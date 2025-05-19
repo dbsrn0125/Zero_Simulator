@@ -114,7 +114,7 @@ public class GroundSensor : MonoBehaviour
             // RaycastHit firstValidHit = new RaycastHit(); // 첫번째 유효 충돌 정보 찾기
             // for(int i=0; i<rayOriginsLocal.Length; ++i) { if(rayDistances[i] < maxRayDistance) { /* 어떻게 hitInfo를 가져올지 고민 필요. Physics.Raycast를 다시 쏘거나, RaycastHit[]을 저장 */ break; }}
             // CurrentFrictionCoefficient = DetermineFrictionFromHit(firstValidHit); 
-            CurrentFrictionCoefficient = 0.7f; // 임시 고정값
+            CurrentFrictionCoefficient = 3f; // 임시 고정값
 
             if (drawDebugRays) Debug.DrawRay(AverageContactPoint_World, CalculatedWorldNormal * normalRayLength, Color.magenta, Time.fixedDeltaTime);
         }
@@ -122,7 +122,7 @@ public class GroundSensor : MonoBehaviour
         {
             CalculatedPenetrationDepth = 0f;
             CalculatedWorldNormal = Vector3.up;
-            CurrentFrictionCoefficient = 0.7f;
+            CurrentFrictionCoefficient = 0.8f;
             AverageContactPoint_World = wheelTransform.position - wheelTransform.up * nominalWheelRadius_R0;
         }
     }

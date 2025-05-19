@@ -9,7 +9,7 @@ public class FMUSimulator : MonoBehaviour
     public FMU fmu;
     public string fmuName;
     public List<GroundSensor> groundSensors = new List<GroundSensor>(4);
-
+    public Transform initialPosition;
     private Dictionary<WheelLocation, float> targetWheelSpeeds = new Dictionary<WheelLocation, float>();
     private Dictionary<WheelLocation, float> targetSteeringAngles = new Dictionary<WheelLocation, float>();
     private GroundContactInfo[] currentGroundContacts = new GroundContactInfo[4];
@@ -40,13 +40,13 @@ public class FMUSimulator : MonoBehaviour
         x = fmu.GetReal("zero_position_x");
         y = fmu.GetReal("zero_position_y");
         z = fmu.GetReal("zero_position_z");
-        transform.position=new Vector3(-(float)x, (float)z, -(float)y);
+        transform.position= initialPosition.position + new Vector3(-(float)x, (float)z, -(float)y);
 
         qx = fmu.GetReal("zero_orientation[1,1]");
         qy = fmu.GetReal("zero_orientation[2,1]");
         qz = fmu.GetReal("zero_orientation[3,1]");
         qw = fmu.GetReal("zero_orientation[4,1]");
-        new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
+        transform.rotation = new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw)*correctionRotation ;
     }
     public void Reset()
     {
