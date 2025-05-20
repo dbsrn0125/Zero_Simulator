@@ -127,7 +127,7 @@ public class FMUSimulator : MonoBehaviour
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", -contactInfo.WorldNormal.z);
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.y);
                 fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
-                Debug.Log(contactInfo.IsContacting);
+                Debug.Log($"{loc} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
             }
             catch (System.Exception e)
             {

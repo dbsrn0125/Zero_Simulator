@@ -60,7 +60,7 @@ public class MultibodyJoint : MonoBehaviour
         float angle_deg = (float)fmuSimulator.fmu.GetReal(fmuOutput_Angle_Name);
         if (invertRotation) angle_deg *= -1f;
         transform.localRotation = initialLocalRotation * Quaternion.AngleAxis(angle_deg, localRotationAxis.normalized);
-        if (fmuOutput_Angle_Name == "LFSteeringAngleOutput") Debug.Log(fmuSimulator.fmu.GetReal("LFSteeringAngleOutput"));
+        //if (fmuOutput_Angle_Name == "LFSteeringAngleOutput") Debug.Log(fmuSimulator.fmu.GetReal("LFSteeringAngleOutput"));
     }
 
     private void UpdateFullTransformWorld()
