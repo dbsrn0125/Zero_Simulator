@@ -9,7 +9,7 @@ public class FMUSimulator : MonoBehaviour
     public FMU fmu;
     public string fmuName;
     public List<GroundSensor> groundSensors = new List<GroundSensor>(4);
-    public Transform initialPosition;
+    public Vector3 initialPosition;
     private Dictionary<WheelLocation, float> targetWheelSpeeds = new Dictionary<WheelLocation, float>();
     private Dictionary<WheelLocation, float> targetSteeringAngles = new Dictionary<WheelLocation, float>();
     private GroundContactInfo[] currentGroundContacts = new GroundContactInfo[4];
@@ -40,7 +40,7 @@ public class FMUSimulator : MonoBehaviour
         x = fmu.GetReal("zero_position_x");
         y = fmu.GetReal("zero_position_y");
         z = fmu.GetReal("zero_position_z");
-        transform.position= initialPosition.position + new Vector3(-(float)x, (float)z, -(float)y);
+        transform.position= initialPosition + new Vector3(-(float)x, (float)z, -(float)y);
 
         qx = fmu.GetReal("zero_orientation[1,1]");
         qy = fmu.GetReal("zero_orientation[2,1]");
@@ -127,7 +127,7 @@ public class FMUSimulator : MonoBehaviour
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", -contactInfo.WorldNormal.z);
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.y);
                 fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
-                Debug.Log(contactInfo.PenetrationDepth);
+                Debug.Log(contactInfo.IsContacting);
             }
             catch (System.Exception e)
             {

@@ -20,7 +20,6 @@ public class MultibodyJoint : MonoBehaviour
     public Vector3 localRotationAxis = Vector3.up;
     //public float angleScale = Mathf.Rad2Deg;
     public bool invertRotation = false;
-
     [Header("Full Transform Settings (World or Local)")]
     // 위치 FMU 변수 이름들 (또는 하나의 Vector3 변수 이름 - 라이브러리/FMU 출력 방식에 따라)
     public string fmuOutput_PositionX_Name;
@@ -61,6 +60,7 @@ public class MultibodyJoint : MonoBehaviour
         float angle_deg = (float)fmuSimulator.fmu.GetReal(fmuOutput_Angle_Name);
         if (invertRotation) angle_deg *= -1f;
         transform.localRotation = initialLocalRotation * Quaternion.AngleAxis(angle_deg, localRotationAxis.normalized);
+        if (fmuOutput_Angle_Name == "LFSteeringAngleOutput") Debug.Log(fmuSimulator.fmu.GetReal("LFSteeringAngleOutput"));
     }
 
     private void UpdateFullTransformWorld()
