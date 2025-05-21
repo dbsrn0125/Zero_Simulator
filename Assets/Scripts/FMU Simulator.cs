@@ -46,7 +46,7 @@ public class FMUSimulator : MonoBehaviour
         qy = fmu.GetReal("zero_orientation[2,1]");
         qz = fmu.GetReal("zero_orientation[3,1]");
         qw = fmu.GetReal("zero_orientation[4,1]");
-        transform.rotation = new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw)*correctionRotation ;
+        transform.localRotation = correctionRotation * new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
     }
     public void Reset()
     {
@@ -127,7 +127,7 @@ public class FMUSimulator : MonoBehaviour
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", -contactInfo.WorldNormal.z);
                 fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.y);
                 fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
-                Debug.Log($"{loc} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
+                //Debug.Log($"{loc} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
             }
             catch (System.Exception e)
             {
