@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-20T16:24:30Z" generationTool="Simulink (R2024b)" guid="{76920fba-c231-98fd-3155-3819f3b1b2ca}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.81">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-21T07:39:53Z" generationTool="Simulink (R2024b)" guid="{900617eb-4bfc-b39a-3dbc-b20509da5969}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.95">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="zero_v1"/>
   <UnitDefinitions>
     <Unit name="1"/>
@@ -7,7 +7,7 @@
     <Unit name="m"/>
     <Unit name="rad/s"/>
   </UnitDefinitions>
-  <DefaultExperiment startTime="0" stepSize="0.001" stopTime="10"/>
+  <DefaultExperiment startTime="0" stepSize="0.001" stopTime="30"/>
   <VendorAnnotations>
     <Tool name="Simulink">
       <Simulink>
