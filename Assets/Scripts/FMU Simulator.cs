@@ -46,7 +46,7 @@ public class FMUSimulator : MonoBehaviour
         qy = fmu.GetReal("zero_orientation[2,1]");
         qz = fmu.GetReal("zero_orientation[3,1]");
         qw = fmu.GetReal("zero_orientation[4,1]");
-        transform.localRotation = correctionRotation * new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
+        transform.rotation = correctionRotation * new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
     }
     public void Reset()
     {
