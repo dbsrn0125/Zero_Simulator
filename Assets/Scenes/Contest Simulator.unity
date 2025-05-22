@@ -4411,7 +4411,7 @@ MonoBehaviour:
   - {fileID: 428887143}
   - {fileID: 513785425}
   - {fileID: 801510910}
-  initialPosition: {x: 0, y: 0.5, z: 0}
+  initialPosition: {x: 0, y: 0.3, z: 0}
 --- !u!1 &987559779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4644,6 +4644,11 @@ PrefabInstance:
       objectReference: {fileID: 963620563}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
+      propertyPath: invertRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
+        type: 3}
       propertyPath: localRotationAxis.x
       value: 0
       objectReference: {fileID: 0}
@@ -4730,7 +4735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1019149158}
   m_Layer: 0
-  m_Name: FL_Tire_Wc
+  m_Name: FL_Tire_Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8560,7 +8565,7 @@ PrefabInstance:
     - target: {fileID: 247990385588853915, guid: ab0cead2d9cd1ee479468eaada1c15d4,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4968269542118432757, guid: ab0cead2d9cd1ee479468eaada1c15d4,
         type: 3}

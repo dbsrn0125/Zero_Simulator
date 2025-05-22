@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheelTransform: {fileID: 0}
   rayOriginsLocal:
-  - {x: 0, y: 0, z: 0.01}
-  - {x: -0.01, y: 0, z: -0.01}
-  - {x: 0.01, y: 0, z: -0.01}
+  - {x: 0, y: 0, z: 0.02}
+  - {x: -0.02, y: 0, z: -0.02}
+  - {x: 0.02, y: 0, z: -0.02}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxRayDistance: 0.2
+  maxRayDistance: 0.1
   nominalWheelRadius_R0: 0.093
-  normalRayLength: 0.3
+  normalRayLength: 0.1
   gizmoRadius: 0.02
   drawDebugRays: 1

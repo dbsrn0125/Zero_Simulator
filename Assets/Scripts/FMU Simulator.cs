@@ -40,13 +40,13 @@ public class FMUSimulator : MonoBehaviour
         x = fmu.GetReal("zero_position_x");
         y = fmu.GetReal("zero_position_y");
         z = fmu.GetReal("zero_position_z");
-        transform.position= initialPosition + new Vector3(-(float)x, (float)z, -(float)y);
+        transform.position= initialPosition + new Vector3((float)x, (float)y, (float)z);
 
-        qx = fmu.GetReal("zero_orientation[1,1]");
-        qy = fmu.GetReal("zero_orientation[2,1]");
-        qz = fmu.GetReal("zero_orientation[3,1]");
-        qw = fmu.GetReal("zero_orientation[4,1]");
-        transform.rotation = correctionRotation * new Quaternion(-(float)qx,(float)qz, -(float)qy, (float)qw) ;
+        qx = fmu.GetReal("zero_orientation[2,1]");
+        qy = fmu.GetReal("zero_orientation[3,1]");
+        qz = fmu.GetReal("zero_orientation[4,1]");
+        qw = fmu.GetReal("zero_orientation[1,1]");
+        transform.rotation = new Quaternion((float)qx,(float)qy, (float)qz, (float)qw) ;
     }
     public void Reset()
     {
@@ -123,11 +123,11 @@ public class FMUSimulator : MonoBehaviour
             {
                 fmu.SetReal($"{loc}Is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
                 fmu.SetReal($"{loc}Penetration_depth_in",contactInfo.PenetrationDepth);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[1]",-contactInfo.WorldNormal.x);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", -contactInfo.WorldNormal.z);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.y);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[1]", contactInfo.WorldNormal.x);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", contactInfo.WorldNormal.y);
+                fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.z);
                 fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
-                //Debug.Log($"{loc} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
+                Debug.Log($"{loc} + {contactInfo.IsContacting} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
             }
             catch (System.Exception e)
             {
