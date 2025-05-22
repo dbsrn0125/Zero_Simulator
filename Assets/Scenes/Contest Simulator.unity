@@ -2245,7 +2245,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -4645,7 +4645,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -6023,7 +6023,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}

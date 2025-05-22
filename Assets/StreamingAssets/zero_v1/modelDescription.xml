@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-22T13:40:22Z" generationTool="Simulink (R2024b)" guid="{4824d2c6-3511-78fd-c29f-088228878305}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.167">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-05-22T15:39:34Z" generationTool="Simulink (R2024b)" guid="{8b4f77e1-f501-89b0-7e47-9e3723f397f4}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.167">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="zero_v1"/>
   <UnitDefinitions>
-    <Unit name="1"/>
     <Unit name="deg"/>
-    <Unit name="m"/>
     <Unit name="rad/s"/>
   </UnitDefinitions>
   <DefaultExperiment startTime="0" stepSize="0.001" stopTime="10"/>
@@ -18,10 +16,10 @@
           <Inport blockPath="zero_v1/RF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RF Tire Angular Velocity input" portNumber="3" sampleTime="[0 0]" uniquePortName="RFTireAngularVelocityInput" unit="rad/s"/>
           <Inport blockPath="zero_v1/RF Steering Angle input" dataType="double" dimension="[1]" portName="RF Steering Angle input" portNumber="4" sampleTime="[0 0]" uniquePortName="RFSteeringAngleInput" unit="deg"/>
           <Inport blockPath="zero_v1/RB Steering Angle input" dataType="double" dimension="[1]" portName="RB Steering Angle input" portNumber="5" sampleTime="[0 0]" uniquePortName="RBSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/RF is_contacting_in" dataType="double" dimension="[1]" portName="RF is_contacting_in" portNumber="6" sampleTime="[0 0]" uniquePortName="RFIs_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/RF penetration_depth_in" dataType="double" dimension="[1]" portName="RF penetration_depth_in" portNumber="7" sampleTime="[0 0]" uniquePortName="RFPenetration_depth_in" unit=""/>
-          <Inport blockPath="zero_v1/RF ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="RF ground_normal_world_in_vec" portNumber="8" sampleTime="[0 0]" uniquePortName="RFGround_normal_world_in_vec" unit=""/>
-          <Inport blockPath="zero_v1/RF friction_coeff_in" dataType="double" dimension="[1]" portName="RF friction_coeff_in" portNumber="9" sampleTime="[0 0]" uniquePortName="RFFriction_coeff_in" unit=""/>
+          <Inport blockPath="zero_v1/RF is_contacting_in" dataType="double" dimension="[1]" portName="RF is_contacting_in" portNumber="6" sampleTime="[0.001     0]" uniquePortName="RFIs_contacting_in" unit=""/>
+          <Inport blockPath="zero_v1/RF penetration_depth_in" dataType="double" dimension="[1]" portName="RF penetration_depth_in" portNumber="7" sampleTime="[0.001     0]" uniquePortName="RFPenetration_depth_in" unit=""/>
+          <Inport blockPath="zero_v1/RF ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="RF ground_normal_world_in_vec" portNumber="8" sampleTime="[0.001     0]" uniquePortName="RFGround_normal_world_in_vec" unit=""/>
+          <Inport blockPath="zero_v1/RF friction_coeff_in" dataType="double" dimension="[1]" portName="RF friction_coeff_in" portNumber="9" sampleTime="[0.001     0]" uniquePortName="RFFriction_coeff_in" unit=""/>
           <Inport blockPath="zero_v1/RB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RB Tire Angular Velocity input" portNumber="10" sampleTime="[0 0]" uniquePortName="RBTireAngularVelocityInput" unit="rad/s"/>
           <Inport blockPath="zero_v1/RB is_contacting_in" dataType="double" dimension="[1]" portName="RB is_contacting_in" portNumber="11" sampleTime="[0 0]" uniquePortName="RBIs_contacting_in" unit=""/>
           <Inport blockPath="zero_v1/RB penetration_depth_in" dataType="double" dimension="[1]" portName="RB penetration_depth_in" portNumber="12" sampleTime="[0 0]" uniquePortName="RBPenetration_depth_in" unit=""/>
@@ -48,10 +46,10 @@
           <Outport blockPath="zero_v1/Right Suspension Angle output" dataType="double" dimension="[1]" portName="Right Suspension Angle output" portNumber="9" sampleTime="[0 0]" uniquePortName="RightSuspensionAngleOutput" unit="deg"/>
           <Outport blockPath="zero_v1/Left Suspension Angle output" dataType="double" dimension="[1]" portName="Left Suspension Angle output" portNumber="10" sampleTime="[0 0]" uniquePortName="LeftSuspensionAngleOutput" unit="deg"/>
           <Outport blockPath="zero_v1/Differential Bar output" dataType="double" dimension="[1]" portName="Differential Bar output" portNumber="11" sampleTime="[0 0]" uniquePortName="DifferentialBarOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/zero_position.x" dataType="double" dimension="[1]" portName="zero_position.x" portNumber="12" sampleTime="[0 0]" uniquePortName="zero_position_x" unit="m"/>
-          <Outport blockPath="zero_v1/zero_position.y" dataType="double" dimension="[1]" portName="zero_position.y" portNumber="13" sampleTime="[0 0]" uniquePortName="zero_position_y" unit="m"/>
-          <Outport blockPath="zero_v1/zero_position.z" dataType="double" dimension="[1]" portName="zero_position.z" portNumber="14" sampleTime="[0 0]" uniquePortName="zero_position_z" unit="m"/>
-          <Outport blockPath="zero_v1/zero_orientation" dataType="double" dimension="[4  1]" portName="zero_orientation" portNumber="15" sampleTime="[0 0]" uniquePortName="zero_orientation" unit="1"/>
+          <Outport blockPath="zero_v1/zero_position.x" dataType="double" dimension="[1]" portName="zero_position.x" portNumber="12" sampleTime="[Inf Inf]" uniquePortName="zero_position_x" unit=""/>
+          <Outport blockPath="zero_v1/zero_position.y" dataType="double" dimension="[1]" portName="zero_position.y" portNumber="13" sampleTime="[Inf Inf]" uniquePortName="zero_position_y" unit=""/>
+          <Outport blockPath="zero_v1/zero_position.z" dataType="double" dimension="[1]" portName="zero_position.z" portNumber="14" sampleTime="[Inf Inf]" uniquePortName="zero_position_z" unit=""/>
+          <Outport blockPath="zero_v1/zero_orientation" dataType="double" dimension="[1]" portName="zero_orientation" portNumber="15" sampleTime="[Inf Inf]" uniquePortName="zero_orientation" unit=""/>
         </SimulinkModelInterface>
       </Simulink>
     </Tool>
@@ -230,36 +228,24 @@
       <!--Index = 43-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="zero_position.x" initial="calculated" name="zero_position_x" valueReference="43" variability="continuous">
-      <Real unit="m"/>
+      <Real/>
       <!--Index = 44-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="zero_position.y" initial="calculated" name="zero_position_y" valueReference="44" variability="continuous">
-      <Real unit="m"/>
+      <Real/>
       <!--Index = 45-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="zero_position.z" initial="calculated" name="zero_position_z" valueReference="45" variability="continuous">
-      <Real unit="m"/>
+      <Real/>
       <!--Index = 46-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(1,1)" initial="calculated" name="zero_orientation[1,1]" valueReference="46" variability="continuous">
-      <Real unit="1"/>
+    <ScalarVariable causality="output" description="zero_orientation" initial="calculated" name="zero_orientation" valueReference="46" variability="continuous">
+      <Real/>
       <!--Index = 47-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(2,1)" initial="calculated" name="zero_orientation[2,1]" valueReference="47" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 48-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(3,1)" initial="calculated" name="zero_orientation[3,1]" valueReference="48" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 49-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(4,1)" initial="calculated" name="zero_orientation[4,1]" valueReference="49" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 50-->
-    </ScalarVariable>
-    <ScalarVariable causality="independent" description="time" name="time" valueReference="50" variability="continuous">
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="47" variability="continuous">
       <Real/>
-      <!--Index = 51-->
+      <!--Index = 48-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
@@ -279,9 +265,6 @@
       <Unknown index="45"/>
       <Unknown index="46"/>
       <Unknown index="47"/>
-      <Unknown index="48"/>
-      <Unknown index="49"/>
-      <Unknown index="50"/>
     </Outputs>
     <InitialUnknowns>
       <Unknown index="33"/>
@@ -299,9 +282,6 @@
       <Unknown index="45"/>
       <Unknown index="46"/>
       <Unknown index="47"/>
-      <Unknown index="48"/>
-      <Unknown index="49"/>
-      <Unknown index="50"/>
     </InitialUnknowns>
   </ModelStructure>
 </fmiModelDescription>
