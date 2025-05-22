@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: zero_v1
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00380062003400660037003700650031002d0066003500300031002d0038003900620030002d0037006500340037002d003900650033003700320033006600330039003700660034007d00
+  guid: 7b00620062003900610038006100310039002d0062003500360066002d0062003500330035002d0066006300320031002d003400650061003600610065006500650033006300620062007d00
   modelName: zero_v1
   coSimulation:
     modelIdentifier: zero_v1
@@ -386,16 +386,40 @@ MonoBehaviour:
     initial: calculated
     type: 0
     start: 
-  - name: zero_orientation
+  - name: zero_orientation[1,1]
     valueReference: 46
-    description: zero_orientation
+    description: zero_orientation(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[2,1]
+    valueReference: 47
+    description: zero_orientation(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[3,1]
+    valueReference: 48
+    description: zero_orientation(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: zero_orientation[4,1]
+    valueReference: 49
+    description: zero_orientation(4,1)
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
   - name: time
-    valueReference: 47
+    valueReference: 50
     description: time
     causality: independent
     variability: continuous

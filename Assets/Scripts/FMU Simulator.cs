@@ -13,6 +13,12 @@ public class FMUSimulator : MonoBehaviour
     private Dictionary<WheelLocation, float> targetWheelSpeeds = new Dictionary<WheelLocation, float>();
     private Dictionary<WheelLocation, float> targetSteeringAngles = new Dictionary<WheelLocation, float>();
     private GroundContactInfo[] currentGroundContacts = new GroundContactInfo[4];
+    public float targetWheelSpeed_RadPerSec=3f;
+    public KeyCode forwardKey = KeyCode.W;      // 전진 키
+    public KeyCode backwardKey = KeyCode.S;     // 후진 키
+    public KeyCode stopKey = KeyCode.X;         // 정지 키 (옵션: 명시적 정지)
+    public enum DriveState { Idle, Forward, Backward };
+    public DriveState currentDriveState = DriveState.Idle;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +31,53 @@ public class FMUSimulator : MonoBehaviour
             currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
         }
     }
+    private void Update()
+    {
+        // 1. 키보드 입력 감지
+        bool forwardPressed = Input.GetKey(forwardKey);
+        bool backwardPressed = Input.GetKey(backwardKey);
+        bool stopPressed = Input.GetKeyDown(stopKey); // GetKeyDown은 키를 누르는 순간만 true
 
+        // 2. 로봇 구동 상태 결정
+        if (stopPressed) // 정지 키가 우선순위를 가짐
+        {
+            currentDriveState = DriveState.Idle;
+        }
+        else if (forwardPressed && !backwardPressed) // 전진 키만 눌렸을 때
+        {
+            currentDriveState = DriveState.Forward;
+        }
+        else if (backwardPressed && !forwardPressed) // 후진 키만 눌렸을 때
+        {
+            currentDriveState = DriveState.Backward;
+        }
+        else if (!forwardPressed && !backwardPressed) // 아무 이동 키도 안 눌렸으면 정지 (또는 이전 상태 유지 - 여기서는 정지로)
+        {
+            currentDriveState = DriveState.Idle;
+        }
+        switch (currentDriveState)
+        {
+            case DriveState.Forward:
+                targetWheelSpeeds[WheelLocation.LF] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.LB] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.RF] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.RB] = targetWheelSpeed_RadPerSec;
+                break;
+            case DriveState.Backward:
+                targetWheelSpeeds[WheelLocation.LF] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.LB] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.RF] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.RB] = -targetWheelSpeed_RadPerSec;
+                break;
+            case DriveState.Idle:
+            default:
+                targetWheelSpeeds[WheelLocation.LF] = 0;
+                targetWheelSpeeds[WheelLocation.LB] = 0;
+                targetWheelSpeeds[WheelLocation.RF] = 0;
+                targetWheelSpeeds[WheelLocation.RB] = 0;
+                break;
+        }
+    }
     Quaternion correctionRotation = Quaternion.Euler(180f, 0f, 0f);
     // Update is called once per frame
     void FixedUpdate()
@@ -134,6 +186,10 @@ public class FMUSimulator : MonoBehaviour
                 Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
             }
         }            
+    }
+    public void KeyInput()
+    {
+
     }
     void OnDestroy()
     {
