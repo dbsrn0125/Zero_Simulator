@@ -4130,7 +4130,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -4372,7 +4372,7 @@ Transform:
   m_GameObject: {fileID: 963620560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4411,8 +4411,8 @@ MonoBehaviour:
   - {fileID: 428887143}
   - {fileID: 513785425}
   - {fileID: 801510910}
-  initialPosition: {x: 0, y: 0.3, z: 0}
-  targetWheelSpeed_RadPerSec: 10
+  initialPosition: {x: 0, y: 1, z: 0}
+  targetWheelSpeed_RadPerSec: 2
   forwardKey: 119
   backwardKey: 115
   stopKey: 120
@@ -4837,7 +4837,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -5168,7 +5168,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -5178,7 +5178,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: localRotationAxis.y
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -7842,7 +7842,7 @@ PrefabInstance:
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
       propertyPath: invertRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4752241831511539640, guid: 681563dc5766a02409d0aed0bf8fc416,
         type: 3}
@@ -8577,7 +8577,7 @@ PrefabInstance:
     - target: {fileID: 247990385588853915, guid: ab0cead2d9cd1ee479468eaada1c15d4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4968269542118432757, guid: ab0cead2d9cd1ee479468eaada1c15d4,
         type: 3}

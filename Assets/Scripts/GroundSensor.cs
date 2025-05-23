@@ -122,7 +122,7 @@ public class GroundSensor : MonoBehaviour
         {
             CalculatedPenetrationDepth = 0f;
             CalculatedWorldNormal = Vector3.up;
-            CurrentFrictionCoefficient = 0.8f;
+            CurrentFrictionCoefficient = 0f;
             AverageContactPoint_World = wheelTransform.position - wheelTransform.up * nominalWheelRadius_R0;
         }
     }

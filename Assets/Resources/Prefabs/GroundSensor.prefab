@@ -54,6 +54,6 @@ MonoBehaviour:
     m_Bits: 64
   maxRayDistance: 0.1
   nominalWheelRadius_R0: 0.093
-  normalRayLength: 0.5
+  normalRayLength: 0.3
   gizmoRadius: 0.02
   drawDebugRays: 1
