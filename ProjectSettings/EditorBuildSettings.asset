@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Contest Simulator.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/GUI.unity
+    guid: fee0bb14f701d3c45ba7f9a983192f4b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 7a000366f35dfe7428f23804a18512e1,
       type: 3}
