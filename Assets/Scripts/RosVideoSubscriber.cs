@@ -39,7 +39,7 @@ public class RosVideoSubscriber : MonoBehaviour
         try
         {
             ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
-            Debug.Log($"[{gameObject.name}] '{rosTopicName}' (CompressedImageMsg) 토픽 구독 시작.");
+            Debug.Log($"[{gameObject.name}] '{rosTopicName}' Subscribe (CompressedImageMsg)");
         }
         catch (System.Exception e)
         {
@@ -89,6 +89,6 @@ public class RosVideoSubscriber : MonoBehaviour
         // ROS-TCP-Connector는 ROSConnection 오브젝트가 파괴될 때 구독을 정리해줄 수 있습니다.
         // 명시적인 구독 해제가 필요하다면 라이브러리 문서를 참조하세요.
         // 예: ROSConnection.GetOrCreateInstance().Unsubscribe(rosTopicName); (API 확인 필요)
-        Debug.Log($"[{gameObject.name}] '{rosTopicName}' 구독자 파괴 시도.");
+        Debug.Log($"[{gameObject.name}] '{rosTopicName}' Subscriber Destroyed.");
     }
 }
