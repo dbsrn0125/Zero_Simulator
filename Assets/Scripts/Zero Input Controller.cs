@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class ZeroInputController : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class ZeroInputController : MonoBehaviour
     }
     [Header("Drive Mode")]
     public DriveMode currentDriveMode = DriveMode.Ackermann;
+    public TextMeshProUGUI driveModeText;
     private int totalDriveModes;
 
     [Header("Input Actions")]
@@ -61,6 +64,7 @@ public class ZeroInputController : MonoBehaviour
         if (switchModeAction == null) { Debug.LogError("'SwitchDriveMode' action not found!"); }
 
         totalDriveModes = System.Enum.GetValues(typeof(DriveMode)).Length;
+        driveModeText.text = currentDriveMode.ToString();
 
     }
     private void OnEnable()
@@ -89,6 +93,7 @@ public class ZeroInputController : MonoBehaviour
     private void onSwitchDriveModePerformed(InputAction.CallbackContext context)
     {
         currentDriveMode = (DriveMode)(((int)currentDriveMode+1)%totalDriveModes);
+        driveModeText.text = currentDriveMode.ToString();
         Debug.Log("Drive Mode Switched To: " + currentDriveMode.ToString());
     }
 
