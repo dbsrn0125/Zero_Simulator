@@ -889,7 +889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDriveMode: 0
   driveModeText: {fileID: 324518623}
-  comPortName: COM10
+  comPortName: COM5
   baudRate: 9600
   inputActions: {fileID: -944628639613478452, guid: 7a000366f35dfe7428f23804a18512e1,
     type: 3}

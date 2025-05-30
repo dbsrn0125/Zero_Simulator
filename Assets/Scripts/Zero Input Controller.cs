@@ -104,7 +104,7 @@ public class ZeroInputController : MonoBehaviour
                 currentV = currentSmoothedMoveInput * maxLinearVelocity;
                 currentW = currentSmoothedTurnInput * maxAngularVelocity;
                 SendAckermannCommand(currentV, currentW);
-                Debug.Log($" Mode : {currentDriveMode} v : {currentV}, w : {currentW}");
+                //Debug.Log($" Mode : {currentDriveMode} v : {currentV}, w : {currentW}");
                 break;
 
             case DriveMode.OmniDirectional:
@@ -182,15 +182,18 @@ public class ZeroInputController : MonoBehaviour
         byte[] v_bytes = BitConverter.GetBytes(v_short);
         byte[] w_bytes = BitConverter.GetBytes(w_short);
 
-        byte[] packet = new byte[4];
-        packet[0] = v_bytes[0];
-        packet[1] = v_bytes[1];
-        packet[2] = w_bytes[0];
-        packet[3] = w_bytes[1];
+        byte[] packet = new byte[6];
+        packet[0] = 0x02;
+        packet[1] = v_bytes[0];
+        packet[2] = v_bytes[1];
+        packet[3] = w_bytes[0];
+        packet[4] = w_bytes[1];
+        packet[5] = 0x03;
 
         try
         {
             serialPort.Write(packet, 0, packet.Length);
+            Debug.Log("Unity Sent Packet: " + BitConverter.ToString(packet));
         }
         catch (TimeoutException)
         {
