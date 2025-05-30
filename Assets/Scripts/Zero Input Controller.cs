@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Ports;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,12 +19,17 @@ public class ZeroInputController : MonoBehaviour
     public TextMeshProUGUI driveModeText;
     private int totalDriveModes;
 
+    [Header("Serial Port Settings")]
+    public string comPortName = "COM10";
+    public int baudRate = 9600;
+    private SerialPort serialPort;
+
     [Header("Input Actions")]
     public InputActionAsset inputActions;
 
     [Header("Ackermann Mode Settings")]
     public float maxLinearVelocity = 100.0f;
-    public float maxAngularVelocity = 1000.0f;
+    public float maxAngularVelocity = 500.0f;
 
     [Header("Omni-Directional Mode Settings")]
     public float omniMaxLinearVelocity = 100.0f;
@@ -64,43 +70,15 @@ public class ZeroInputController : MonoBehaviour
         if (switchModeAction == null) { Debug.LogError("'SwitchDriveMode' action not found!"); }
 
         totalDriveModes = System.Enum.GetValues(typeof(DriveMode)).Length;
-        driveModeText.text = currentDriveMode.ToString();
 
     }
-    private void OnEnable()
-    {
-        if(inputActions != null)
-        {
-            inputActions.Enable();
-        }
-        if (switchModeAction != null) 
-        {
-            switchModeAction.performed += onSwitchDriveModePerformed;
-        }
-    }
-    private void OnDisable()
-    {
-        if(inputActions != null)
-        {
-            inputActions.Disable();
-        }
-        if (switchModeAction != null)
-        {
-            switchModeAction.performed -= onSwitchDriveModePerformed;
-        }
-    }
-
-    private void onSwitchDriveModePerformed(InputAction.CallbackContext context)
-    {
-        currentDriveMode = (DriveMode)(((int)currentDriveMode+1)%totalDriveModes);
-        driveModeText.text = currentDriveMode.ToString();
-        Debug.Log("Drive Mode Switched To: " + currentDriveMode.ToString());
-    }
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        driveModeText.text = currentDriveMode.ToString();
+        InitializeSerialPort();
     }
 
     // Update is called once per frame
@@ -125,15 +103,124 @@ public class ZeroInputController : MonoBehaviour
             case DriveMode.Ackermann:
                 currentV = currentSmoothedMoveInput * maxLinearVelocity;
                 currentW = currentSmoothedTurnInput * maxAngularVelocity;
+                SendAckermannCommand(currentV, currentW);
                 Debug.Log($" Mode : {currentDriveMode} v : {currentV}, w : {currentW}");
                 break;
 
             case DriveMode.OmniDirectional:
                 currentV = currentSmoothedMoveInput * maxLinearVelocity;
                 currentW = currentSmoothedTurnInput * maxAngularVelocity;
+                SendOmniCommand(currentV, currentW);
                 Debug.Log($" Mode : {currentDriveMode}, v : {currentV}, w : {currentW}");
                 break;
         }
         // 3. 최종 v, w 계산
+    }
+
+    void InitializeSerialPort()
+    {
+        try
+        {
+            serialPort = new SerialPort(comPortName, baudRate)
+            {
+                ReadTimeout = 100,
+                WriteTimeout = 100
+            };
+            serialPort.Open();
+            Debug.Log($"Serial port {comPortName} opened successfully at {baudRate}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error opening serial port{comPortName}: {e.Message}");
+            serialPort = null;
+        }
+    }
+    private void OnEnable()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Enable();
+        }
+        if (switchModeAction != null)
+        {
+            switchModeAction.performed += onSwitchDriveModePerformed;
+        }
+    }
+    private void OnDisable()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+        }
+        if (switchModeAction != null)
+        {
+            switchModeAction.performed -= onSwitchDriveModePerformed;
+        }
+        CloseSerialPort();
+    }
+
+    private void onSwitchDriveModePerformed(InputAction.CallbackContext context)
+    {
+        currentDriveMode = (DriveMode)(((int)currentDriveMode + 1) % totalDriveModes);
+        driveModeText.text = currentDriveMode.ToString();
+        Debug.Log("Drive Mode Switched To: " + currentDriveMode.ToString());
+        currentSmoothedMoveInput = 0f;
+        currentSmoothedTurnInput = 0f;
+        currentV = 0f;
+        currentW = 0f;
+    }
+    public void SendAckermannCommand(float v, float w)
+    {
+        if (serialPort == null || !serialPort.IsOpen) 
+        {
+            Debug.LogError("serial port is not open.");
+            return;
+        }
+        short v_short = (short)Mathf.Clamp(v * (32767.0f / maxLinearVelocity), short.MinValue, short.MaxValue);
+        short w_short = (short)Mathf.Clamp(w * (32767.0f / maxAngularVelocity), short.MinValue, short.MaxValue);
+
+        byte[] v_bytes = BitConverter.GetBytes(v_short);
+        byte[] w_bytes = BitConverter.GetBytes(w_short);
+
+        byte[] packet = new byte[4];
+        packet[0] = v_bytes[0];
+        packet[1] = v_bytes[1];
+        packet[2] = w_bytes[0];
+        packet[3] = w_bytes[1];
+
+        try
+        {
+            serialPort.Write(packet, 0, packet.Length);
+        }
+        catch (TimeoutException)
+        {
+            Debug.LogWarning("Timeout writing to serialPort");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
+    }
+
+
+    public void SendOmniCommand(float v, float theta)
+    {
+
+    }
+    void CloseSerialPort() // OnDisable, OnApplicationQuit 등에서 호출
+    {
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            try
+            {
+                serialPort.Close();
+                Debug.Log($"Serial port {comPortName} closed.");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error closing serial port {comPortName}: {e.Message}");
+            }
+            serialPort = null;
+        }
     }
 }
