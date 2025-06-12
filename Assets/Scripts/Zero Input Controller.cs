@@ -23,6 +23,8 @@ public class ZeroInputController : MonoBehaviour
     public string comPortName = "COM10";
     public int baudRate = 9600;
     private SerialPort serialPort;
+    public float sendInterval = 0.1f;
+    private float timeSinceLastSend = 0f;
 
     [Header("Input Actions")]
     public InputActionAsset inputActions;
@@ -98,12 +100,11 @@ public class ZeroInputController : MonoBehaviour
         float targetTurnInput = rawTurnInput;
         float currentAngularRate = (Mathf.Approximately(targetTurnInput, 0f)) ? angularDeceleration : angularAcceleration;
         currentSmoothedTurnInput = Mathf.MoveTowards(currentSmoothedTurnInput, targetTurnInput, currentAngularRate * Time.deltaTime);
-        switch(currentDriveMode)
+        switch (currentDriveMode)
         {
             case DriveMode.Ackermann:
                 currentV = currentSmoothedMoveInput * maxLinearVelocity;
                 currentW = currentSmoothedTurnInput * maxAngularVelocity;
-                SendAckermannCommand(currentV, currentW);
                 //Debug.Log($" Mode : {currentDriveMode} v : {currentV}, w : {currentW}");
                 break;
 
@@ -114,9 +115,25 @@ public class ZeroInputController : MonoBehaviour
                 Debug.Log($" Mode : {currentDriveMode}, v : {currentV}, w : {currentW}");
                 break;
         }
+        timeSinceLastSend += Time.deltaTime;
+        if(timeSinceLastSend >=sendInterval)
+        {
+            if(currentDriveMode == DriveMode.Ackermann)
+            {
+                //SendAckermannCommand(currentV, currentW);
+            }
+            else if(currentDriveMode == DriveMode.OmniDirectional)
+            {
+                //SendOmniCommand(currentV, currentW);
+            }
+            timeSinceLastSend = 0f;
+        }
         // 3. 최종 v, w 계산
     }
-
+    private void FixedUpdate()
+    {
+        
+    }
     void InitializeSerialPort()
     {
         try

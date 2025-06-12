@@ -890,7 +890,8 @@ MonoBehaviour:
   currentDriveMode: 0
   driveModeText: {fileID: 324518623}
   comPortName: COM5
-  baudRate: 9600
+  baudRate: 115200
+  sendInterval: 0.3
   inputActions: {fileID: -944628639613478452, guid: 7a000366f35dfe7428f23804a18512e1,
     type: 3}
   maxLinearVelocity: 100
@@ -1249,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: image_raw/compressed
+  rosTopicName: camera/depth_image/compressed
   displayImage: {fileID: 2033373677}
 --- !u!1 &462480408
 GameObject:
@@ -1878,7 +1879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: image_raw/compressed
+  rosTopicName: camera/color_image/compressed
   displayImage: {fileID: 691637476}
 --- !u!1 &1015829772
 GameObject:
@@ -2393,7 +2394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: image_raw/compressed
+  rosTopicName: color_image/compressed
   displayImage: {fileID: 156837693}
 --- !u!1 &1204691180
 GameObject:
@@ -2993,7 +2994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: image_raw/compressed
+  rosTopicName: depth_colormap/compressed
   displayImage: {fileID: 1139074342}
 --- !u!1 &1423133619
 GameObject:
