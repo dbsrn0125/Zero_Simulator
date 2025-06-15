@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: zero_v1
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00340037006400390033003700310038002d0038003700350037002d0038003400340039002d0062003000310039002d003400650037006400370062003800310035006300370034007d00
+  guid: 7b00380065006600310030006600350039002d0061003400320063002d0064003600390036002d0031006300610032002d006500330034003700360066003400610065006500320038007d00
   modelName: zero_v1
   coSimulation:
     modelIdentifier: zero_v1
@@ -98,16 +98,8 @@ MonoBehaviour:
     initial: 
     type: 0
     start: 0
-  - name: RFFriction_coeff_in
-    valueReference: 10
-    description: RF friction_coeff_in
-    causality: input
-    variability: continuous
-    initial: 
-    type: 0
-    start: 0
   - name: RBTireAngularVelocityInput
-    valueReference: 11
+    valueReference: 10
     description: RB Tire Angular Velocity input
     causality: input
     variability: continuous
@@ -115,7 +107,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: RBIs_contacting_in
-    valueReference: 12
+    valueReference: 11
     description: RB is_contacting_in
     causality: input
     variability: continuous
@@ -123,7 +115,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: RBPenetration_depth_in
-    valueReference: 13
+    valueReference: 12
     description: RB penetration_depth_in
     causality: input
     variability: continuous
@@ -131,7 +123,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: RBGround_normal_world_in_vec[1]
-    valueReference: 14
+    valueReference: 13
     description: RB ground_normal_world_in_vec(1)
     causality: input
     variability: continuous
@@ -139,7 +131,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: RBGround_normal_world_in_vec[2]
-    valueReference: 15
+    valueReference: 14
     description: RB ground_normal_world_in_vec(2)
     causality: input
     variability: continuous
@@ -147,23 +139,15 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: RBGround_normal_world_in_vec[3]
-    valueReference: 16
+    valueReference: 15
     description: RB ground_normal_world_in_vec(3)
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RBFriction_coeff_in
-    valueReference: 17
-    description: RB friction_coeff_in
-    causality: input
-    variability: continuous
-    initial: 
-    type: 0
-    start: 0
   - name: LFTireAngularVelocityInput
-    valueReference: 18
+    valueReference: 16
     description: LF Tire Angular Velocity input
     causality: input
     variability: continuous
@@ -171,7 +155,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LFIs_contacting_in
-    valueReference: 19
+    valueReference: 17
     description: LF is_contacting_in
     causality: input
     variability: continuous
@@ -179,7 +163,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LFPenetration_depth_in
-    valueReference: 20
+    valueReference: 18
     description: LF penetration_depth_in
     causality: input
     variability: continuous
@@ -187,7 +171,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LFGround_normal_world_in_vec[1]
-    valueReference: 21
+    valueReference: 19
     description: LF ground_normal_world_in_vec(1)
     causality: input
     variability: continuous
@@ -195,7 +179,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LFGround_normal_world_in_vec[2]
-    valueReference: 22
+    valueReference: 20
     description: LF ground_normal_world_in_vec(2)
     causality: input
     variability: continuous
@@ -203,23 +187,15 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LFGround_normal_world_in_vec[3]
-    valueReference: 23
+    valueReference: 21
     description: LF ground_normal_world_in_vec(3)
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LFFriction_coeff_in
-    valueReference: 24
-    description: LF friction_coeff_in
-    causality: input
-    variability: continuous
-    initial: 
-    type: 0
-    start: 0
   - name: LBTireAngularVelocityInput
-    valueReference: 25
+    valueReference: 22
     description: LB Tire Angular Velocity input
     causality: input
     variability: continuous
@@ -227,7 +203,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LBIs_contacting_in
-    valueReference: 26
+    valueReference: 23
     description: LB is_contacting_in
     causality: input
     variability: continuous
@@ -235,7 +211,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LBPenetration_depth_in
-    valueReference: 27
+    valueReference: 24
     description: LB penetration_depth_in
     causality: input
     variability: continuous
@@ -243,7 +219,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LBGround_normal_world_in_vec[1]
-    valueReference: 28
+    valueReference: 25
     description: LB ground_normal_world_in_vec(1)
     causality: input
     variability: continuous
@@ -251,7 +227,7 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LBGround_normal_world_in_vec[2]
-    valueReference: 29
+    valueReference: 26
     description: LB ground_normal_world_in_vec(2)
     causality: input
     variability: continuous
@@ -259,23 +235,15 @@ MonoBehaviour:
     type: 0
     start: 0
   - name: LBGround_normal_world_in_vec[3]
-    valueReference: 30
+    valueReference: 27
     description: LB ground_normal_world_in_vec(3)
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LBFriction_coeff_in
-    valueReference: 31
-    description: LB friction_coeff_in
-    causality: input
-    variability: continuous
-    initial: 
-    type: 0
-    start: 0
   - name: LFTireAngleOutput
-    valueReference: 32
+    valueReference: 28
     description: LF Tire Angle output
     causality: output
     variability: continuous
@@ -283,7 +251,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: LFSteeringAngleOutput
-    valueReference: 33
+    valueReference: 29
     description: LF Steering Angle output
     causality: output
     variability: continuous
@@ -291,7 +259,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: LBTireAngleOutput
-    valueReference: 34
+    valueReference: 30
     description: LB Tire Angle output
     causality: output
     variability: continuous
@@ -299,7 +267,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: LBSteeringAngleOutput
-    valueReference: 35
+    valueReference: 31
     description: LB Steering Angle output
     causality: output
     variability: continuous
@@ -307,7 +275,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: RFTireAngleOutput
-    valueReference: 36
+    valueReference: 32
     description: RF Tire Angle output
     causality: output
     variability: continuous
@@ -315,7 +283,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: RFSteeringAngleOutput
-    valueReference: 37
+    valueReference: 33
     description: RF Steering Angle output
     causality: output
     variability: continuous
@@ -323,7 +291,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: RBTireAngleOutput
-    valueReference: 38
+    valueReference: 34
     description: RB Tire Angle output
     causality: output
     variability: continuous
@@ -331,7 +299,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: RBSteeringAngleOutput
-    valueReference: 39
+    valueReference: 35
     description: RB Steering Angle output
     causality: output
     variability: continuous
@@ -339,7 +307,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: RightSuspensionAngleOutput
-    valueReference: 40
+    valueReference: 36
     description: Right Suspension Angle output
     causality: output
     variability: continuous
@@ -347,7 +315,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: LeftSuspensionAngleOutput
-    valueReference: 41
+    valueReference: 37
     description: Left Suspension Angle output
     causality: output
     variability: continuous
@@ -355,7 +323,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: DifferentialBarOutput
-    valueReference: 42
+    valueReference: 38
     description: Differential Bar output
     causality: output
     variability: continuous
@@ -363,7 +331,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_x
-    valueReference: 43
+    valueReference: 39
     description: zero_position.x
     causality: output
     variability: continuous
@@ -371,7 +339,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_y
-    valueReference: 44
+    valueReference: 40
     description: zero_position.y
     causality: output
     variability: continuous
@@ -379,7 +347,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_z
-    valueReference: 45
+    valueReference: 41
     description: zero_position.z
     causality: output
     variability: continuous
@@ -387,7 +355,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[1,1]
-    valueReference: 46
+    valueReference: 42
     description: zero_orientation(1,1)
     causality: output
     variability: continuous
@@ -395,7 +363,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[2,1]
-    valueReference: 47
+    valueReference: 43
     description: zero_orientation(2,1)
     causality: output
     variability: continuous
@@ -403,7 +371,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[3,1]
-    valueReference: 48
+    valueReference: 44
     description: zero_orientation(3,1)
     causality: output
     variability: continuous
@@ -411,7 +379,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[4,1]
-    valueReference: 49
+    valueReference: 45
     description: zero_orientation(4,1)
     causality: output
     variability: continuous
@@ -419,7 +387,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: time
-    valueReference: 50
+    valueReference: 46
     description: time
     causality: independent
     variability: continuous
