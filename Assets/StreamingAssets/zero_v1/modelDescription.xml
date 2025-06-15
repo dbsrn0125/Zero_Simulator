@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-06-14T11:21:25Z" generationTool="Simulink (R2024b)" guid="{8ef10f59-a42c-d696-1ca2-e3476f4aee28}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.252">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-06-15T14:57:43Z" generationTool="Simulink (R2024b)" guid="{77b7f41d-61de-1c78-17b6-d27aeba789d4}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.268">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="zero_v1"/>
   <UnitDefinitions>
     <Unit name="1"/>
@@ -18,21 +18,25 @@
           <Inport blockPath="zero_v1/RF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RF Tire Angular Velocity input" portNumber="3" sampleTime="[0 0]" uniquePortName="RFTireAngularVelocityInput" unit="rad/s"/>
           <Inport blockPath="zero_v1/RF Steering Angle input" dataType="double" dimension="[1]" portName="RF Steering Angle input" portNumber="4" sampleTime="[0 0]" uniquePortName="RFSteeringAngleInput" unit="deg"/>
           <Inport blockPath="zero_v1/RB Steering Angle input" dataType="double" dimension="[1]" portName="RB Steering Angle input" portNumber="5" sampleTime="[0 0]" uniquePortName="RBSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/RF is_contacting_in" dataType="double" dimension="[1]" portName="RF is_contacting_in" portNumber="6" sampleTime="[0 0]" uniquePortName="RFIs_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/RF penetration_depth_in" dataType="double" dimension="[1]" portName="RF penetration_depth_in" portNumber="7" sampleTime="[0 0]" uniquePortName="RFPenetration_depth_in" unit=""/>
-          <Inport blockPath="zero_v1/RF ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="RF ground_normal_world_in_vec" portNumber="8" sampleTime="[0 0]" uniquePortName="RFGround_normal_world_in_vec" unit=""/>
-          <Inport blockPath="zero_v1/RB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RB Tire Angular Velocity input" portNumber="9" sampleTime="[0 0]" uniquePortName="RBTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/RB is_contacting_in" dataType="double" dimension="[1]" portName="RB is_contacting_in" portNumber="10" sampleTime="[0 0]" uniquePortName="RBIs_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/RB penetration_depth_in" dataType="double" dimension="[1]" portName="RB penetration_depth_in" portNumber="11" sampleTime="[0 0]" uniquePortName="RBPenetration_depth_in" unit=""/>
-          <Inport blockPath="zero_v1/RB ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="RB ground_normal_world_in_vec" portNumber="12" sampleTime="[0 0]" uniquePortName="RBGround_normal_world_in_vec" unit=""/>
-          <Inport blockPath="zero_v1/LF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LF Tire Angular Velocity input" portNumber="13" sampleTime="[0 0]" uniquePortName="LFTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/LF is_contacting_in" dataType="double" dimension="[1]" portName="LF is_contacting_in" portNumber="14" sampleTime="[0 0]" uniquePortName="LFIs_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/LF penetration_depth_in" dataType="double" dimension="[1]" portName="LF penetration_depth_in" portNumber="15" sampleTime="[0 0]" uniquePortName="LFPenetration_depth_in" unit=""/>
-          <Inport blockPath="zero_v1/LF ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="LF ground_normal_world_in_vec" portNumber="16" sampleTime="[0 0]" uniquePortName="LFGround_normal_world_in_vec" unit=""/>
-          <Inport blockPath="zero_v1/LB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LB Tire Angular Velocity input" portNumber="17" sampleTime="[0 0]" uniquePortName="LBTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/LB is_contacting_in" dataType="double" dimension="[1]" portName="LB is_contacting_in" portNumber="18" sampleTime="[0 0]" uniquePortName="LBIs_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/LB penetration_depth_in" dataType="double" dimension="[1]" portName="LB penetration_depth_in" portNumber="19" sampleTime="[0 0]" uniquePortName="LBPenetration_depth_in" unit=""/>
-          <Inport blockPath="zero_v1/LB ground_normal_world_in_vec" dataType="double" dimension="[3]" portName="LB ground_normal_world_in_vec" portNumber="20" sampleTime="[0 0]" uniquePortName="LBGround_normal_world_in_vec" unit=""/>
+          <Inport blockPath="zero_v1/RF_is_contacting_in" dataType="double" dimension="[1]" portName="RF_is_contacting_in" portNumber="6" sampleTime="[0 0]" uniquePortName="RF_is_contacting_in" unit=""/>
+          <Inport blockPath="zero_v1/RF_ray_in" dataType="double" dimension="[1]" portName="RF_ray_in" portNumber="7" sampleTime="[0 0]" uniquePortName="RF_ray_in" unit=""/>
+          <Inport blockPath="zero_v1/RF_gnd_pitch_in" dataType="double" dimension="[1]" portName="RF_gnd_pitch_in" portNumber="8" sampleTime="[0 0]" uniquePortName="RF_gnd_pitch_in" unit=""/>
+          <Inport blockPath="zero_v1/RF_gnd_roll_in" dataType="double" dimension="[1]" portName="RF_gnd_roll_in" portNumber="9" sampleTime="[0 0]" uniquePortName="RF_gnd_roll_in" unit=""/>
+          <Inport blockPath="zero_v1/RB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RB Tire Angular Velocity input" portNumber="10" sampleTime="[0 0]" uniquePortName="RBTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/RB_is_contacting_in" dataType="double" dimension="[1]" portName="RB_is_contacting_in" portNumber="11" sampleTime="[0 0]" uniquePortName="RB_is_contacting_in" unit=""/>
+          <Inport blockPath="zero_v1/RB_ray_in" dataType="double" dimension="[1]" portName="RB_ray_in" portNumber="12" sampleTime="[0 0]" uniquePortName="RB_ray_in" unit=""/>
+          <Inport blockPath="zero_v1/RB_gnd_pitch_in" dataType="double" dimension="[1]" portName="RB_gnd_pitch_in" portNumber="13" sampleTime="[0 0]" uniquePortName="RB_gnd_pitch_in" unit=""/>
+          <Inport blockPath="zero_v1/RB_gnd_roll_in" dataType="double" dimension="[1]" portName="RB_gnd_roll_in" portNumber="14" sampleTime="[0 0]" uniquePortName="RB_gnd_roll_in" unit=""/>
+          <Inport blockPath="zero_v1/LF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LF Tire Angular Velocity input" portNumber="15" sampleTime="[0 0]" uniquePortName="LFTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/LF_is_contacting_in" dataType="double" dimension="[1]" portName="LF_is_contacting_in" portNumber="16" sampleTime="[0 0]" uniquePortName="LF_is_contacting_in" unit=""/>
+          <Inport blockPath="zero_v1/LF_ray_in" dataType="double" dimension="[1]" portName="LF_ray_in" portNumber="17" sampleTime="[0 0]" uniquePortName="LF_ray_in" unit=""/>
+          <Inport blockPath="zero_v1/LF_gnd_pitch_in" dataType="double" dimension="[1]" portName="LF_gnd_pitch_in" portNumber="18" sampleTime="[0 0]" uniquePortName="LF_gnd_pitch_in" unit=""/>
+          <Inport blockPath="zero_v1/LF_gnd_roll_in" dataType="double" dimension="[1]" portName="LF_gnd_roll_in" portNumber="19" sampleTime="[0 0]" uniquePortName="LF_gnd_roll_in" unit=""/>
+          <Inport blockPath="zero_v1/LB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LB Tire Angular Velocity input" portNumber="20" sampleTime="[0 0]" uniquePortName="LBTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/LB_is_contacting_in" dataType="double" dimension="[1]" portName="LB_is_contacting_in" portNumber="21" sampleTime="[0 0]" uniquePortName="LB_is_contacting_in" unit=""/>
+          <Inport blockPath="zero_v1/LB_ray_in" dataType="double" dimension="[1]" portName="LB_ray_in" portNumber="22" sampleTime="[0 0]" uniquePortName="LB_ray_in" unit=""/>
+          <Inport blockPath="zero_v1/LB_gnd_pitch_in" dataType="double" dimension="[1]" portName="LB_gnd_pitch_in" portNumber="23" sampleTime="[0 0]" uniquePortName="LB_gnd_pitch_in" unit=""/>
+          <Inport blockPath="zero_v1/LB_gnd_roll_in" dataType="double" dimension="[1]" portName="LB_gnd_roll_in" portNumber="24" sampleTime="[0 0]" uniquePortName="LB_gnd_roll_in" unit=""/>
           <Outport blockPath="zero_v1/LF Tire Angle output" dataType="double" dimension="[1]" portName="LF Tire Angle output" portNumber="1" sampleTime="[0 0]" uniquePortName="LFTireAngleOutput" unit="deg"/>
           <Outport blockPath="zero_v1/LF Steering Angle output" dataType="double" dimension="[1]" portName="LF Steering Angle output" portNumber="2" sampleTime="[0 0]" uniquePortName="LFSteeringAngleOutput" unit="deg"/>
           <Outport blockPath="zero_v1/LB Tire Angle output" dataType="double" dimension="[1]" portName="LB Tire Angle output" portNumber="3" sampleTime="[0 0]" uniquePortName="LBTireAngleOutput" unit="deg"/>
@@ -73,177 +77,165 @@
       <Real start="0" unit="deg"/>
       <!--Index = 5-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF is_contacting_in" name="RFIs_contacting_in" valueReference="5" variability="continuous">
+    <ScalarVariable causality="input" description="RF_is_contacting_in" name="RF_is_contacting_in" valueReference="5" variability="continuous">
       <Real start="0"/>
       <!--Index = 6-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF penetration_depth_in" name="RFPenetration_depth_in" valueReference="6" variability="continuous">
+    <ScalarVariable causality="input" description="RF_ray_in" name="RF_ray_in" valueReference="6" variability="continuous">
       <Real start="0"/>
       <!--Index = 7-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF ground_normal_world_in_vec(1)" name="RFGround_normal_world_in_vec[1]" valueReference="7" variability="continuous">
+    <ScalarVariable causality="input" description="RF_gnd_pitch_in" name="RF_gnd_pitch_in" valueReference="7" variability="continuous">
       <Real start="0"/>
       <!--Index = 8-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF ground_normal_world_in_vec(2)" name="RFGround_normal_world_in_vec[2]" valueReference="8" variability="continuous">
+    <ScalarVariable causality="input" description="RF_gnd_roll_in" name="RF_gnd_roll_in" valueReference="8" variability="continuous">
       <Real start="0"/>
       <!--Index = 9-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF ground_normal_world_in_vec(3)" name="RFGround_normal_world_in_vec[3]" valueReference="9" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="input" description="RB Tire Angular Velocity input" name="RBTireAngularVelocityInput" valueReference="9" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 10-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB Tire Angular Velocity input" name="RBTireAngularVelocityInput" valueReference="10" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="RB_is_contacting_in" name="RB_is_contacting_in" valueReference="10" variability="continuous">
+      <Real start="0"/>
       <!--Index = 11-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB is_contacting_in" name="RBIs_contacting_in" valueReference="11" variability="continuous">
+    <ScalarVariable causality="input" description="RB_ray_in" name="RB_ray_in" valueReference="11" variability="continuous">
       <Real start="0"/>
       <!--Index = 12-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB penetration_depth_in" name="RBPenetration_depth_in" valueReference="12" variability="continuous">
+    <ScalarVariable causality="input" description="RB_gnd_pitch_in" name="RB_gnd_pitch_in" valueReference="12" variability="continuous">
       <Real start="0"/>
       <!--Index = 13-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB ground_normal_world_in_vec(1)" name="RBGround_normal_world_in_vec[1]" valueReference="13" variability="continuous">
+    <ScalarVariable causality="input" description="RB_gnd_roll_in" name="RB_gnd_roll_in" valueReference="13" variability="continuous">
       <Real start="0"/>
       <!--Index = 14-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB ground_normal_world_in_vec(2)" name="RBGround_normal_world_in_vec[2]" valueReference="14" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="input" description="LF Tire Angular Velocity input" name="LFTireAngularVelocityInput" valueReference="14" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 15-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB ground_normal_world_in_vec(3)" name="RBGround_normal_world_in_vec[3]" valueReference="15" variability="continuous">
+    <ScalarVariable causality="input" description="LF_is_contacting_in" name="LF_is_contacting_in" valueReference="15" variability="continuous">
       <Real start="0"/>
       <!--Index = 16-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF Tire Angular Velocity input" name="LFTireAngularVelocityInput" valueReference="16" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="LF_ray_in" name="LF_ray_in" valueReference="16" variability="continuous">
+      <Real start="0"/>
       <!--Index = 17-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF is_contacting_in" name="LFIs_contacting_in" valueReference="17" variability="continuous">
+    <ScalarVariable causality="input" description="LF_gnd_pitch_in" name="LF_gnd_pitch_in" valueReference="17" variability="continuous">
       <Real start="0"/>
       <!--Index = 18-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF penetration_depth_in" name="LFPenetration_depth_in" valueReference="18" variability="continuous">
+    <ScalarVariable causality="input" description="LF_gnd_roll_in" name="LF_gnd_roll_in" valueReference="18" variability="continuous">
       <Real start="0"/>
       <!--Index = 19-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF ground_normal_world_in_vec(1)" name="LFGround_normal_world_in_vec[1]" valueReference="19" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="input" description="LB Tire Angular Velocity input" name="LBTireAngularVelocityInput" valueReference="19" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 20-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF ground_normal_world_in_vec(2)" name="LFGround_normal_world_in_vec[2]" valueReference="20" variability="continuous">
+    <ScalarVariable causality="input" description="LB_is_contacting_in" name="LB_is_contacting_in" valueReference="20" variability="continuous">
       <Real start="0"/>
       <!--Index = 21-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF ground_normal_world_in_vec(3)" name="LFGround_normal_world_in_vec[3]" valueReference="21" variability="continuous">
+    <ScalarVariable causality="input" description="LB_ray_in" name="LB_ray_in" valueReference="21" variability="continuous">
       <Real start="0"/>
       <!--Index = 22-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB Tire Angular Velocity input" name="LBTireAngularVelocityInput" valueReference="22" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="LB_gnd_pitch_in" name="LB_gnd_pitch_in" valueReference="22" variability="continuous">
+      <Real start="0"/>
       <!--Index = 23-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB is_contacting_in" name="LBIs_contacting_in" valueReference="23" variability="continuous">
+    <ScalarVariable causality="input" description="LB_gnd_roll_in" name="LB_gnd_roll_in" valueReference="23" variability="continuous">
       <Real start="0"/>
       <!--Index = 24-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB penetration_depth_in" name="LBPenetration_depth_in" valueReference="24" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="output" description="LF Tire Angle output" initial="calculated" name="LFTireAngleOutput" valueReference="24" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 25-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB ground_normal_world_in_vec(1)" name="LBGround_normal_world_in_vec[1]" valueReference="25" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="output" description="LF Steering Angle output" initial="calculated" name="LFSteeringAngleOutput" valueReference="25" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 26-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB ground_normal_world_in_vec(2)" name="LBGround_normal_world_in_vec[2]" valueReference="26" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="output" description="LB Tire Angle output" initial="calculated" name="LBTireAngleOutput" valueReference="26" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 27-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB ground_normal_world_in_vec(3)" name="LBGround_normal_world_in_vec[3]" valueReference="27" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="output" description="LB Steering Angle output" initial="calculated" name="LBSteeringAngleOutput" valueReference="27" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 28-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LF Tire Angle output" initial="calculated" name="LFTireAngleOutput" valueReference="28" variability="continuous">
+    <ScalarVariable causality="output" description="RF Tire Angle output" initial="calculated" name="RFTireAngleOutput" valueReference="28" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 29-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LF Steering Angle output" initial="calculated" name="LFSteeringAngleOutput" valueReference="29" variability="continuous">
+    <ScalarVariable causality="output" description="RF Steering Angle output" initial="calculated" name="RFSteeringAngleOutput" valueReference="29" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 30-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LB Tire Angle output" initial="calculated" name="LBTireAngleOutput" valueReference="30" variability="continuous">
+    <ScalarVariable causality="output" description="RB Tire Angle output" initial="calculated" name="RBTireAngleOutput" valueReference="30" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 31-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LB Steering Angle output" initial="calculated" name="LBSteeringAngleOutput" valueReference="31" variability="continuous">
+    <ScalarVariable causality="output" description="RB Steering Angle output" initial="calculated" name="RBSteeringAngleOutput" valueReference="31" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 32-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RF Tire Angle output" initial="calculated" name="RFTireAngleOutput" valueReference="32" variability="continuous">
+    <ScalarVariable causality="output" description="Right Suspension Angle output" initial="calculated" name="RightSuspensionAngleOutput" valueReference="32" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 33-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RF Steering Angle output" initial="calculated" name="RFSteeringAngleOutput" valueReference="33" variability="continuous">
+    <ScalarVariable causality="output" description="Left Suspension Angle output" initial="calculated" name="LeftSuspensionAngleOutput" valueReference="33" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 34-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RB Tire Angle output" initial="calculated" name="RBTireAngleOutput" valueReference="34" variability="continuous">
+    <ScalarVariable causality="output" description="Differential Bar output" initial="calculated" name="DifferentialBarOutput" valueReference="34" variability="continuous">
       <Real unit="deg"/>
       <!--Index = 35-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RB Steering Angle output" initial="calculated" name="RBSteeringAngleOutput" valueReference="35" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="output" description="zero_position.x" initial="calculated" name="zero_position_x" valueReference="35" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 36-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Right Suspension Angle output" initial="calculated" name="RightSuspensionAngleOutput" valueReference="36" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="output" description="zero_position.y" initial="calculated" name="zero_position_y" valueReference="36" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 37-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Left Suspension Angle output" initial="calculated" name="LeftSuspensionAngleOutput" valueReference="37" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="output" description="zero_position.z" initial="calculated" name="zero_position_z" valueReference="37" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 38-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Differential Bar output" initial="calculated" name="DifferentialBarOutput" valueReference="38" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="output" description="zero_orientation(1,1)" initial="calculated" name="zero_orientation[1,1]" valueReference="38" variability="continuous">
+      <Real unit="1"/>
       <!--Index = 39-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.x" initial="calculated" name="zero_position_x" valueReference="39" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="output" description="zero_orientation(2,1)" initial="calculated" name="zero_orientation[2,1]" valueReference="39" variability="continuous">
+      <Real unit="1"/>
       <!--Index = 40-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.y" initial="calculated" name="zero_position_y" valueReference="40" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="output" description="zero_orientation(3,1)" initial="calculated" name="zero_orientation[3,1]" valueReference="40" variability="continuous">
+      <Real unit="1"/>
       <!--Index = 41-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.z" initial="calculated" name="zero_position_z" valueReference="41" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="output" description="zero_orientation(4,1)" initial="calculated" name="zero_orientation[4,1]" valueReference="41" variability="continuous">
+      <Real unit="1"/>
       <!--Index = 42-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(1,1)" initial="calculated" name="zero_orientation[1,1]" valueReference="42" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 43-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(2,1)" initial="calculated" name="zero_orientation[2,1]" valueReference="43" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 44-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(3,1)" initial="calculated" name="zero_orientation[3,1]" valueReference="44" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 45-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(4,1)" initial="calculated" name="zero_orientation[4,1]" valueReference="45" variability="continuous">
-      <Real unit="1"/>
-      <!--Index = 46-->
-    </ScalarVariable>
-    <ScalarVariable causality="independent" description="time" name="time" valueReference="46" variability="continuous">
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="42" variability="continuous">
       <Real/>
-      <!--Index = 47-->
+      <!--Index = 43-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
     <Outputs>
+      <Unknown index="25"/>
+      <Unknown index="26"/>
+      <Unknown index="27"/>
+      <Unknown index="28"/>
       <Unknown index="29"/>
       <Unknown index="30"/>
       <Unknown index="31"/>
@@ -258,12 +250,12 @@
       <Unknown index="40"/>
       <Unknown index="41"/>
       <Unknown index="42"/>
-      <Unknown index="43"/>
-      <Unknown index="44"/>
-      <Unknown index="45"/>
-      <Unknown index="46"/>
     </Outputs>
     <InitialUnknowns>
+      <Unknown index="25"/>
+      <Unknown index="26"/>
+      <Unknown index="27"/>
+      <Unknown index="28"/>
       <Unknown index="29"/>
       <Unknown index="30"/>
       <Unknown index="31"/>
@@ -278,10 +270,6 @@
       <Unknown index="40"/>
       <Unknown index="41"/>
       <Unknown index="42"/>
-      <Unknown index="43"/>
-      <Unknown index="44"/>
-      <Unknown index="45"/>
-      <Unknown index="46"/>
     </InitialUnknowns>
   </ModelStructure>
 </fmiModelDescription>

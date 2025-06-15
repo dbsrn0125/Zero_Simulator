@@ -84,7 +84,7 @@ public class FMUSimulator : MonoBehaviour
     {
         FMUInput();
         fmu.DoStep(Time.timeAsDouble, Time.fixedDeltaTime);
-        zero6dof();
+        //zero6dof();
     }
     void zero6dof()
     {
@@ -120,12 +120,11 @@ public class FMUSimulator : MonoBehaviour
         targetSteeringAngles[WheelLocation.RB] = message.br_ang;
     }
 
+    // FMUSimulator.cs 안에 있는 이 함수를 찾아서 내용물을 교체하세요.
     public void UpdateGroundContactData()
     {
         if (groundSensors == null || groundSensors.Count != 4)
         {
-            // Debug.LogWarning("GroundSensors List가 제대로 할당되지 않았거나 개수가 맞지 않습니다.");
-            // 모든 센서가 할당되지 않았을 경우를 대비해 NonContact으로 초기화
             for (int i = 0; i < currentGroundContacts.Length; ++i)
             {
                 currentGroundContacts[i] = GroundContactInfo.NonContact();
@@ -133,21 +132,22 @@ public class FMUSimulator : MonoBehaviour
             return;
         }
 
+        // [수정된 로직]
         for (int i = 0; i < groundSensors.Count; i++)
         {
-            WheelLocation loc = (WheelLocation)i; // enum 값이 0,1,2,3 순서라고 가정
+            WheelLocation loc = (WheelLocation)i;
             if (groundSensors[i] != null)
             {
                 currentGroundContacts[(int)loc] = new GroundContactInfo(
                     groundSensors[i].IsContacting,
-                    groundSensors[i].CalculatedPenetrationDepth,
-                    groundSensors[i].CalculatedWorldNormal,
-                    groundSensors[i].CurrentFrictionCoefficient
+                    groundSensors[i].GroundHeight,
+                    groundSensors[i].GroundPitch,
+                    groundSensors[i].GroundRoll
                 );
             }
             else
             {
-                Debug.LogWarning("GroundSensor at index " + i + " is not assigned.");
+                // Debug.LogWarning("GroundSensor at index " + i + " is not assigned.");
                 currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
             }
         }
@@ -167,25 +167,27 @@ public class FMUSimulator : MonoBehaviour
                 Debug.LogError($"FMU SetReal for Control Command (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
             }
         }
-        for (int i = 0; i < currentGroundContacts.Length; ++i) 
+        for (int i = 0; i < currentGroundContacts.Length; ++i)
         {
-            WheelLocation loc= (WheelLocation)i;
+            WheelLocation loc = (WheelLocation)i;
             GroundContactInfo contactInfo = currentGroundContacts[i];
             try
             {
-                fmu.SetReal($"{loc}Is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
-                fmu.SetReal($"{loc}Penetration_depth_in",contactInfo.PenetrationDepth);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[1]", contactInfo.WorldNormal.x);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[2]", contactInfo.WorldNormal.y);
-                fmu.SetReal($"{loc}Ground_normal_world_in_vec[3]", contactInfo.WorldNormal.z);
-                //fmu.SetReal($"{loc}Friction_coeff_in",contactInfo.FrictionCoefficient);
-                Debug.Log($"{loc} + {contactInfo.IsContacting} + {contactInfo.WorldNormal} + {contactInfo.PenetrationDepth} + {contactInfo.FrictionCoefficient}");
+                // 새로운 데이터 규격에 맞춰 FMU 변수명을 수정합니다.
+                // (이 변수명은 Simscape 모델의 입력 포트 이름과 정확히 일치해야 합니다)
+                fmu.SetReal($"{loc}_is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
+                fmu.SetReal($"{loc}_ray_in", contactInfo.GroundHeight);
+                fmu.SetReal($"{loc}_gnd_pitch_in", contactInfo.GroundPitch);
+                fmu.SetReal($"{loc}_gnd_roll_in", contactInfo.GroundRoll);
+
+                // 디버깅 로그 (수정됨)
+                 Debug.Log($"[{loc}] Contact:{contactInfo.IsContacting}, H:{contactInfo.GroundHeight:F3}, P:{contactInfo.GroundPitch:F3}, R:{contactInfo.GroundRoll:F3}");
             }
             catch (System.Exception e)
             {
                 Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
             }
-        }            
+        }
     }
     public void KeyInput()
     {

@@ -1,26 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// WheelLocation Enum (아마 이미 있을 겁니다. 없다면 추가해주세요)
 
+// 센서 데이터를 담을 구조체
 public struct GroundContactInfo
 {
     public bool IsContacting;
-    public float PenetrationDepth;
-    public Vector3 WorldNormal;
-    public float FrictionCoefficient;
+    public float GroundHeight; // ray_in
+    public float GroundPitch;  // gnd_pitch
+    public float GroundRoll;   // gnd_roll
 
-
-    public GroundContactInfo(bool isContacting, float depth, Vector3 normal, float friction)
+    // 기본 생성자
+    public GroundContactInfo(bool isContacting, float height, float pitch, float roll)
     {
         IsContacting = isContacting;
-        PenetrationDepth = depth;
-        WorldNormal = normal;
-        FrictionCoefficient = friction;
-
+        GroundHeight = height;
+        GroundPitch = pitch;
+        GroundRoll = roll;
     }
 
+    // 비접촉 상태를 위한 정적 메서드
     public static GroundContactInfo NonContact()
     {
-        return new GroundContactInfo(false, 0f, Vector3.up, 0.2f);
+        return new GroundContactInfo(false, -1f, 0f, 0f); // 기본값
     }
 }

@@ -187,9 +187,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
+      propertyPath: sideOffset.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
       propertyPath: wheelTransform
       value: 
       objectReference: {fileID: 944749326}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: forwardOffset.z
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -947,7 +957,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6b36de40488c5b04dbf807af0669cb2f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 932495104611212448, guid: 6b36de40488c5b04dbf807af0669cb2f,
         type: 3}
@@ -2070,9 +2080,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
+      propertyPath: sideOffset.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
       propertyPath: wheelTransform
       value: 
       objectReference: {fileID: 1019149158}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: forwardOffset.z
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6785,9 +6805,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
+      propertyPath: sideOffset.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
       propertyPath: wheelTransform
       value: 
       objectReference: {fileID: 121955177}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: forwardOffset.z
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8489,9 +8519,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
+      propertyPath: sideOffset.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
       propertyPath: wheelTransform
       value: 
       objectReference: {fileID: 67022142}
+    - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: forwardOffset.z
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
