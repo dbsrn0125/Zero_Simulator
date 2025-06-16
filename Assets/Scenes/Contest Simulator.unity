@@ -188,7 +188,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: sideOffset.x
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: forwardOffset.z
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2081,7 +2081,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: sideOffset.x
-      value: -0.01
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
@@ -2091,7 +2091,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: forwardOffset.z
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4402,7 +4402,7 @@ Transform:
   m_GameObject: {fileID: 963620560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4438,10 +4438,10 @@ MonoBehaviour:
   fmuName: zero_v1
   groundSensors:
   - {fileID: 1666807704}
-  - {fileID: 428887143}
   - {fileID: 513785425}
+  - {fileID: 428887143}
   - {fileID: 801510910}
-  initialPosition: {x: 0, y: 1, z: 0}
+  initialPosition: {x: 0, y: 0.3, z: 0}
   targetWheelSpeed_RadPerSec: 2
   forwardKey: 119
   backwardKey: 115
@@ -6806,7 +6806,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: sideOffset.x
-      value: -0.01
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
@@ -6816,7 +6816,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: forwardOffset.z
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8520,7 +8520,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: sideOffset.x
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
@@ -8530,7 +8530,7 @@ PrefabInstance:
     - target: {fileID: 3749588612114268623, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: forwardOffset.z
-      value: 0.01
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

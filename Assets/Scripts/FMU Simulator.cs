@@ -84,7 +84,7 @@ public class FMUSimulator : MonoBehaviour
     {
         FMUInput();
         fmu.DoStep(Time.timeAsDouble, Time.fixedDeltaTime);
-        //zero6dof();
+        zero6dof();
     }
     void zero6dof()
     {
@@ -157,6 +157,7 @@ public class FMUSimulator : MonoBehaviour
         UpdateGroundContactData();
         foreach(WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation))) 
         {
+            //Debug.Log(loc.ToString());
             try
             {
                 fmu.SetReal($"{loc}TireAngularVelocityInput", targetWheelSpeeds[loc]);
@@ -173,6 +174,7 @@ public class FMUSimulator : MonoBehaviour
             GroundContactInfo contactInfo = currentGroundContacts[i];
             try
             {
+
                 // 새로운 데이터 규격에 맞춰 FMU 변수명을 수정합니다.
                 // (이 변수명은 Simscape 모델의 입력 포트 이름과 정확히 일치해야 합니다)
                 fmu.SetReal($"{loc}_is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
