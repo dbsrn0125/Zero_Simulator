@@ -891,7 +891,7 @@ MonoBehaviour:
   driveModeText: {fileID: 324518623}
   comPortName: COM5
   baudRate: 115200
-  sendInterval: 0.3
+  sendInterval: 0.02
   inputActions: {fileID: -944628639613478452, guid: 7a000366f35dfe7428f23804a18512e1,
     type: 3}
   maxLinearVelocity: 100
