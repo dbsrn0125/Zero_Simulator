@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO.Ports;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using TMPro;
 
 public class ZeroInputController : MonoBehaviour
@@ -14,6 +13,7 @@ public class ZeroInputController : MonoBehaviour
         Ackermann,
         OmniDirectional
     }
+
     [Header("Drive Mode")]
     public DriveMode currentDriveMode = DriveMode.Ackermann;
     public TextMeshProUGUI driveModeText;
@@ -21,10 +21,10 @@ public class ZeroInputController : MonoBehaviour
 
     [Header("Serial Port Settings")]
     public string comPortName = "COM10";
-    public int baudRate = 9600;
+    public int baudRate = 115200;
     private SerialPort serialPort;
-    public float sendInterval = 0.1f;
-    private float timeSinceLastSend = 0f;
+    private CancellationTokenSource cancellationTokenSource;
+    private readonly object serialLock = new object();
 
     [Header("Input Actions")]
     public InputActionAsset inputActions;
@@ -63,103 +63,148 @@ public class ZeroInputController : MonoBehaviour
         switchModeAction = manualControlMap.FindAction("SwitchDriveMode");
 
         if (moveAction == null) { Debug.LogError("'Move' action not found!"); enabled = false; return; }
-        if (turnAction == null) { Debug.LogWarning("'Turn' action not found! Rotation might not work."); }
+        if (turnAction == null) { Debug.LogWarning("'Turn' action not found!"); }
         if (switchModeAction == null) { Debug.LogError("'SwitchDriveMode' action not found!"); }
 
-        totalDriveModes = System.Enum.GetValues(typeof(DriveMode)).Length;
+        totalDriveModes = Enum.GetValues(typeof(DriveMode)).Length;
     }
 
     void Start()
     {
         driveModeText.text = currentDriveMode.ToString();
         InitializeSerialPort();
+
+        cancellationTokenSource = new CancellationTokenSource();
+        StartSerialWriterLoop(cancellationTokenSource.Token);
     }
 
-    void Update()
+    private void InitializeSerialPort()
+    {
+        try
+        {
+            serialPort = new SerialPort(comPortName, baudRate)
+            {
+                WriteTimeout = 500,
+                ReadTimeout = 500,
+                Handshake = Handshake.None
+            };
+            serialPort.Open();
+            Debug.Log($"Serial port {comPortName} opened successfully at {baudRate}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($" Failed to open serial port: {e.Message}");
+            serialPort = null;
+        }
+    }
+
+    private async void StartSerialWriterLoop(CancellationToken token)
+    {
+        await Task.Delay(1000); // MCU 준비 시간 확보
+
+        Debug.Log("SerialWriterLoop started");
+
+        while (!token.IsCancellationRequested)
+        {
+            if (serialPort != null && serialPort.IsOpen && serialPort.BytesToWrite == 0)
+            {
+                byte[] packet = MakeCommandPacket(currentDriveMode, currentV, currentW);
+                //Debug.Log("Sending: " + BitConverter.ToString(packet));
+
+                try
+                {
+                    lock (serialLock)
+                    {
+                        serialPort.Write(packet, 0, packet.Length);
+                        Debug.Log("Sent: " + BitConverter.ToString(packet));
+                        
+                    }
+                }
+                catch (TimeoutException te)
+                {
+                    Debug.LogWarning("Timeout while writing: " + te.Message);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Serial write error: " + ex.Message);
+                }
+            }
+
+            await Task.Delay(20, token);
+        }
+
+        Debug.Log("SerialWriterLoop cancelled.");
+    }
+
+    private byte[] MakeCommandPacket(DriveMode mode, float v, float w)
+    {
+        short v_short = (short)Mathf.Clamp(v * (32767.0f / (mode == DriveMode.Ackermann ? maxLinearVelocity : omniMaxLinearVelocity)), short.MinValue, short.MaxValue);
+        short w_short = (short)Mathf.Clamp(w * (32767.0f / (mode == DriveMode.Ackermann ? maxAngularVelocity : omniMaxAngularVelocity)), short.MinValue, short.MaxValue);
+
+        byte[] v_bytes = BitConverter.GetBytes(v_short);
+        byte[] w_bytes = BitConverter.GetBytes(w_short);
+
+        byte[] packet = new byte[7];
+        packet[0] = 0x02;
+        packet[1] = (byte)mode;
+        packet[2] = v_bytes[0];
+        packet[3] = v_bytes[1];
+        packet[4] = w_bytes[0];
+        packet[5] = w_bytes[1];
+        packet[6] = 0x03;
+
+        return packet;
+    }
+
+    private void Update()
     {
         float rawMoveInput = moveAction.ReadValue<float>();
         float rawTurnInput = turnAction.ReadValue<float>();
 
-        float targetMoveInput = rawMoveInput;
-        float currentLinearRate = (Mathf.Approximately(targetMoveInput, 0f)) ? linearDeceleration : linearAcceleration;
-        currentSmoothedMoveInput = Mathf.MoveTowards(currentSmoothedMoveInput, targetMoveInput, currentLinearRate * Time.deltaTime);
+        float currentLinearRate = Mathf.Approximately(rawMoveInput, 0f) ? linearDeceleration : linearAcceleration;
+        currentSmoothedMoveInput = Mathf.MoveTowards(currentSmoothedMoveInput, rawMoveInput, currentLinearRate * Time.deltaTime);
 
-        float targetTurnInput = rawTurnInput;
-        float currentAngularRate = (Mathf.Approximately(targetTurnInput, 0f)) ? angularDeceleration : angularAcceleration;
-        currentSmoothedTurnInput = Mathf.MoveTowards(currentSmoothedTurnInput, targetTurnInput, currentAngularRate * Time.deltaTime);
+        float currentAngularRate = Mathf.Approximately(rawTurnInput, 0f) ? angularDeceleration : angularAcceleration;
+        currentSmoothedTurnInput = Mathf.MoveTowards(currentSmoothedTurnInput, rawTurnInput, currentAngularRate * Time.deltaTime);
 
         switch (currentDriveMode)
         {
             case DriveMode.Ackermann:
                 currentV = currentSmoothedMoveInput * maxLinearVelocity;
                 currentW = currentSmoothedTurnInput * maxAngularVelocity;
-                Debug.Log($"currentV : {currentV} + currentW : {currentW}");
                 break;
-
             case DriveMode.OmniDirectional:
-                // 지금은 Omni도 v, w를 보내도록 설정
                 currentV = currentSmoothedMoveInput * omniMaxLinearVelocity;
                 currentW = currentSmoothedTurnInput * omniMaxAngularVelocity;
                 break;
         }
-
-        timeSinceLastSend += Time.deltaTime;
-        if (timeSinceLastSend >= sendInterval)
-        {
-            if (currentDriveMode == DriveMode.Ackermann)
-            {
-                SendAckermannCommand(currentV, currentW);
-            }
-            else if (currentDriveMode == DriveMode.OmniDirectional)
-            {
-                SendOmniCommand(currentV, currentW);
-            }
-            timeSinceLastSend = 0f;
-        }
     }
 
-    // --- (InitializeSerialPort, OnEnable/Disable, onSwitchDriveModePerformed, CloseSerialPort는 기존과 동일) ---
-    void InitializeSerialPort()
-    {
-        try
-        {
-            serialPort = new SerialPort(comPortName, baudRate)
-            {
-                ReadTimeout = 500,
-                WriteTimeout = 500
-            };
-            serialPort.Handshake = Handshake.None;
-            serialPort.Open();
-            Debug.Log($"Serial port {comPortName} opened successfully at {baudRate}");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Error opening serial port{comPortName}: {e.Message}");
-            serialPort = null;
-        }
-    }
     private void OnEnable()
     {
-        if (inputActions != null) { inputActions.Enable(); }
-        if (switchModeAction != null) { switchModeAction.performed += onSwitchDriveModePerformed; }
+        if (inputActions != null) inputActions.Enable();
+        if (switchModeAction != null) switchModeAction.performed += onSwitchDriveModePerformed;
     }
+
     private void OnDisable()
     {
-        if (inputActions != null) { inputActions.Disable(); }
-        if (switchModeAction != null) { switchModeAction.performed -= onSwitchDriveModePerformed; }
+        if (inputActions != null) inputActions.Disable();
+        if (switchModeAction != null) switchModeAction.performed -= onSwitchDriveModePerformed;
+        cancellationTokenSource?.Cancel();
         CloseSerialPort();
     }
+
     private void onSwitchDriveModePerformed(InputAction.CallbackContext context)
     {
         currentDriveMode = (DriveMode)(((int)currentDriveMode + 1) % totalDriveModes);
         driveModeText.text = currentDriveMode.ToString();
-        Debug.Log("Drive Mode Switched To: " + currentDriveMode.ToString());
         currentSmoothedMoveInput = 0f;
         currentSmoothedTurnInput = 0f;
         currentV = 0f;
         currentW = 0f;
     }
-    void CloseSerialPort()
+
+    private void CloseSerialPort()
     {
         if (serialPort != null && serialPort.IsOpen)
         {
@@ -168,78 +213,11 @@ public class ZeroInputController : MonoBehaviour
                 serialPort.Close();
                 Debug.Log($"Serial port {comPortName} closed.");
             }
-            catch (Exception e) { Debug.LogError($"Error closing serial port {comPortName}: {e.Message}"); }
-            serialPort = null;
+            catch (Exception ex)
+            {
+                Debug.LogError("Error while closing port: " + ex.Message);
+            }
         }
-    }
-    // --- (여기까지는 거의 동일) ---
-
-
-    /// <summary>
-    /// Ackermann 모드(v, w) 데이터를 전송합니다.
-    /// </summary>
-    public void SendAckermannCommand(float v, float w)
-    {
-        if (serialPort == null || !serialPort.IsOpen) return;
-
-        short v_short = (short)Mathf.Clamp(v * (32767.0f / maxLinearVelocity), short.MinValue, short.MaxValue);
-        short w_short = (short)Mathf.Clamp(w * (32767.0f / maxAngularVelocity), short.MinValue, short.MaxValue);
-
-        byte[] v_bytes = BitConverter.GetBytes(v_short);
-        byte[] w_bytes = BitConverter.GetBytes(w_short);
-
-        // 7바이트 패킷: [STX][Mode][v_LSB][v_MSB][w_LSB][w_MSB][ETX]
-        byte[] packet = new byte[7];
-        packet[0] = 0x02;                           // STX (Start of Text)
-        packet[1] = (byte)DriveMode.Ackermann;      // Mode (0)
-        packet[2] = v_bytes[0];                     // v Low Byte
-        packet[3] = v_bytes[1];                     // v High Byte
-        packet[4] = w_bytes[0];                     // w Low Byte
-        packet[5] = w_bytes[1];                     // w High Byte
-        packet[6] = 0x03;                           // ETX (End of Text)
-
-        try
-        {
-            serialPort.Write(packet, 0, packet.Length);
-            // Debug.Log("Sent Ackermann Packet: " + BitConverter.ToString(packet));
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
-    }
-
-    /// <summary>
-    /// Omni-directional 모드(v, w) 데이터를 전송합니다.
-    /// </summary>
-    private void SendOmniCommand(float v, float w)
-    {
-        if (serialPort == null || !serialPort.IsOpen) return;
-
-        short v_short = (short)Mathf.Clamp(v * (32767.0f / omniMaxLinearVelocity), short.MinValue, short.MaxValue);
-        short w_short = (short)Mathf.Clamp(w * (32767.0f / omniMaxAngularVelocity), short.MinValue, short.MaxValue);
-
-        byte[] v_bytes = BitConverter.GetBytes(v_short);
-        byte[] w_bytes = BitConverter.GetBytes(w_short);
-
-        // 7바이트 패킷: [STX][Mode][v_LSB][v_MSB][w_LSB][w_MSB][ETX]
-        byte[] packet = new byte[7];
-        packet[0] = 0x02;                               // STX
-        packet[1] = (byte)DriveMode.OmniDirectional;    // Mode (1)
-        packet[2] = v_bytes[0];
-        packet[3] = v_bytes[1];
-        packet[4] = w_bytes[0];
-        packet[5] = w_bytes[1];
-        packet[6] = 0x03;                               // ETX
-
-        try
-        {
-            serialPort.Write(packet, 0, packet.Length);
-            // Debug.Log("Sent Omni Packet: " + BitConverter.ToString(packet));
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
+        serialPort = null;
     }
 }

@@ -112,7 +112,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Positive",
                     "id": "6f101cea-602c-444a-979b-40b2c8cc7370",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -123,7 +123,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Negative",
                     "id": "bd40ddba-a8e6-4f3a-8d17-5c91d1442a3b",
                     "path": "<XInputController>/leftTrigger",
                     "interactions": "",
