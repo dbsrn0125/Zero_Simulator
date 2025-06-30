@@ -112,7 +112,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Positive",
+                    "name": "Negative",
                     "id": "6f101cea-602c-444a-979b-40b2c8cc7370",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -123,7 +123,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Negative",
+                    "name": "Positive",
                     "id": "bd40ddba-a8e6-4f3a-8d17-5c91d1442a3b",
                     "path": "<XInputController>/leftTrigger",
                     "interactions": "",
@@ -145,7 +145,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Positive",
+                    "name": "Negative",
                     "id": "5413dbe9-1240-488e-a333-5a8f3366fa64",
                     "path": "<Keyboard>/#(D)",
                     "interactions": "",
@@ -156,7 +156,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Negative",
+                    "name": "Positive",
                     "id": "a952babe-ad94-46be-8d7e-3d6a6881ed6f",
                     "path": "<Keyboard>/#(A)",
                     "interactions": "",

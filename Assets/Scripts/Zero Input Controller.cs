@@ -72,10 +72,10 @@ public class ZeroInputController : MonoBehaviour
     void Start()
     {
         driveModeText.text = currentDriveMode.ToString();
-        InitializeSerialPort();
+        //InitializeSerialPort();
 
-        cancellationTokenSource = new CancellationTokenSource();
-        StartSerialWriterLoop(cancellationTokenSource.Token);
+        //cancellationTokenSource = new CancellationTokenSource();
+        //StartSerialWriterLoop(cancellationTokenSource.Token);
     }
 
     private void InitializeSerialPort()
