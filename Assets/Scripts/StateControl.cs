@@ -37,7 +37,7 @@ public class StateControl : MonoBehaviour
         ros.SendServiceMessage<ChangeStateResponse>(ChangeStateServiceName, request, OnServiceResponse);
 
         // 요청을 보냈다고 UI에 표시
-        statusText.text = "[" + selectedState + "] 상태 변경 요청 중...";
+        statusText.text = "[" + selectedState + "] State Change Requested...";
         statusText.color = Color.yellow;
     }
     void OnServiceResponse(ChangeStateResponse response)
