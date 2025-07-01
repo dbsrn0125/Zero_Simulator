@@ -2074,7 +2074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: camera/depth_image/compressed
+  rosTopicName: /webcam/image_raw/compressed
   displayImage: {fileID: 2033373677}
 --- !u!1 &462480408
 GameObject:
@@ -3254,7 +3254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: camera/color_image/compressed
+  rosTopicName: /webcam/image_raw/compressed
   displayImage: {fileID: 691637476}
 --- !u!1 &1015829772
 GameObject:
@@ -3965,7 +3965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: color_image/compressed
+  rosTopicName: /webcam/image_raw/compressed
   displayImage: {fileID: 156837693}
 --- !u!1 &1204691180
 GameObject:
@@ -4565,7 +4565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: depth_colormap/compressed
+  rosTopicName: /webcam/image_raw/compressed
   displayImage: {fileID: 1139074342}
 --- !u!1 &1423133619
 GameObject:
