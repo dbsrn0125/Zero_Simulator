@@ -11,7 +11,8 @@ public class IPAdressController : MonoBehaviour
     public TMP_InputField ipAddressInputField;
     public ROSConnection rosConnectionPrefab;
     public Image statusIndicatorImage;
-
+    public Button launchButton;
+    public Button emergencyButton;
     [Header("Status Colors")]
     public Color connectedColor = Color.green;
     public Color errorColor = Color.red;
@@ -34,15 +35,21 @@ public class IPAdressController : MonoBehaviour
             if(rosConnectionPrefab.HasConnectionError)
             {
                 statusIndicatorImage.color = errorColor;
+                launchButton.interactable = false;
+                emergencyButton.interactable=false;
             }
             else
             {
                 statusIndicatorImage.color = connectedColor;
+                launchButton.interactable = true;
+                emergencyButton.interactable = true;
             }
         }
         else
         {
             statusIndicatorImage.color = disconnectedColor;
+            launchButton.interactable = false;
+            emergencyButton.interactable = false;
         }
     }
 }
