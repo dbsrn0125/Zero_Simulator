@@ -4565,7 +4565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: /webcam/image_raw/compressed
+  rosTopicName: webcam/image_raw/compressed
   displayImage: {fileID: 1139074342}
 --- !u!1 &1423133619
 GameObject:
