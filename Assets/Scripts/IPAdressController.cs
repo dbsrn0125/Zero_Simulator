@@ -7,6 +7,9 @@ using Unity.Robotics.ROSTCPConnector;
 using System;
 public class IPAdressController : MonoBehaviour
 {
+    [Header("ROS Settings")]
+    [Tooltip("Default ROS IP address")]
+    public string defaultIPAddress = "172.30.1.91";
     [Header("UI Connection")]
     public TMP_InputField ipAddressInputField;
     public ROSConnection rosConnectionPrefab;
@@ -18,6 +21,10 @@ public class IPAdressController : MonoBehaviour
     public Color errorColor = Color.red;
     public Color disconnectedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
     // Start is called before the first frame update
+    private void Start()
+    {
+        ipAddressInputField.text = defaultIPAddress;
+    }
     public void OnClickIpAdressChange()
     {
         rosConnectionPrefab.RosIPAddress = ipAddressInputField.text;

@@ -1,25 +1,28 @@
-// WheelLocation Enum (아마 이미 있을 겁니다. 없다면 추가해주세요)
+// GroundContactInfo.cs
 
-// 센서 데이터를 담을 구조체
+using UnityEngine;
+
+/// <summary>
+/// Simscape에 전달할 지면 접촉 정보를 담는 구조체
+/// </summary>
 public struct GroundContactInfo
 {
-    public bool IsContacting;
-    public float GroundHeight; // ray_in
-    public float GroundPitch;  // gnd_pitch
-    public float GroundRoll;   // gnd_roll
+    public bool IsContacting;      // 지면 접촉 여부
+    public Vector3 ContactPoint;   // 4개 접촉점의 평균 월드 좌표
+    public Vector3 ContactNormal;  // 4개 접촉점으로부터 계산된 평균 법선 벡터
 
-    // 기본 생성자
-    public GroundContactInfo(bool isContacting, float height, float pitch, float roll)
+    // 생성자
+    public GroundContactInfo(bool isContacting, Vector3 point, Vector3 normal)
     {
         IsContacting = isContacting;
-        GroundHeight = height;
-        GroundPitch = pitch;
-        GroundRoll = roll;
+        ContactPoint = point;
+        ContactNormal = normal;
     }
 
-    // 비접촉 상태를 위한 정적 메서드
+    // 바퀴가 허공에 떠 있을 때 사용할 기본값
     public static GroundContactInfo NonContact()
     {
-        return new GroundContactInfo(false, -1f, 0f, 0f); // 기본값
+        // 비접촉 시, 위치는 0, 법선 벡터는 위쪽(Y-up)을 기본값으로 사용
+        return new GroundContactInfo(false, Vector3.zero, Vector3.up);
     }
 }

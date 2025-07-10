@@ -1,84 +1,125 @@
+// GroundSensor.cs
+
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GroundSensor : MonoBehaviour
 {
-    [Header("Set Up")]
+    [Header("Sensor Setup")]
     public LayerMask groundLayer;
+    [Tooltip("레이캐스트를 쏠 최대 거리")]
     public float maxDistance = 1.0f;
-    public float wheelRadius = 0.093f;
 
-    [Header("Raycast Offset")]
-    public Vector3 centerOffset = Vector3.zero;
-    public Vector3 forwardOffset = new Vector3(0, 0, 0.1f);
-    public Vector3 sideOffset = new Vector3(0.1f, 0, 0);
+    [Header("4-Point Raycast Offsets")]
+    [Tooltip("이 오프셋들을 조정하여 4개의 레이캐스트 위치를 결정합니다.")]
+    public Vector3[] raycastOffsets = new Vector3[4]
+    {
+        new Vector3( 0.1f, 0,  0.1f), // 앞-오른쪽
+        new Vector3(-0.1f, 0,  0.1f), // 앞-왼쪽
+        new Vector3( 0.1f, 0, -0.1f), // 뒤-오른쪽
+        new Vector3(-0.1f, 0, -0.1f)  // 뒤-왼쪽
+    };
 
-    // --- 출력 데이터 ---
-    public bool IsContacting { get; private set; }
-    public float GroundHeight { get; private set; }
-    public float GroundPitch { get; private set; }
-    public float GroundRoll { get; private set; }
+    // --- 최종 출력 데이터 ---
+    public GroundContactInfo ContactInfo { get; private set; }
+
 
     void FixedUpdate()
     {
-        // ======================== 이 부분이 스케일 문제를 해결합니다 ========================
-        // TransformPoint 대신, 스케일의 영향을 받지 않도록 직접 월드 위치를 계산합니다.
-        // (현재 바퀴의 월드 위치) + (현재 바퀴의 월드 회전 * 로컬 오프셋)
-        Vector3 ray_origin_center = transform.position + transform.rotation * centerOffset;
-        Vector3 ray_origin_forward = transform.position + transform.rotation * forwardOffset;
-        Vector3 ray_origin_side = transform.position + transform.rotation * sideOffset;
-        // ==============================================================================
+        UpdateGroundContact();
+    }
 
-        Vector3 ray_direction = -transform.up;
+    /// <summary>
+    /// 4점 레이캐스트를 실행하고 지면 정보를 업데이트합니다.
+    /// </summary>
+    private void UpdateGroundContact()
+    {
+        List<RaycastHit> hits = new List<RaycastHit>();
+        Vector3 rayDirection = -transform.up; // 항상 바퀴의 아래 방향
 
-        // 레이캐스트 실행
-        RaycastHit hit_c, hit_f, hit_s;
-        bool did_hit_c = Physics.Raycast(ray_origin_center, ray_direction, out hit_c, maxDistance, groundLayer);
-        bool did_hit_f = Physics.Raycast(ray_origin_forward, ray_direction, out hit_f, maxDistance, groundLayer);
-        bool did_hit_s = Physics.Raycast(ray_origin_side, ray_direction, out hit_s, maxDistance, groundLayer);
-
-        if (did_hit_c && did_hit_f && did_hit_s)
+        // 4개의 오프셋 위치에서 각각 레이캐스트 실행
+        foreach (var offset in raycastOffsets)
         {
-            IsContacting = true;
-            GroundHeight = hit_c.point.y;
+            // 월드 좌표계 기준 레이캐스트 시작점 계산
+            Vector3 rayOrigin = transform.position + transform.rotation * offset;
 
-            Vector3 local_hit_c = transform.InverseTransformPoint(hit_c.point);
-            Vector3 local_hit_f = transform.InverseTransformPoint(hit_f.point);
-            Vector3 local_hit_s = transform.InverseTransformPoint(hit_s.point);
+            if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, maxDistance, groundLayer))
+            {
+                hits.Add(hit);
+            }
+        }
 
-            Vector3 forward_vec = local_hit_f - local_hit_c;
-            Vector3 side_vec = local_hit_s - local_hit_c;
-
-            GroundPitch = Mathf.Atan2(forward_vec.y, forward_vec.z);
-            GroundRoll = Mathf.Atan2(side_vec.y, side_vec.x);
+        // 4개의 레이가 모두 지면에 닿았을 때만 접촉으로 인정
+        if (hits.Count == 4)
+        {
+            ContactInfo = CalculateContactFromHits(hits);
         }
         else
         {
-            IsContacting = false;
-            GroundHeight = transform.position.y - wheelRadius-100;
-            GroundPitch = 0f;
-            GroundRoll = 0f;
+            ContactInfo = GroundContactInfo.NonContact();
         }
+    }
+
+    /// <summary>
+    /// 4개의 충돌 지점(Hit)으로부터 평균 위치와 법선 벡터를 계산합니다.
+    /// </summary>
+    private GroundContactInfo CalculateContactFromHits(List<RaycastHit> hits)
+    {
+        // 1. 평균 접촉점 계산
+        Vector3 avgContactPoint = Vector3.zero;
+        foreach (var hit in hits)
+        {
+            avgContactPoint += hit.point;
+        }
+        avgContactPoint /= hits.Count;
+
+        // 2. 두 개의 삼각형을 만들어 평균 법선 벡터 계산 (더 안정적인 방법)
+        Vector3 v1 = hits[1].point - hits[0].point; // 앞-왼쪽 -> 앞-오른쪽
+        Vector3 v2 = hits[2].point - hits[0].point; // 뒤-오른쪽 -> 앞-오른쪽
+        Vector3 normal1 = Vector3.Cross(v1, v2);
+
+        Vector3 v3 = hits[3].point - hits[2].point; // 뒤-왼쪽 -> 뒤-오른쪽
+        Vector3 v4 = hits[0].point - hits[2].point; // 앞-오른쪽 -> 뒤-오른쪽
+        Vector3 normal2 = Vector3.Cross(v3, v4);
+
+        Vector3 avgNormal = (normal1 + normal2).normalized;
+
+        // 법선 벡터가 항상 위를 향하도록 보정
+        if (Vector3.Dot(avgNormal, transform.up) < 0)
+        {
+            avgNormal = -avgNormal;
+        }
+
+        return new GroundContactInfo(true, avgContactPoint, avgNormal);
     }
 
     // 디버깅용 시각화
     void OnDrawGizmosSelected()
     {
-        // OnDrawGizmosSelected도 FixedUpdate와 동일한 방식으로 월드 위치를 계산해야
-        // 씬 뷰에서 기즈모가 정확한 위치에 그려집니다.
-        if (!Application.isPlaying) return;
+        if (raycastOffsets == null || raycastOffsets.Length == 0) return;
 
-        Gizmos.color = Color.yellow;
-        Vector3 world_offset_c = transform.position + transform.rotation * centerOffset;
-        Vector3 world_offset_f = transform.position + transform.rotation * forwardOffset;
-        Vector3 world_offset_s = transform.position + transform.rotation * sideOffset;
+        Gizmos.color = IsGrounded() ? Color.green : Color.yellow;
+        Vector3 rayDirection = -transform.up;
 
-        Gizmos.DrawSphere(world_offset_c, 0.02f);
-        Gizmos.DrawSphere(world_offset_f, 0.02f);
-        Gizmos.DrawSphere(world_offset_s, 0.02f);
+        foreach (var offset in raycastOffsets)
+        {
+            // 에디터에서도 정확한 위치를 보기 위해 월드 위치 계산
+            Vector3 rayOrigin = transform.position + transform.rotation * offset;
+            Gizmos.DrawSphere(rayOrigin, 0.02f);
+            Gizmos.DrawLine(rayOrigin, rayOrigin + rayDirection * maxDistance);
+        }
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(world_offset_c, world_offset_c - transform.up * maxDistance);
-        Gizmos.DrawLine(world_offset_f, world_offset_f - transform.up * maxDistance);
-        Gizmos.DrawLine(world_offset_s, world_offset_s - transform.up * maxDistance);
+        // 계산된 법선 벡터 그리기
+        if (IsGrounded())
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(ContactInfo.ContactPoint, ContactInfo.ContactPoint + ContactInfo.ContactNormal * 0.3f);
+        }
+    }
+
+    // 간단한 접지 확인용 헬퍼 함수
+    public bool IsGrounded()
+    {
+        return ContactInfo.IsContacting;
     }
 }

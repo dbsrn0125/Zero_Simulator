@@ -58,23 +58,23 @@ public class FMUSimulator : MonoBehaviour
         switch (currentDriveState)
         {
             case DriveState.Forward:
-                targetWheelSpeeds[WheelLocation.LF] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.LB] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.RF] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.RB] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.FL] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.BL] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.FR] = targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.BR] = targetWheelSpeed_RadPerSec;
                 break;
             case DriveState.Backward:
-                targetWheelSpeeds[WheelLocation.LF] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.LB] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.RF] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.RB] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.FL] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.BL] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.FR] = -targetWheelSpeed_RadPerSec;
+                targetWheelSpeeds[WheelLocation.BR] = -targetWheelSpeed_RadPerSec;
                 break;
             case DriveState.Idle:
             default:
-                targetWheelSpeeds[WheelLocation.LF] = 0;
-                targetWheelSpeeds[WheelLocation.LB] = 0;
-                targetWheelSpeeds[WheelLocation.RF] = 0;
-                targetWheelSpeeds[WheelLocation.RB] = 0;
+                targetWheelSpeeds[WheelLocation.FL] = 0;
+                targetWheelSpeeds[WheelLocation.BL] = 0;
+                targetWheelSpeeds[WheelLocation.FR] = 0;
+                targetWheelSpeeds[WheelLocation.BR] = 0;
                 break;
         }
     }
@@ -110,14 +110,14 @@ public class FMUSimulator : MonoBehaviour
 
     public void UpdateControlCommands(CmdVelMsg message)
     {
-        targetWheelSpeeds[WheelLocation.LF] = message.fl_vel;
-        targetWheelSpeeds[WheelLocation.LB] = message.bl_vel;
-        targetWheelSpeeds[WheelLocation.RF] = message.fr_vel;
-        targetWheelSpeeds[WheelLocation.RB] = message.br_vel;
-        targetSteeringAngles[WheelLocation.LF] = message.fl_ang;
-        targetSteeringAngles[WheelLocation.LB] = message.bl_ang;
-        targetSteeringAngles[WheelLocation.RF] = message.fr_ang;
-        targetSteeringAngles[WheelLocation.RB] = message.br_ang;
+        targetWheelSpeeds[WheelLocation.FL] = message.fl_vel;
+        targetWheelSpeeds[WheelLocation.BL] = message.bl_vel;
+        targetWheelSpeeds[WheelLocation.FR] = message.fr_vel;
+        targetWheelSpeeds[WheelLocation.BR] = message.br_vel;
+        targetSteeringAngles[WheelLocation.FL] = message.fl_ang;
+        targetSteeringAngles[WheelLocation.BL] = message.bl_ang;
+        targetSteeringAngles[WheelLocation.FR] = message.fr_ang;
+        targetSteeringAngles[WheelLocation.BR] = message.br_ang;
     }
 
     // FMUSimulator.cs 안에 있는 이 함수를 찾아서 내용물을 교체하세요.
@@ -138,12 +138,7 @@ public class FMUSimulator : MonoBehaviour
             WheelLocation loc = (WheelLocation)i;
             if (groundSensors[i] != null)
             {
-                currentGroundContacts[(int)loc] = new GroundContactInfo(
-                    groundSensors[i].IsContacting,
-                    groundSensors[i].GroundHeight,
-                    groundSensors[i].GroundPitch,
-                    groundSensors[i].GroundRoll
-                );
+                currentGroundContacts[(int)loc] = groundSensors[i].ContactInfo;
             }
             else
             {
@@ -174,16 +169,24 @@ public class FMUSimulator : MonoBehaviour
             GroundContactInfo contactInfo = currentGroundContacts[i];
             try
             {
+                // 새로운 데이터(ContactPoint, ContactNormal)를 FMU로 전송
+                fmu.SetReal($"{loc}_is_contacting", contactInfo.IsContacting ? 1.0 : 0.0);
 
-                // 새로운 데이터 규격에 맞춰 FMU 변수명을 수정합니다.
-                // (이 변수명은 Simscape 모델의 입력 포트 이름과 정확히 일치해야 합니다)
-                fmu.SetReal($"{loc}_is_contacting_in", contactInfo.IsContacting ? 1.0 : 0.0);
-                fmu.SetReal($"{loc}_ray_in", contactInfo.GroundHeight);
-                fmu.SetReal($"{loc}_gnd_pitch_in", contactInfo.GroundPitch);
-                fmu.SetReal($"{loc}_gnd_roll_in", contactInfo.GroundRoll);
+                // 접촉점의 월드 좌표(x,y,z) 전송
+                fmu.SetReal($"{loc}_contact_pos_x", contactInfo.ContactPoint.x);
+                fmu.SetReal($"{loc}_contact_pos_y", contactInfo.ContactPoint.y);
+                fmu.SetReal($"{loc}_contact_pos_z", contactInfo.ContactPoint.z);
 
-                // 디버깅 로그 (수정됨)
-                 Debug.Log($"[{loc}] Contact:{contactInfo.IsContacting}, H:{contactInfo.GroundHeight:F3}, P:{contactInfo.GroundPitch:F3}, R:{contactInfo.GroundRoll:F3}");
+                // 지면의 법선 벡터(x,y,z) 전송
+                fmu.SetReal($"{loc}_contact_nrm_x", contactInfo.ContactNormal.x);
+                fmu.SetReal($"{loc}_contact_nrm_y", contactInfo.ContactNormal.y);
+                fmu.SetReal($"{loc}_contact_nrm_z", contactInfo.ContactNormal.z);
+
+                // 디버깅 로그 (새로운 데이터 형식에 맞게 수정)
+                if (contactInfo.IsContacting)
+                {
+                    Debug.Log($"[{loc}] Contact Point: {contactInfo.ContactPoint.ToString("F3")}, Normal: {contactInfo.ContactNormal.ToString("F3")}");
+                }
             }
             catch (System.Exception e)
             {
