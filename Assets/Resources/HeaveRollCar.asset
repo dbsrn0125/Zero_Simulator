@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: HeaveRollCar
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00350065003700320038003700350038002d0035003200350066002d0064003600630066002d0032003300620033002d006100350064006100350066003800370066003400320030007d00
+  modelName: HeaveRollCar
+  coSimulation:
+    modelIdentifier: HeaveRollCar
+  modelVariables:
+  - name: qWhl
+    valueReference: 0
+    description: qWhl
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: x
+    valueReference: 1
+    description: x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: y
+    valueReference: 2
+    description: y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: z
+    valueReference: 3
+    description: z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 4
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 

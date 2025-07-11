@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Robotics.ROSTCPConnector;
@@ -8,87 +6,87 @@ using RosMessageTypes.Sensor;
 public class RosVideoSubscriber : MonoBehaviour
 {
     [Header("ROS Settings")]
-    [Tooltip("ROS Topic Name")]
-    public string rosTopicName = "/camera/image_compressed";
+    [Tooltip("구독할 ROS 토픽 이름")]
+    public string rosTopicName = "/marker_lifecycle_node/image_raw/compressed";
 
     [Header("UI Display")]
-    [Tooltip("UI RawImage component")]
+    [Tooltip("UI RawImage 컴포넌트")]
     public RawImage displayImage;
+    [Tooltip("초 단위의 타임아웃 시간")]
+    public float timeout = 2.0f;
 
-    //내부 변수
     private Texture2D receivedTexture;
     private byte[] imageDataBuffer;
     private bool newFrameAvailable = false;
     private readonly object _lock = new object();
+    private float lastMessageTime;
+    private bool isDisplaying = false; // 현재 영상이 표시되고 있는지 기억
 
-    // Start is called before the first frame update
     void Start()
     {
         if (displayImage == null)
         {
-            Debug.LogError($"[{gameObject.name}] ROSVideoSubscriber: 'Display Image' (RawImage)가 할당되지 않았습니다!");
+            Debug.LogError($"'Display Image'가 할당되지 않았습니다!");
             enabled = false;
             return;
         }
 
-        // 초기 텍스처 생성 (크기는 LoadImage 호출 시 자동 조절됨)
-        receivedTexture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-        displayImage.texture = receivedTexture;
+        receivedTexture = new Texture2D(2, 2);
+        ClearDisplay(); // 시작할 때 화면을 깨끗하게 비움
 
-        // ROSConnection 인스턴스를 통해 토픽 구독
-        try
-        {
-            ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
-            //Debug.Log($"[{gameObject.name}] '{rosTopicName}' Subscribe (CompressedImageMsg)");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"[{gameObject.name}] 토픽 구독 중 오류 발생: {rosTopicName} - {e.Message}");
-        }
+        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
+        Debug.Log($"'{rosTopicName}' 토픽 구독을 시작합니다.");
     }
-    
+
     void CompressedImageCallback(CompressedImageMsg msg)
     {
-        lock (_lock) 
+        lock (_lock)
         {
-            //msg.data는 byte[] 타입입니다.
             imageDataBuffer = msg.data;
             newFrameAvailable = true;
+            lastMessageTime = Time.time;
         }
     }
-
 
     void Update()
     {
-        byte[] currentFrameData = null;
+        // 1. 새 프레임이 도착했는지 확인
         bool processThisFrame = false;
-
+        byte[] currentFrameData = null;
         lock (_lock)
         {
             if (newFrameAvailable)
             {
-                currentFrameData = imageDataBuffer;
                 processThisFrame = true;
-                newFrameAvailable = false; // 플래그 리셋!
+                currentFrameData = imageDataBuffer;
+                newFrameAvailable = false;
             }
         }
 
+        // 2. 새 프레임이 있으면 화면에 그림
         if (processThisFrame && currentFrameData != null)
         {
-            // 압축된 이미지 데이터(JPEG, PNG 등)를 Texture2D로 로드합니다.
-            // LoadImage는 텍스처 크기를 자동으로 조절하고 GPU에 업로드합니다 (메인 스레드에서만 호출).
-            if (!receivedTexture.LoadImage(currentFrameData))
+            receivedTexture.LoadImage(currentFrameData);
+            if (displayImage.texture == null)
             {
-                Debug.LogWarning($"[{gameObject.name}] 압축 이미지 데이터를 텍스처로 로드하는 데 실패했습니다. 토픽: {rosTopicName}. 데이터 길이: {currentFrameData.Length}");
+                displayImage.texture = receivedTexture;
             }
+            displayImage.color = Color.white; // 이미지가 보이도록 색상 복구
+            isDisplaying = true; // '표시 중' 상태로 변경
+        }
+
+        // 3. 타임아웃 확인 (영상이 표시 중일 때만)
+        if (isDisplaying && (Time.time - lastMessageTime > timeout))
+        {
+            ClearDisplay(); // 화면을 딱 한 번만 지움
         }
     }
 
-    void OnDestroy()
+    private void ClearDisplay()
     {
-        // ROS-TCP-Connector는 ROSConnection 오브젝트가 파괴될 때 구독을 정리해줄 수 있습니다.
-        // 명시적인 구독 해제가 필요하다면 라이브러리 문서를 참조하세요.
-        // 예: ROSConnection.GetOrCreateInstance().Unsubscribe(rosTopicName); (API 확인 필요)
-        //Debug.Log($"[{gameObject.name}] '{rosTopicName}' Subscriber Destroyed.");
+        // ? isDisplaying을 false로 바꿔서 이 함수가 중복 호출되는 것을 방지
+        isDisplaying = false;
+        displayImage.texture = null;
+        Debug.Log("Display cleared.");
     }
 }

@@ -3125,6 +3125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosTopicName: /marker_lifecycle_node/image_raw/compressed
   displayImage: {fileID: 2033373677}
+  timeout: 0.3
 --- !u!1 &474556762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4853,6 +4854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosTopicName: /marker_lifecycle_node/image_raw/compressed
   displayImage: {fileID: 691637476}
+  timeout: 0.3
 --- !u!1 &1015829772
 GameObject:
   m_ObjectHideFlags: 0
@@ -5016,7 +5018,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -150}
+  m_AnchoredPosition: {x: -70, y: -210}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062407990
@@ -5375,7 +5377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -30}
+  m_AnchoredPosition: {x: -70, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1141196481
@@ -5509,9 +5511,9 @@ RectTransform:
   - {fileID: 1338308197}
   m_Father: {fileID: 1500739028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -180}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 70, y: -210}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143785955
@@ -6101,9 +6103,9 @@ RectTransform:
   - {fileID: 2134753244}
   m_Father: {fileID: 1500739028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -60}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 70, y: -150}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1187312733
@@ -6369,6 +6371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosTopicName: /marker_lifecycle_node/image_raw/compressed
   displayImage: {fileID: 156837693}
+  timeout: 0.3
 --- !u!1 &1203828078
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,9 +6406,9 @@ RectTransform:
   - {fileID: 202001741}
   m_Father: {fileID: 1500739028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -120}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 70, y: -180}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1203828080
@@ -6541,7 +6544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -35}
+  m_AnchoredPosition: {x: -50, y: -35}
   m_SizeDelta: {x: 75, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1204691182
@@ -7380,7 +7383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35, y: -35}
+  m_AnchoredPosition: {x: -122.5, y: -35}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1396049905
@@ -7512,6 +7515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosTopicName: /marker_lifecycle_node/image_raw/compressed
   displayImage: {fileID: 1139074342}
+  timeout: 0.3
 --- !u!1 &1423133619
 GameObject:
   m_ObjectHideFlags: 0
@@ -8867,7 +8871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -90}
+  m_AnchoredPosition: {x: -70, y: -180}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1844959543

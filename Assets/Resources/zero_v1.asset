@@ -13,269 +13,357 @@ MonoBehaviour:
   m_Name: zero_v1
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00640031003300350065006100380063002d0066006300620032002d0036003200350061002d0031006400620037002d003500640039003400630061003100610031006100300065007d00
+  guid: 7b00650034006300310063003100620031002d0062003400610039002d0032003900660030002d0031003900300066002d006400310036006400630031003700620065003200350062007d00
   modelName: zero_v1
   coSimulation:
     modelIdentifier: zero_v1
   modelVariables:
-  - name: LFSteeringAngleInput
+  - name: FLSteeringAngleInput
     valueReference: 0
-    description: LF Steering Angle input
+    description: FL Steering Angle input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LBSteeringAngleInput
+  - name: FLTireAngularVelocityInput
     valueReference: 1
-    description: LB Steering Angle input
+    description: FL Tire Angular Velocity input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RFTireAngularVelocityInput
+  - name: FL_is_contacting
     valueReference: 2
-    description: RF Tire Angular Velocity input
+    description: FL_is_contacting
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RFSteeringAngleInput
+  - name: FL_contact_pos_x
     valueReference: 3
-    description: RF Steering Angle input
+    description: FL_contact_pos_x
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RBSteeringAngleInput
+  - name: FL_contact_pos_y
     valueReference: 4
-    description: RB Steering Angle input
+    description: FL_contact_pos_y
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RF_is_contacting_in
+  - name: FL_contact_pos_z
     valueReference: 5
-    description: RF_is_contacting_in
+    description: FL_contact_pos_z
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RF_ray_in
+  - name: FL_contact_nrm_x
     valueReference: 6
-    description: RF_ray_in
+    description: FL_contact_nrm_x
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RF_gnd_pitch_in
+  - name: FL_contact_nrm_y
     valueReference: 7
-    description: RF_gnd_pitch_in
+    description: FL_contact_nrm_y
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RF_gnd_roll_in
+  - name: FL_contact_nrm_z
     valueReference: 8
-    description: RF_gnd_roll_in
+    description: FL_contact_nrm_z
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RBTireAngularVelocityInput
+  - name: BLSteeringAngleInput
     valueReference: 9
-    description: RB Tire Angular Velocity input
+    description: BL Steering Angle input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RB_is_contacting_in
+  - name: BLTireAngularVelocityInput
     valueReference: 10
-    description: RB_is_contacting_in
+    description: BL Tire Angular Velocity input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RB_ray_in
+  - name: BL_is_contacting
     valueReference: 11
-    description: RB_ray_in
+    description: BL_is_contacting
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RB_gnd_pitch_in
+  - name: BL_contact_pos_x
     valueReference: 12
-    description: RB_gnd_pitch_in
+    description: BL_contact_pos_x
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RB_gnd_roll_in
+  - name: BL_contact_pos_y
     valueReference: 13
-    description: RB_gnd_roll_in
+    description: BL_contact_pos_y
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LFTireAngularVelocityInput
+  - name: BL_contact_pos_z
     valueReference: 14
-    description: LF Tire Angular Velocity input
+    description: BL_contact_pos_z
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LF_is_contacting_in
+  - name: BL_contact_nrm_x
     valueReference: 15
-    description: LF_is_contacting_in
+    description: BL_contact_nrm_x
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LF_ray_in
+  - name: BL_contact_nrm_y
     valueReference: 16
-    description: LF_ray_in
+    description: BL_contact_nrm_y
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LF_gnd_pitch_in
+  - name: BL_contact_nrm_z
     valueReference: 17
-    description: LF_gnd_pitch_in
+    description: BL_contact_nrm_z
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LF_gnd_roll_in
+  - name: FRSteeringAngleInput
     valueReference: 18
-    description: LF_gnd_roll_in
+    description: FR Steering Angle input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LBTireAngularVelocityInput
+  - name: FRTireAngularVelocityInput
     valueReference: 19
-    description: LB Tire Angular Velocity input
+    description: FR Tire Angular Velocity input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LB_is_contacting_in
+  - name: FR_is_contacting
     valueReference: 20
-    description: LB_is_contacting_in
+    description: FR_is_contacting
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LB_ray_in
+  - name: FR_contact_pos_x
     valueReference: 21
-    description: LB_ray_in
+    description: FR_contact_pos_x
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LB_gnd_pitch_in
+  - name: FR_contact_pos_y
     valueReference: 22
-    description: LB_gnd_pitch_in
+    description: FR_contact_pos_y
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LB_gnd_roll_in
+  - name: FR_contact_pos_z
     valueReference: 23
-    description: LB_gnd_roll_in
+    description: FR_contact_pos_z
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LFTireAngleOutput
+  - name: FR_contact_nrm_x
     valueReference: 24
-    description: LF Tire Angle output
-    causality: output
+    description: FR_contact_nrm_x
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: LFSteeringAngleOutput
+    start: 0
+  - name: FR_contact_nrm_y
     valueReference: 25
-    description: LF Steering Angle output
-    causality: output
+    description: FR_contact_nrm_y
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: LBTireAngleOutput
+    start: 0
+  - name: FR_contact_nrm_z
     valueReference: 26
-    description: LB Tire Angle output
-    causality: output
+    description: FR_contact_nrm_z
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: LBSteeringAngleOutput
+    start: 0
+  - name: BRSteeringAngleInput
     valueReference: 27
-    description: LB Steering Angle output
-    causality: output
+    description: BR Steering Angle input
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: RFTireAngleOutput
+    start: 0
+  - name: BRTireAngularVelocityInput
     valueReference: 28
-    description: RF Tire Angle output
-    causality: output
+    description: BR Tire Angular Velocity input
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: RFSteeringAngleOutput
+    start: 0
+  - name: BR_is_contacting
     valueReference: 29
-    description: RF Steering Angle output
-    causality: output
+    description: BR_is_contacting
+    causality: input
     variability: continuous
-    initial: calculated
+    initial: 
     type: 0
-    start: 
-  - name: RBTireAngleOutput
+    start: 0
+  - name: BR_contact_pos_x
     valueReference: 30
-    description: RB Tire Angle output
+    description: BR_contact_pos_x
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: BR_contact_pos_y
+    valueReference: 31
+    description: BR_contact_pos_y
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: BR_contact_pos_z
+    valueReference: 32
+    description: BR_contact_pos_z
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: BR_contact_nrm_x
+    valueReference: 33
+    description: BR_contact_nrm_x
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: BR_contact_nrm_y
+    valueReference: 34
+    description: BR_contact_nrm_y
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: BR_contact_nrm_z
+    valueReference: 35
+    description: BR_contact_nrm_z
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: FLTireAngleOutput
+    valueReference: 36
+    description: FL Tire Angle output
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
-  - name: RBSteeringAngleOutput
-    valueReference: 31
-    description: RB Steering Angle output
+  - name: FLSteeringAngleOutput
+    valueReference: 37
+    description: FL Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: BLTireAngleOutput
+    valueReference: 38
+    description: BL Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: BLSteeringAngleOutput
+    valueReference: 39
+    description: BL Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FRTireAngleOutput
+    valueReference: 40
+    description: FR Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FRSteeringAngleOutput
+    valueReference: 41
+    description: FR Steering Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: BRSteeringAngleOutput
+    valueReference: 42
+    description: BR Steering Angle output
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
   - name: RightSuspensionAngleOutput
-    valueReference: 32
+    valueReference: 43
     description: Right Suspension Angle output
     causality: output
     variability: continuous
@@ -283,7 +371,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: LeftSuspensionAngleOutput
-    valueReference: 33
+    valueReference: 44
     description: Left Suspension Angle output
     causality: output
     variability: continuous
@@ -291,7 +379,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: DifferentialBarOutput
-    valueReference: 34
+    valueReference: 45
     description: Differential Bar output
     causality: output
     variability: continuous
@@ -299,7 +387,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_x
-    valueReference: 35
+    valueReference: 46
     description: zero_position.x
     causality: output
     variability: continuous
@@ -307,7 +395,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_y
-    valueReference: 36
+    valueReference: 47
     description: zero_position.y
     causality: output
     variability: continuous
@@ -315,7 +403,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_position_z
-    valueReference: 37
+    valueReference: 48
     description: zero_position.z
     causality: output
     variability: continuous
@@ -323,7 +411,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[1,1]
-    valueReference: 38
+    valueReference: 49
     description: zero_orientation(1,1)
     causality: output
     variability: continuous
@@ -331,7 +419,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[2,1]
-    valueReference: 39
+    valueReference: 50
     description: zero_orientation(2,1)
     causality: output
     variability: continuous
@@ -339,7 +427,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[3,1]
-    valueReference: 40
+    valueReference: 51
     description: zero_orientation(3,1)
     causality: output
     variability: continuous
@@ -347,15 +435,23 @@ MonoBehaviour:
     type: 0
     start: 
   - name: zero_orientation[4,1]
-    valueReference: 41
+    valueReference: 52
     description: zero_orientation(4,1)
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
+  - name: BRTireAngleOutput
+    valueReference: 53
+    description: BR Tire Angle output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
   - name: time
-    valueReference: 42
+    valueReference: 54
     description: time
     causality: independent
     variability: continuous

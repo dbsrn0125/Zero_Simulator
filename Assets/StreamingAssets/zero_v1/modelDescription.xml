@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-06-16T01:53:31Z" generationTool="Simulink (R2024b)" guid="{d135ea8c-fcb2-625a-1db7-5d94ca1a1a0e}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.309">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-07-10T15:05:51Z" generationTool="Simulink (R2024b)" guid="{e4c1c1b1-b4a9-29f0-190f-d16dc17be25b}" modelName="zero_v1" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.324">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="zero_v1"/>
   <UnitDefinitions>
     <Unit name="1"/>
@@ -7,269 +7,329 @@
     <Unit name="m"/>
     <Unit name="rad/s"/>
   </UnitDefinitions>
-  <DefaultExperiment startTime="0" stepSize="0.001" stopTime="10"/>
+  <DefaultExperiment startTime="0" stepSize="0.001" stopTime="30"/>
   <VendorAnnotations>
     <Tool name="Simulink">
       <Simulink>
         <ImportCompatibility FMUProduct="standalone FMU" requireMATLABOnPath="no" requireRelease="all"/>
         <SimulinkModelInterface>
-          <Inport blockPath="zero_v1/LF Steering Angle input" dataType="double" dimension="[1]" portName="LF Steering Angle input" portNumber="1" sampleTime="[0 0]" uniquePortName="LFSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/LB Steering Angle input" dataType="double" dimension="[1]" portName="LB Steering Angle input" portNumber="2" sampleTime="[0 0]" uniquePortName="LBSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/RF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RF Tire Angular Velocity input" portNumber="3" sampleTime="[0 0]" uniquePortName="RFTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/RF Steering Angle input" dataType="double" dimension="[1]" portName="RF Steering Angle input" portNumber="4" sampleTime="[0 0]" uniquePortName="RFSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/RB Steering Angle input" dataType="double" dimension="[1]" portName="RB Steering Angle input" portNumber="5" sampleTime="[0 0]" uniquePortName="RBSteeringAngleInput" unit="deg"/>
-          <Inport blockPath="zero_v1/RF_is_contacting_in" dataType="double" dimension="[1]" portName="RF_is_contacting_in" portNumber="6" sampleTime="[0 0]" uniquePortName="RF_is_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/RF_ray_in" dataType="double" dimension="[1]" portName="RF_ray_in" portNumber="7" sampleTime="[0 0]" uniquePortName="RF_ray_in" unit=""/>
-          <Inport blockPath="zero_v1/RF_gnd_pitch_in" dataType="double" dimension="[1]" portName="RF_gnd_pitch_in" portNumber="8" sampleTime="[0 0]" uniquePortName="RF_gnd_pitch_in" unit=""/>
-          <Inport blockPath="zero_v1/RF_gnd_roll_in" dataType="double" dimension="[1]" portName="RF_gnd_roll_in" portNumber="9" sampleTime="[0 0]" uniquePortName="RF_gnd_roll_in" unit=""/>
-          <Inport blockPath="zero_v1/RB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="RB Tire Angular Velocity input" portNumber="10" sampleTime="[0 0]" uniquePortName="RBTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/RB_is_contacting_in" dataType="double" dimension="[1]" portName="RB_is_contacting_in" portNumber="11" sampleTime="[0 0]" uniquePortName="RB_is_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/RB_ray_in" dataType="double" dimension="[1]" portName="RB_ray_in" portNumber="12" sampleTime="[0 0]" uniquePortName="RB_ray_in" unit=""/>
-          <Inport blockPath="zero_v1/RB_gnd_pitch_in" dataType="double" dimension="[1]" portName="RB_gnd_pitch_in" portNumber="13" sampleTime="[0 0]" uniquePortName="RB_gnd_pitch_in" unit=""/>
-          <Inport blockPath="zero_v1/RB_gnd_roll_in" dataType="double" dimension="[1]" portName="RB_gnd_roll_in" portNumber="14" sampleTime="[0 0]" uniquePortName="RB_gnd_roll_in" unit=""/>
-          <Inport blockPath="zero_v1/LF Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LF Tire Angular Velocity input" portNumber="15" sampleTime="[0 0]" uniquePortName="LFTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/LF_is_contacting_in" dataType="double" dimension="[1]" portName="LF_is_contacting_in" portNumber="16" sampleTime="[0 0]" uniquePortName="LF_is_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/LF_ray_in" dataType="double" dimension="[1]" portName="LF_ray_in" portNumber="17" sampleTime="[0 0]" uniquePortName="LF_ray_in" unit=""/>
-          <Inport blockPath="zero_v1/LF_gnd_pitch_in" dataType="double" dimension="[1]" portName="LF_gnd_pitch_in" portNumber="18" sampleTime="[0 0]" uniquePortName="LF_gnd_pitch_in" unit=""/>
-          <Inport blockPath="zero_v1/LF_gnd_roll_in" dataType="double" dimension="[1]" portName="LF_gnd_roll_in" portNumber="19" sampleTime="[0 0]" uniquePortName="LF_gnd_roll_in" unit=""/>
-          <Inport blockPath="zero_v1/LB Tire Angular Velocity input" dataType="double" dimension="[1]" portName="LB Tire Angular Velocity input" portNumber="20" sampleTime="[0 0]" uniquePortName="LBTireAngularVelocityInput" unit="rad/s"/>
-          <Inport blockPath="zero_v1/LB_is_contacting_in" dataType="double" dimension="[1]" portName="LB_is_contacting_in" portNumber="21" sampleTime="[0 0]" uniquePortName="LB_is_contacting_in" unit=""/>
-          <Inport blockPath="zero_v1/LB_ray_in" dataType="double" dimension="[1]" portName="LB_ray_in" portNumber="22" sampleTime="[0 0]" uniquePortName="LB_ray_in" unit=""/>
-          <Inport blockPath="zero_v1/LB_gnd_pitch_in" dataType="double" dimension="[1]" portName="LB_gnd_pitch_in" portNumber="23" sampleTime="[0 0]" uniquePortName="LB_gnd_pitch_in" unit=""/>
-          <Inport blockPath="zero_v1/LB_gnd_roll_in" dataType="double" dimension="[1]" portName="LB_gnd_roll_in" portNumber="24" sampleTime="[0 0]" uniquePortName="LB_gnd_roll_in" unit=""/>
-          <Outport blockPath="zero_v1/LF Tire Angle output" dataType="double" dimension="[1]" portName="LF Tire Angle output" portNumber="1" sampleTime="[0 0]" uniquePortName="LFTireAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/LF Steering Angle output" dataType="double" dimension="[1]" portName="LF Steering Angle output" portNumber="2" sampleTime="[0 0]" uniquePortName="LFSteeringAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/LB Tire Angle output" dataType="double" dimension="[1]" portName="LB Tire Angle output" portNumber="3" sampleTime="[0 0]" uniquePortName="LBTireAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/LB Steering Angle output" dataType="double" dimension="[1]" portName="LB Steering Angle output" portNumber="4" sampleTime="[0 0]" uniquePortName="LBSteeringAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/RF Tire Angle output" dataType="double" dimension="[1]" portName="RF Tire Angle output" portNumber="5" sampleTime="[0 0]" uniquePortName="RFTireAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/RF Steering Angle output" dataType="double" dimension="[1]" portName="RF Steering Angle output" portNumber="6" sampleTime="[0 0]" uniquePortName="RFSteeringAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/RB Tire Angle output" dataType="double" dimension="[1]" portName="RB Tire Angle output" portNumber="7" sampleTime="[0 0]" uniquePortName="RBTireAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/RB Steering Angle output" dataType="double" dimension="[1]" portName="RB Steering Angle output" portNumber="8" sampleTime="[0 0]" uniquePortName="RBSteeringAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/Right Suspension Angle output" dataType="double" dimension="[1]" portName="Right Suspension Angle output" portNumber="9" sampleTime="[0 0]" uniquePortName="RightSuspensionAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/Left Suspension Angle output" dataType="double" dimension="[1]" portName="Left Suspension Angle output" portNumber="10" sampleTime="[0 0]" uniquePortName="LeftSuspensionAngleOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/Differential Bar output" dataType="double" dimension="[1]" portName="Differential Bar output" portNumber="11" sampleTime="[0 0]" uniquePortName="DifferentialBarOutput" unit="deg"/>
-          <Outport blockPath="zero_v1/zero_position.x" dataType="double" dimension="[1]" portName="zero_position.x" portNumber="12" sampleTime="[0 0]" uniquePortName="zero_position_x" unit="m"/>
-          <Outport blockPath="zero_v1/zero_position.y" dataType="double" dimension="[1]" portName="zero_position.y" portNumber="13" sampleTime="[0 0]" uniquePortName="zero_position_y" unit="m"/>
-          <Outport blockPath="zero_v1/zero_position.z" dataType="double" dimension="[1]" portName="zero_position.z" portNumber="14" sampleTime="[0 0]" uniquePortName="zero_position_z" unit="m"/>
-          <Outport blockPath="zero_v1/zero_orientation" dataType="double" dimension="[4  1]" portName="zero_orientation" portNumber="15" sampleTime="[0 0]" uniquePortName="zero_orientation" unit="1"/>
+          <Inport blockPath="zero_v1/FL Steering Angle input" dataType="double" dimension="[1]" portName="FL Steering Angle input" portNumber="1" sampleTime="[0 0]" uniquePortName="FLSteeringAngleInput" unit="deg"/>
+          <Inport blockPath="zero_v1/FL Tire Angular Velocity input" dataType="double" dimension="[1]" portName="FL Tire Angular Velocity input" portNumber="2" sampleTime="[0 0]" uniquePortName="FLTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/FL_is_contacting" dataType="double" dimension="[1]" portName="FL_is_contacting" portNumber="3" sampleTime="[0 0]" uniquePortName="FL_is_contacting" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_pos_x" dataType="double" dimension="[1]" portName="FL_contact_pos_x" portNumber="4" sampleTime="[0 0]" uniquePortName="FL_contact_pos_x" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_pos_y" dataType="double" dimension="[1]" portName="FL_contact_pos_y" portNumber="5" sampleTime="[0 0]" uniquePortName="FL_contact_pos_y" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_pos_z" dataType="double" dimension="[1]" portName="FL_contact_pos_z" portNumber="6" sampleTime="[0 0]" uniquePortName="FL_contact_pos_z" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_nrm_x" dataType="double" dimension="[1]" portName="FL_contact_nrm_x" portNumber="7" sampleTime="[0 0]" uniquePortName="FL_contact_nrm_x" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_nrm_y" dataType="double" dimension="[1]" portName="FL_contact_nrm_y" portNumber="8" sampleTime="[0 0]" uniquePortName="FL_contact_nrm_y" unit=""/>
+          <Inport blockPath="zero_v1/FL_contact_nrm_z" dataType="double" dimension="[1]" portName="FL_contact_nrm_z" portNumber="9" sampleTime="[0 0]" uniquePortName="FL_contact_nrm_z" unit=""/>
+          <Inport blockPath="zero_v1/BL Steering Angle input" dataType="double" dimension="[1]" portName="BL Steering Angle input" portNumber="10" sampleTime="[0 0]" uniquePortName="BLSteeringAngleInput" unit="deg"/>
+          <Inport blockPath="zero_v1/BL Tire Angular Velocity input" dataType="double" dimension="[1]" portName="BL Tire Angular Velocity input" portNumber="11" sampleTime="[0 0]" uniquePortName="BLTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/BL_is_contacting" dataType="double" dimension="[1]" portName="BL_is_contacting" portNumber="12" sampleTime="[0 0]" uniquePortName="BL_is_contacting" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_pos_x" dataType="double" dimension="[1]" portName="BL_contact_pos_x" portNumber="13" sampleTime="[0 0]" uniquePortName="BL_contact_pos_x" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_pos_y" dataType="double" dimension="[1]" portName="BL_contact_pos_y" portNumber="14" sampleTime="[0 0]" uniquePortName="BL_contact_pos_y" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_pos_z" dataType="double" dimension="[1]" portName="BL_contact_pos_z" portNumber="15" sampleTime="[0 0]" uniquePortName="BL_contact_pos_z" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_nrm_x" dataType="double" dimension="[1]" portName="BL_contact_nrm_x" portNumber="16" sampleTime="[0 0]" uniquePortName="BL_contact_nrm_x" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_nrm_y" dataType="double" dimension="[1]" portName="BL_contact_nrm_y" portNumber="17" sampleTime="[0 0]" uniquePortName="BL_contact_nrm_y" unit=""/>
+          <Inport blockPath="zero_v1/BL_contact_nrm_z" dataType="double" dimension="[1]" portName="BL_contact_nrm_z" portNumber="18" sampleTime="[0 0]" uniquePortName="BL_contact_nrm_z" unit=""/>
+          <Inport blockPath="zero_v1/FR Steering Angle input" dataType="double" dimension="[1]" portName="FR Steering Angle input" portNumber="19" sampleTime="[0 0]" uniquePortName="FRSteeringAngleInput" unit="deg"/>
+          <Inport blockPath="zero_v1/FR Tire Angular Velocity input" dataType="double" dimension="[1]" portName="FR Tire Angular Velocity input" portNumber="20" sampleTime="[0 0]" uniquePortName="FRTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/FR_is_contacting" dataType="double" dimension="[1]" portName="FR_is_contacting" portNumber="21" sampleTime="[0 0]" uniquePortName="FR_is_contacting" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_pos_x" dataType="double" dimension="[1]" portName="FR_contact_pos_x" portNumber="22" sampleTime="[0 0]" uniquePortName="FR_contact_pos_x" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_pos_y" dataType="double" dimension="[1]" portName="FR_contact_pos_y" portNumber="23" sampleTime="[0 0]" uniquePortName="FR_contact_pos_y" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_pos_z" dataType="double" dimension="[1]" portName="FR_contact_pos_z" portNumber="24" sampleTime="[0 0]" uniquePortName="FR_contact_pos_z" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_nrm_x" dataType="double" dimension="[1]" portName="FR_contact_nrm_x" portNumber="25" sampleTime="[0 0]" uniquePortName="FR_contact_nrm_x" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_nrm_y" dataType="double" dimension="[1]" portName="FR_contact_nrm_y" portNumber="26" sampleTime="[0 0]" uniquePortName="FR_contact_nrm_y" unit=""/>
+          <Inport blockPath="zero_v1/FR_contact_nrm_z" dataType="double" dimension="[1]" portName="FR_contact_nrm_z" portNumber="27" sampleTime="[0 0]" uniquePortName="FR_contact_nrm_z" unit=""/>
+          <Inport blockPath="zero_v1/BR Steering Angle input" dataType="double" dimension="[1]" portName="BR Steering Angle input" portNumber="28" sampleTime="[0 0]" uniquePortName="BRSteeringAngleInput" unit="deg"/>
+          <Inport blockPath="zero_v1/BR Tire Angular Velocity input" dataType="double" dimension="[1]" portName="BR Tire Angular Velocity input" portNumber="29" sampleTime="[0 0]" uniquePortName="BRTireAngularVelocityInput" unit="rad/s"/>
+          <Inport blockPath="zero_v1/BR_is_contacting" dataType="double" dimension="[1]" portName="BR_is_contacting" portNumber="30" sampleTime="[0 0]" uniquePortName="BR_is_contacting" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_pos_x" dataType="double" dimension="[1]" portName="BR_contact_pos_x" portNumber="31" sampleTime="[0 0]" uniquePortName="BR_contact_pos_x" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_pos_y" dataType="double" dimension="[1]" portName="BR_contact_pos_y" portNumber="32" sampleTime="[0 0]" uniquePortName="BR_contact_pos_y" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_pos_z" dataType="double" dimension="[1]" portName="BR_contact_pos_z" portNumber="33" sampleTime="[0 0]" uniquePortName="BR_contact_pos_z" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_nrm_x" dataType="double" dimension="[1]" portName="BR_contact_nrm_x" portNumber="34" sampleTime="[0 0]" uniquePortName="BR_contact_nrm_x" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_nrm_y" dataType="double" dimension="[1]" portName="BR_contact_nrm_y" portNumber="35" sampleTime="[0 0]" uniquePortName="BR_contact_nrm_y" unit=""/>
+          <Inport blockPath="zero_v1/BR_contact_nrm_z" dataType="double" dimension="[1]" portName="BR_contact_nrm_z" portNumber="36" sampleTime="[0 0]" uniquePortName="BR_contact_nrm_z" unit=""/>
+          <Outport blockPath="zero_v1/FL Tire Angle output" dataType="double" dimension="[1]" portName="FL Tire Angle output" portNumber="1" sampleTime="[0 0]" uniquePortName="FLTireAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/FL Steering Angle output" dataType="double" dimension="[1]" portName="FL Steering Angle output" portNumber="2" sampleTime="[0 0]" uniquePortName="FLSteeringAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/BL Tire Angle output" dataType="double" dimension="[1]" portName="BL Tire Angle output" portNumber="3" sampleTime="[0 0]" uniquePortName="BLTireAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/BL Steering Angle output" dataType="double" dimension="[1]" portName="BL Steering Angle output" portNumber="4" sampleTime="[0 0]" uniquePortName="BLSteeringAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/FR Tire Angle output" dataType="double" dimension="[1]" portName="FR Tire Angle output" portNumber="5" sampleTime="[0 0]" uniquePortName="FRTireAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/FR Steering Angle output" dataType="double" dimension="[1]" portName="FR Steering Angle output" portNumber="6" sampleTime="[0 0]" uniquePortName="FRSteeringAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/BR Steering Angle output" dataType="double" dimension="[1]" portName="BR Steering Angle output" portNumber="7" sampleTime="[0 0]" uniquePortName="BRSteeringAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/Right Suspension Angle output" dataType="double" dimension="[1]" portName="Right Suspension Angle output" portNumber="8" sampleTime="[0 0]" uniquePortName="RightSuspensionAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/Left Suspension Angle output" dataType="double" dimension="[1]" portName="Left Suspension Angle output" portNumber="9" sampleTime="[0 0]" uniquePortName="LeftSuspensionAngleOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/Differential Bar output" dataType="double" dimension="[1]" portName="Differential Bar output" portNumber="10" sampleTime="[0 0]" uniquePortName="DifferentialBarOutput" unit="deg"/>
+          <Outport blockPath="zero_v1/zero_position.x" dataType="double" dimension="[1]" portName="zero_position.x" portNumber="11" sampleTime="[0 0]" uniquePortName="zero_position_x" unit="m"/>
+          <Outport blockPath="zero_v1/zero_position.y" dataType="double" dimension="[1]" portName="zero_position.y" portNumber="12" sampleTime="[0 0]" uniquePortName="zero_position_y" unit="m"/>
+          <Outport blockPath="zero_v1/zero_position.z" dataType="double" dimension="[1]" portName="zero_position.z" portNumber="13" sampleTime="[0 0]" uniquePortName="zero_position_z" unit="m"/>
+          <Outport blockPath="zero_v1/zero_orientation" dataType="double" dimension="[4  1]" portName="zero_orientation" portNumber="14" sampleTime="[0 0]" uniquePortName="zero_orientation" unit="1"/>
+          <Outport blockPath="zero_v1/BR Tire Angle output" dataType="double" dimension="[1]" portName="BR Tire Angle output" portNumber="15" sampleTime="[0 0]" uniquePortName="BRTireAngleOutput" unit="deg"/>
         </SimulinkModelInterface>
       </Simulink>
     </Tool>
   </VendorAnnotations>
   <ModelVariables>
-    <ScalarVariable causality="input" description="LF Steering Angle input" name="LFSteeringAngleInput" valueReference="0" variability="continuous">
+    <ScalarVariable causality="input" description="FL Steering Angle input" name="FLSteeringAngleInput" valueReference="0" variability="continuous">
       <Real start="0" unit="deg"/>
       <!--Index = 1-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB Steering Angle input" name="LBSteeringAngleInput" valueReference="1" variability="continuous">
-      <Real start="0" unit="deg"/>
+    <ScalarVariable causality="input" description="FL Tire Angular Velocity input" name="FLTireAngularVelocityInput" valueReference="1" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 2-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF Tire Angular Velocity input" name="RFTireAngularVelocityInput" valueReference="2" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="FL_is_contacting" name="FL_is_contacting" valueReference="2" variability="continuous">
+      <Real start="0"/>
       <!--Index = 3-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF Steering Angle input" name="RFSteeringAngleInput" valueReference="3" variability="continuous">
-      <Real start="0" unit="deg"/>
+    <ScalarVariable causality="input" description="FL_contact_pos_x" name="FL_contact_pos_x" valueReference="3" variability="continuous">
+      <Real start="0"/>
       <!--Index = 4-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB Steering Angle input" name="RBSteeringAngleInput" valueReference="4" variability="continuous">
-      <Real start="0" unit="deg"/>
+    <ScalarVariable causality="input" description="FL_contact_pos_y" name="FL_contact_pos_y" valueReference="4" variability="continuous">
+      <Real start="0"/>
       <!--Index = 5-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF_is_contacting_in" name="RF_is_contacting_in" valueReference="5" variability="continuous">
+    <ScalarVariable causality="input" description="FL_contact_pos_z" name="FL_contact_pos_z" valueReference="5" variability="continuous">
       <Real start="0"/>
       <!--Index = 6-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF_ray_in" name="RF_ray_in" valueReference="6" variability="continuous">
+    <ScalarVariable causality="input" description="FL_contact_nrm_x" name="FL_contact_nrm_x" valueReference="6" variability="continuous">
       <Real start="0"/>
       <!--Index = 7-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF_gnd_pitch_in" name="RF_gnd_pitch_in" valueReference="7" variability="continuous">
+    <ScalarVariable causality="input" description="FL_contact_nrm_y" name="FL_contact_nrm_y" valueReference="7" variability="continuous">
       <Real start="0"/>
       <!--Index = 8-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RF_gnd_roll_in" name="RF_gnd_roll_in" valueReference="8" variability="continuous">
+    <ScalarVariable causality="input" description="FL_contact_nrm_z" name="FL_contact_nrm_z" valueReference="8" variability="continuous">
       <Real start="0"/>
       <!--Index = 9-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB Tire Angular Velocity input" name="RBTireAngularVelocityInput" valueReference="9" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="BL Steering Angle input" name="BLSteeringAngleInput" valueReference="9" variability="continuous">
+      <Real start="0" unit="deg"/>
       <!--Index = 10-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB_is_contacting_in" name="RB_is_contacting_in" valueReference="10" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="input" description="BL Tire Angular Velocity input" name="BLTireAngularVelocityInput" valueReference="10" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 11-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB_ray_in" name="RB_ray_in" valueReference="11" variability="continuous">
+    <ScalarVariable causality="input" description="BL_is_contacting" name="BL_is_contacting" valueReference="11" variability="continuous">
       <Real start="0"/>
       <!--Index = 12-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB_gnd_pitch_in" name="RB_gnd_pitch_in" valueReference="12" variability="continuous">
+    <ScalarVariable causality="input" description="BL_contact_pos_x" name="BL_contact_pos_x" valueReference="12" variability="continuous">
       <Real start="0"/>
       <!--Index = 13-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="RB_gnd_roll_in" name="RB_gnd_roll_in" valueReference="13" variability="continuous">
+    <ScalarVariable causality="input" description="BL_contact_pos_y" name="BL_contact_pos_y" valueReference="13" variability="continuous">
       <Real start="0"/>
       <!--Index = 14-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF Tire Angular Velocity input" name="LFTireAngularVelocityInput" valueReference="14" variability="continuous">
-      <Real start="0" unit="rad/s"/>
+    <ScalarVariable causality="input" description="BL_contact_pos_z" name="BL_contact_pos_z" valueReference="14" variability="continuous">
+      <Real start="0"/>
       <!--Index = 15-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF_is_contacting_in" name="LF_is_contacting_in" valueReference="15" variability="continuous">
+    <ScalarVariable causality="input" description="BL_contact_nrm_x" name="BL_contact_nrm_x" valueReference="15" variability="continuous">
       <Real start="0"/>
       <!--Index = 16-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF_ray_in" name="LF_ray_in" valueReference="16" variability="continuous">
+    <ScalarVariable causality="input" description="BL_contact_nrm_y" name="BL_contact_nrm_y" valueReference="16" variability="continuous">
       <Real start="0"/>
       <!--Index = 17-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF_gnd_pitch_in" name="LF_gnd_pitch_in" valueReference="17" variability="continuous">
+    <ScalarVariable causality="input" description="BL_contact_nrm_z" name="BL_contact_nrm_z" valueReference="17" variability="continuous">
       <Real start="0"/>
       <!--Index = 18-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LF_gnd_roll_in" name="LF_gnd_roll_in" valueReference="18" variability="continuous">
-      <Real start="0"/>
+    <ScalarVariable causality="input" description="FR Steering Angle input" name="FRSteeringAngleInput" valueReference="18" variability="continuous">
+      <Real start="0" unit="deg"/>
       <!--Index = 19-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB Tire Angular Velocity input" name="LBTireAngularVelocityInput" valueReference="19" variability="continuous">
+    <ScalarVariable causality="input" description="FR Tire Angular Velocity input" name="FRTireAngularVelocityInput" valueReference="19" variability="continuous">
       <Real start="0" unit="rad/s"/>
       <!--Index = 20-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB_is_contacting_in" name="LB_is_contacting_in" valueReference="20" variability="continuous">
+    <ScalarVariable causality="input" description="FR_is_contacting" name="FR_is_contacting" valueReference="20" variability="continuous">
       <Real start="0"/>
       <!--Index = 21-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB_ray_in" name="LB_ray_in" valueReference="21" variability="continuous">
+    <ScalarVariable causality="input" description="FR_contact_pos_x" name="FR_contact_pos_x" valueReference="21" variability="continuous">
       <Real start="0"/>
       <!--Index = 22-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB_gnd_pitch_in" name="LB_gnd_pitch_in" valueReference="22" variability="continuous">
+    <ScalarVariable causality="input" description="FR_contact_pos_y" name="FR_contact_pos_y" valueReference="22" variability="continuous">
       <Real start="0"/>
       <!--Index = 23-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="LB_gnd_roll_in" name="LB_gnd_roll_in" valueReference="23" variability="continuous">
+    <ScalarVariable causality="input" description="FR_contact_pos_z" name="FR_contact_pos_z" valueReference="23" variability="continuous">
       <Real start="0"/>
       <!--Index = 24-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LF Tire Angle output" initial="calculated" name="LFTireAngleOutput" valueReference="24" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="FR_contact_nrm_x" name="FR_contact_nrm_x" valueReference="24" variability="continuous">
+      <Real start="0"/>
       <!--Index = 25-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LF Steering Angle output" initial="calculated" name="LFSteeringAngleOutput" valueReference="25" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="FR_contact_nrm_y" name="FR_contact_nrm_y" valueReference="25" variability="continuous">
+      <Real start="0"/>
       <!--Index = 26-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LB Tire Angle output" initial="calculated" name="LBTireAngleOutput" valueReference="26" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="FR_contact_nrm_z" name="FR_contact_nrm_z" valueReference="26" variability="continuous">
+      <Real start="0"/>
       <!--Index = 27-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="LB Steering Angle output" initial="calculated" name="LBSteeringAngleOutput" valueReference="27" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR Steering Angle input" name="BRSteeringAngleInput" valueReference="27" variability="continuous">
+      <Real start="0" unit="deg"/>
       <!--Index = 28-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RF Tire Angle output" initial="calculated" name="RFTireAngleOutput" valueReference="28" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR Tire Angular Velocity input" name="BRTireAngularVelocityInput" valueReference="28" variability="continuous">
+      <Real start="0" unit="rad/s"/>
       <!--Index = 29-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RF Steering Angle output" initial="calculated" name="RFSteeringAngleOutput" valueReference="29" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_is_contacting" name="BR_is_contacting" valueReference="29" variability="continuous">
+      <Real start="0"/>
       <!--Index = 30-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RB Tire Angle output" initial="calculated" name="RBTireAngleOutput" valueReference="30" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_contact_pos_x" name="BR_contact_pos_x" valueReference="30" variability="continuous">
+      <Real start="0"/>
       <!--Index = 31-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="RB Steering Angle output" initial="calculated" name="RBSteeringAngleOutput" valueReference="31" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_contact_pos_y" name="BR_contact_pos_y" valueReference="31" variability="continuous">
+      <Real start="0"/>
       <!--Index = 32-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Right Suspension Angle output" initial="calculated" name="RightSuspensionAngleOutput" valueReference="32" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_contact_pos_z" name="BR_contact_pos_z" valueReference="32" variability="continuous">
+      <Real start="0"/>
       <!--Index = 33-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Left Suspension Angle output" initial="calculated" name="LeftSuspensionAngleOutput" valueReference="33" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_contact_nrm_x" name="BR_contact_nrm_x" valueReference="33" variability="continuous">
+      <Real start="0"/>
       <!--Index = 34-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Differential Bar output" initial="calculated" name="DifferentialBarOutput" valueReference="34" variability="continuous">
-      <Real unit="deg"/>
+    <ScalarVariable causality="input" description="BR_contact_nrm_y" name="BR_contact_nrm_y" valueReference="34" variability="continuous">
+      <Real start="0"/>
       <!--Index = 35-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.x" initial="calculated" name="zero_position_x" valueReference="35" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="input" description="BR_contact_nrm_z" name="BR_contact_nrm_z" valueReference="35" variability="continuous">
+      <Real start="0"/>
       <!--Index = 36-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.y" initial="calculated" name="zero_position_y" valueReference="36" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="output" description="FL Tire Angle output" initial="calculated" name="FLTireAngleOutput" valueReference="36" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 37-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_position.z" initial="calculated" name="zero_position_z" valueReference="37" variability="continuous">
-      <Real unit="m"/>
+    <ScalarVariable causality="output" description="FL Steering Angle output" initial="calculated" name="FLSteeringAngleOutput" valueReference="37" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 38-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(1,1)" initial="calculated" name="zero_orientation[1,1]" valueReference="38" variability="continuous">
-      <Real unit="1"/>
+    <ScalarVariable causality="output" description="BL Tire Angle output" initial="calculated" name="BLTireAngleOutput" valueReference="38" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 39-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(2,1)" initial="calculated" name="zero_orientation[2,1]" valueReference="39" variability="continuous">
-      <Real unit="1"/>
+    <ScalarVariable causality="output" description="BL Steering Angle output" initial="calculated" name="BLSteeringAngleOutput" valueReference="39" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 40-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(3,1)" initial="calculated" name="zero_orientation[3,1]" valueReference="40" variability="continuous">
-      <Real unit="1"/>
+    <ScalarVariable causality="output" description="FR Tire Angle output" initial="calculated" name="FRTireAngleOutput" valueReference="40" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 41-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="zero_orientation(4,1)" initial="calculated" name="zero_orientation[4,1]" valueReference="41" variability="continuous">
-      <Real unit="1"/>
+    <ScalarVariable causality="output" description="FR Steering Angle output" initial="calculated" name="FRSteeringAngleOutput" valueReference="41" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 42-->
     </ScalarVariable>
-    <ScalarVariable causality="independent" description="time" name="time" valueReference="42" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="BR Steering Angle output" initial="calculated" name="BRSteeringAngleOutput" valueReference="42" variability="continuous">
+      <Real unit="deg"/>
       <!--Index = 43-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Right Suspension Angle output" initial="calculated" name="RightSuspensionAngleOutput" valueReference="43" variability="continuous">
+      <Real unit="deg"/>
+      <!--Index = 44-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Left Suspension Angle output" initial="calculated" name="LeftSuspensionAngleOutput" valueReference="44" variability="continuous">
+      <Real unit="deg"/>
+      <!--Index = 45-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Differential Bar output" initial="calculated" name="DifferentialBarOutput" valueReference="45" variability="continuous">
+      <Real unit="deg"/>
+      <!--Index = 46-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_position.x" initial="calculated" name="zero_position_x" valueReference="46" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 47-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_position.y" initial="calculated" name="zero_position_y" valueReference="47" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 48-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_position.z" initial="calculated" name="zero_position_z" valueReference="48" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 49-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_orientation(1,1)" initial="calculated" name="zero_orientation[1,1]" valueReference="49" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 50-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_orientation(2,1)" initial="calculated" name="zero_orientation[2,1]" valueReference="50" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 51-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_orientation(3,1)" initial="calculated" name="zero_orientation[3,1]" valueReference="51" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 52-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="zero_orientation(4,1)" initial="calculated" name="zero_orientation[4,1]" valueReference="52" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 53-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="BR Tire Angle output" initial="calculated" name="BRTireAngleOutput" valueReference="53" variability="continuous">
+      <Real unit="deg"/>
+      <!--Index = 54-->
+    </ScalarVariable>
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="54" variability="continuous">
+      <Real/>
+      <!--Index = 55-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
     <Outputs>
-      <Unknown index="25"/>
-      <Unknown index="26"/>
-      <Unknown index="27"/>
-      <Unknown index="28"/>
-      <Unknown index="29"/>
-      <Unknown index="30"/>
-      <Unknown index="31"/>
-      <Unknown index="32"/>
-      <Unknown index="33"/>
-      <Unknown index="34"/>
-      <Unknown index="35"/>
-      <Unknown index="36"/>
       <Unknown index="37"/>
       <Unknown index="38"/>
       <Unknown index="39"/>
       <Unknown index="40"/>
       <Unknown index="41"/>
       <Unknown index="42"/>
+      <Unknown index="43"/>
+      <Unknown index="44"/>
+      <Unknown index="45"/>
+      <Unknown index="46"/>
+      <Unknown index="47"/>
+      <Unknown index="48"/>
+      <Unknown index="49"/>
+      <Unknown index="50"/>
+      <Unknown index="51"/>
+      <Unknown index="52"/>
+      <Unknown index="53"/>
+      <Unknown index="54"/>
     </Outputs>
     <InitialUnknowns>
-      <Unknown index="25"/>
-      <Unknown index="26"/>
-      <Unknown index="27"/>
-      <Unknown index="28"/>
-      <Unknown index="29"/>
-      <Unknown index="30"/>
-      <Unknown index="31"/>
-      <Unknown index="32"/>
-      <Unknown index="33"/>
-      <Unknown index="34"/>
-      <Unknown index="35"/>
-      <Unknown index="36"/>
       <Unknown index="37"/>
       <Unknown index="38"/>
       <Unknown index="39"/>
       <Unknown index="40"/>
       <Unknown index="41"/>
       <Unknown index="42"/>
+      <Unknown index="43"/>
+      <Unknown index="44"/>
+      <Unknown index="45"/>
+      <Unknown index="46"/>
+      <Unknown index="47"/>
+      <Unknown index="48"/>
+      <Unknown index="49"/>
+      <Unknown index="50"/>
+      <Unknown index="51"/>
+      <Unknown index="52"/>
+      <Unknown index="53"/>
+      <Unknown index="54"/>
     </InitialUnknowns>
   </ModelStructure>
 </fmiModelDescription>

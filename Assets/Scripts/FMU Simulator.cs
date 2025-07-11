@@ -91,6 +91,7 @@ public class FMUSimulator : MonoBehaviour
         double x, y, z, qw, qx, qy, qz;
         x = fmu.GetReal("zero_position_x");
         y = fmu.GetReal("zero_position_y");
+        //y = 0;
         z = fmu.GetReal("zero_position_z");
         transform.position= initialPosition + new Vector3((float)x, (float)y, (float)z);
 
@@ -175,6 +176,7 @@ public class FMUSimulator : MonoBehaviour
                 // 접촉점의 월드 좌표(x,y,z) 전송
                 fmu.SetReal($"{loc}_contact_pos_x", contactInfo.ContactPoint.x);
                 fmu.SetReal($"{loc}_contact_pos_y", contactInfo.ContactPoint.y);
+                //fmu.SetReal($"{loc}_contact_pos_y", 0);
                 fmu.SetReal($"{loc}_contact_pos_z", contactInfo.ContactPoint.z);
 
                 // 지면의 법선 벡터(x,y,z) 전송
