@@ -21,7 +21,7 @@ public class CarFMU : MonoBehaviour
     {
         bool forwardPressed = Input.GetKey(forwardKey);
         bool backwardPressed = Input.GetKey(backwardKey);
-        double x, y, z, qw, qx, qy, qz;
+        double x, y, z;
         x = fmu.GetReal("x");
         y = fmu.GetReal("y");
         z = fmu.GetReal("z");

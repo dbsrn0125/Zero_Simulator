@@ -81,7 +81,35 @@ public class RosVideoSubscriber : MonoBehaviour
             ClearDisplay(); // 화면을 딱 한 번만 지움
         }
     }
+    public void ChangeTopic(string newTopic)
+    {
+        // 이미 같은 토픽을 구독 중이면 아무것도 하지 않음
+        if (rosTopicName == newTopic)
+        {
+            return;
+        }
 
+        // 화면을 깨끗하게 정리
+        ClearDisplay();
+
+        // 이전에 구독 중인 토픽이 있었다면 구독 해제
+        if (!string.IsNullOrEmpty(rosTopicName))
+        {
+            ROSConnection.GetOrCreateInstance().Unsubscribe(rosTopicName);
+        }
+
+        // 새로운 토픽 이름이 비어있지 않다면, 새로 구독
+        if (!string.IsNullOrEmpty(newTopic))
+        {
+            rosTopicName = newTopic;
+            ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
+            Debug.Log($"Subscribed to new topic: {rosTopicName}");
+        }
+        else
+        {
+            rosTopicName = "";
+        }
+    }
     private void ClearDisplay()
     {
         // ? isDisplaying을 false로 바꿔서 이 함수가 중복 호출되는 것을 방지
