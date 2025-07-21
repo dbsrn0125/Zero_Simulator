@@ -21,7 +21,7 @@ public class RosVideoSubscriber : MonoBehaviour
     private readonly object _lock = new object();
     private float lastMessageTime;
     private bool isDisplaying = false; // 현재 영상이 표시되고 있는지 기억
-
+    private ROSConnection rosConnection;
     void Start()
     {
         if (displayImage == null)
@@ -33,8 +33,8 @@ public class RosVideoSubscriber : MonoBehaviour
 
         receivedTexture = new Texture2D(2, 2);
         ClearDisplay(); // 시작할 때 화면을 깨끗하게 비움
-
-        ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
+        rosConnection = ROSConnection.GetOrCreateInstance();
+        rosConnection.Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
         Debug.Log($"'{rosTopicName}' 토픽 구독을 시작합니다.");
     }
 
@@ -89,20 +89,22 @@ public class RosVideoSubscriber : MonoBehaviour
             return;
         }
 
-        // 화면을 깨끗하게 정리
-        ClearDisplay();
-
+        
         // 이전에 구독 중인 토픽이 있었다면 구독 해제
         if (!string.IsNullOrEmpty(rosTopicName))
         {
-            ROSConnection.GetOrCreateInstance().Unsubscribe(rosTopicName);
+            rosConnection.Unsubscribe(rosTopicName);
         }
+
+        // 화면을 깨끗하게 정리
+        ClearDisplay();
 
         // 새로운 토픽 이름이 비어있지 않다면, 새로 구독
         if (!string.IsNullOrEmpty(newTopic))
         {
             rosTopicName = newTopic;
-            ROSConnection.GetOrCreateInstance().Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
+            rosConnection.RefreshTopicsList();
+            rosConnection.Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
             Debug.Log($"Subscribed to new topic: {rosTopicName}");
         }
         else

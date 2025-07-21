@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: robot
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00380061006200360066003400380062002d0037003500310037002d0034003300610063002d0063003700300066002d003100390030003800630032006300320062003400640038007d00
+  modelName: robot
+  coSimulation:
+    modelIdentifier: robot
+  modelVariables:
+  - name: LeftWheelWInput
+    valueReference: 0
+    description: Left Wheel w Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RightWheelWInput
+    valueReference: 1
+    description: Right Wheel w Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Lgap
+    valueReference: 2
+    description: Lgap
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Lnrm[1]
+    valueReference: 3
+    description: Lnrm(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Lnrm[2]
+    valueReference: 4
+    description: Lnrm(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Lnrm[3]
+    valueReference: 5
+    description: Lnrm(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Rgap
+    valueReference: 6
+    description: Rgap
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Rnrm[1]
+    valueReference: 7
+    description: Rnrm(1)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Rnrm[2]
+    valueReference: 8
+    description: Rnrm(2)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Rnrm[3]
+    valueReference: 9
+    description: Rnrm(3)
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LeftWheelAngleOutput
+    valueReference: 10
+    description: Left Wheel Angle Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RightWheelAngleOutput
+    valueReference: 11
+    description: Right Wheel Angle Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_x
+    valueReference: 12
+    description: Position.x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_y
+    valueReference: 13
+    description: Position.y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_z
+    valueReference: 14
+    description: Position.z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[1,1]
+    valueReference: 15
+    description: Orientation(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[2,1]
+    valueReference: 16
+    description: Orientation(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[3,1]
+    valueReference: 17
+    description: Orientation(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[4,1]
+    valueReference: 18
+    description: Orientation(4,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 19
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 

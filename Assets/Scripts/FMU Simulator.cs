@@ -27,64 +27,20 @@ public class FMUSimulator : MonoBehaviour
         foreach (WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation)))
         {
             targetSteeringAngles[loc] = 0.0f;
-            targetWheelSpeeds[loc] = 0.0f;
-            currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
+            targetWheelSpeeds[loc] = 0.0f;        
         }
     }
     private void Update()
     {
-        // 1. 키보드 입력 감지
-        bool forwardPressed = Input.GetKey(forwardKey);
-        bool backwardPressed = Input.GetKey(backwardKey);
-        bool stopPressed = Input.GetKeyDown(stopKey); // GetKeyDown은 키를 누르는 순간만 true
-
-        // 2. 로봇 구동 상태 결정
-        if (stopPressed) // 정지 키가 우선순위를 가짐
-        {
-            currentDriveState = DriveState.Idle;
-        }
-        else if (forwardPressed && !backwardPressed) // 전진 키만 눌렸을 때
-        {
-            currentDriveState = DriveState.Forward;
-        }
-        else if (backwardPressed && !forwardPressed) // 후진 키만 눌렸을 때
-        {
-            currentDriveState = DriveState.Backward;
-        }
-        else if (!forwardPressed && !backwardPressed) // 아무 이동 키도 안 눌렸으면 정지 (또는 이전 상태 유지 - 여기서는 정지로)
-        {
-            currentDriveState = DriveState.Idle;
-        }
-        switch (currentDriveState)
-        {
-            case DriveState.Forward:
-                targetWheelSpeeds[WheelLocation.FL] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.BL] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.FR] = targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.BR] = targetWheelSpeed_RadPerSec;
-                break;
-            case DriveState.Backward:
-                targetWheelSpeeds[WheelLocation.FL] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.BL] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.FR] = -targetWheelSpeed_RadPerSec;
-                targetWheelSpeeds[WheelLocation.BR] = -targetWheelSpeed_RadPerSec;
-                break;
-            case DriveState.Idle:
-            default:
-                targetWheelSpeeds[WheelLocation.FL] = 0;
-                targetWheelSpeeds[WheelLocation.BL] = 0;
-                targetWheelSpeeds[WheelLocation.FR] = 0;
-                targetWheelSpeeds[WheelLocation.BR] = 0;
-                break;
-        }
+        HandleKeyboardInput();
     }
     Quaternion correctionRotation = Quaternion.Euler(180f, 0f, 0f);
     // Update is called once per frame
     void FixedUpdate()
     {
-        FMUInput();
+        SetFmuInputs();
         fmu.DoStep(Time.timeAsDouble, Time.fixedDeltaTime);
-        zero6dof();
+        ApplyFmuOutputs();
     }
     void zero6dof()
     {
@@ -108,7 +64,6 @@ public class FMUSimulator : MonoBehaviour
         fmu.EnterInitializationMode();
     }
 
-
     public void UpdateControlCommands(CmdVelMsg message)
     {
         targetWheelSpeeds[WheelLocation.FL] = message.fl_vel;
@@ -121,85 +76,158 @@ public class FMUSimulator : MonoBehaviour
         targetSteeringAngles[WheelLocation.BR] = message.br_ang;
     }
 
-    // FMUSimulator.cs 안에 있는 이 함수를 찾아서 내용물을 교체하세요.
-    public void UpdateGroundContactData()
+    void SetFmuInputs()
     {
-        if (groundSensors == null || groundSensors.Count != 4)
-        {
-            for (int i = 0; i < currentGroundContacts.Length; ++i)
-            {
-                currentGroundContacts[i] = GroundContactInfo.NonContact();
-            }
-            return;
-        }
-
-        // [수정된 로직]
         for (int i = 0; i < groundSensors.Count; i++)
         {
             WheelLocation loc = (WheelLocation)i;
+            GroundContactInfo contactInfo;
+
             if (groundSensors[i] != null)
             {
-                currentGroundContacts[(int)loc] = groundSensors[i].ContactInfo;
+                contactInfo = groundSensors[i].GetContactInfo();
             }
             else
             {
-                // Debug.LogWarning("GroundSensor at index " + i + " is not assigned.");
-                currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
+                contactInfo = new GroundContactInfo { IsContacting = false, Gap = 1.0f, GroundNormal = Vector3.up };
             }
-        }
-    }
-    public void FMUInput()
-    {
-        UpdateGroundContactData();
-        foreach(WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation))) 
-        {
-            //Debug.Log(loc.ToString());
             try
             {
-                fmu.SetReal($"{loc}TireAngularVelocityInput", targetWheelSpeeds[loc]);
-                fmu.SetReal($"{loc}SteeringAngleInput", targetSteeringAngles[loc]);
-            }
-            catch(System.Exception e)
-            {
-                Debug.LogError($"FMU SetReal for Control Command (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
-            }
-        }
-        for (int i = 0; i < currentGroundContacts.Length; ++i)
-        {
-            WheelLocation loc = (WheelLocation)i;
-            GroundContactInfo contactInfo = currentGroundContacts[i];
-            try
-            {
-                // 새로운 데이터(ContactPoint, ContactNormal)를 FMU로 전송
-                fmu.SetReal($"{loc}_is_contacting", contactInfo.IsContacting ? 1.0 : 0.0);
-
-                // 접촉점의 월드 좌표(x,y,z) 전송
-                fmu.SetReal($"{loc}_contact_pos_x", contactInfo.ContactPoint.x);
-                fmu.SetReal($"{loc}_contact_pos_y", contactInfo.ContactPoint.y);
-                //fmu.SetReal($"{loc}_contact_pos_y", 0);
-                fmu.SetReal($"{loc}_contact_pos_z", contactInfo.ContactPoint.z);
-
-                // 지면의 법선 벡터(x,y,z) 전송
-                fmu.SetReal($"{loc}_contact_nrm_x", contactInfo.ContactNormal.x);
-                fmu.SetReal($"{loc}_contact_nrm_y", contactInfo.ContactNormal.y);
-                fmu.SetReal($"{loc}_contact_nrm_z", contactInfo.ContactNormal.z);
-
-                // 디버깅 로그 (새로운 데이터 형식에 맞게 수정)
-                if (contactInfo.IsContacting)
-                {
-                    Debug.Log($"[{loc}] Contact Point: {contactInfo.ContactPoint.ToString("F3")}, Normal: {contactInfo.ContactNormal.ToString("F3")}");
-                }
+                fmu.SetReal($"{loc}_gap", contactInfo.Gap);
+                fmu.SetReal($"{loc}_normal_x", contactInfo.GroundNormal.x);
+                fmu.SetReal($"{loc}_normal_y", contactInfo.GroundNormal.y);
+                fmu.SetReal($"{loc}_normal_z", contactInfo.GroundNormal.z);
             }
             catch (System.Exception e)
             {
-                Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
+                Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}");
+            }
+        }
+
+        foreach (WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation)))
+        {
+            try
+            {
+                fmu.SetReal($"{loc}_target_speed", targetWheelSpeeds[loc]);
+                fmu.SetReal($"{loc}_target_angle", targetSteeringAngles[loc]);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"FMU SetReal for Control Command (Wheel: {loc}) failed: {e.Message}");
             }
         }
     }
-    public void KeyInput()
+    public void ApplyFmuOutputs()
     {
+        double x = fmu.GetReal("Position.x");
+        double y = fmu.GetReal("Position.y");
+        double z = fmu.GetReal("Position.z");
 
+        double qx = fmu.GetReal("Orientation[2,1]");
+        double qy = fmu.GetReal("Orientation[3,1]");
+        double qz = fmu.GetReal("Orientation[4,1]");
+        double qw = fmu.GetReal("Orientation[1,1]");
+
+        Vector3 fmuPosition = new Vector3(-(float)x, (float)y, (float)z);
+        Quaternion fmuRotation = new Quaternion(-(float)qx, (float)qy, -(float)qz, (float)qw);
+        transform.position = initialPosition + fmuPosition;
+        transform.rotation = fmuRotation;
     }
+
+    void HandleKeyboardInput()
+    {
+        if (Input.GetKeyDown(stopKey)) { currentDriveState = DriveState.Idle; }
+        else if (Input.GetKey(forwardKey)) { currentDriveState = DriveState.Forward; }
+        else if (Input.GetKey(backwardKey)) { currentDriveState = DriveState.Backward; }
+        else { currentDriveState = DriveState.Idle; }
+
+        float speed = 0;
+        switch (currentDriveState)
+        {
+            case DriveState.Forward: speed = targetWheelSpeed_RadPerSec; break;
+            case DriveState.Backward: speed = -targetWheelSpeed_RadPerSec; break;
+            case DriveState.Idle: speed = 0; break;
+        }
+
+        foreach (WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation)))
+        {
+            targetWheelSpeeds[loc] = speed;
+        }
+    }
+    //public void UpdateGroundContactData()
+    //{
+    //    if (groundSensors == null || groundSensors.Count != 4)
+    //    {
+    //        for (int i = 0; i < currentGroundContacts.Length; ++i)
+    //        {
+    //            currentGroundContacts[i] = GroundContactInfo.NonContact();
+    //        }
+    //        return;
+    //    }
+
+    //    // [수정된 로직]
+    //    for (int i = 0; i < groundSensors.Count; i++)
+    //    {
+    //        WheelLocation loc = (WheelLocation)i;
+    //        if (groundSensors[i] != null)
+    //        {
+    //            currentGroundContacts[(int)loc] = groundSensors[i].ContactInfo;
+    //        }
+    //        else
+    //        {
+    //            // Debug.LogWarning("GroundSensor at index " + i + " is not assigned.");
+    //            currentGroundContacts[(int)loc] = GroundContactInfo.NonContact();
+    //        }
+    //    }
+    //}
+    //public void FMUInput()
+    //{
+    //    UpdateGroundContactData();
+    //    foreach(WheelLocation loc in System.Enum.GetValues(typeof(WheelLocation))) 
+    //    {
+    //        //Debug.Log(loc.ToString());
+    //        try
+    //        {
+    //            fmu.SetReal($"{loc}TireAngularVelocityInput", targetWheelSpeeds[loc]);
+    //            fmu.SetReal($"{loc}SteeringAngleInput", targetSteeringAngles[loc]);
+    //        }
+    //        catch(System.Exception e)
+    //        {
+    //            Debug.LogError($"FMU SetReal for Control Command (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
+    //        }
+    //    }
+    //    for (int i = 0; i < currentGroundContacts.Length; ++i)
+    //    {
+    //        WheelLocation loc = (WheelLocation)i;
+    //        GroundContactInfo contactInfo = currentGroundContacts[i];
+    //        try
+    //        {
+    //            // 새로운 데이터(ContactPoint, ContactNormal)를 FMU로 전송
+    //            fmu.SetReal($"{loc}_is_contacting", contactInfo.IsContacting ? 1.0 : 0.0);
+
+    //            // 접촉점의 월드 좌표(x,y,z) 전송
+    //            fmu.SetReal($"{loc}_contact_pos_x", contactInfo.ContactPoint.x);
+    //            fmu.SetReal($"{loc}_contact_pos_y", contactInfo.ContactPoint.y);
+    //            //fmu.SetReal($"{loc}_contact_pos_y", 0);
+    //            fmu.SetReal($"{loc}_contact_pos_z", contactInfo.ContactPoint.z);
+
+    //            // 지면의 법선 벡터(x,y,z) 전송
+    //            fmu.SetReal($"{loc}_contact_nrm_x", contactInfo.ContactNormal.x);
+    //            fmu.SetReal($"{loc}_contact_nrm_y", contactInfo.ContactNormal.y);
+    //            fmu.SetReal($"{loc}_contact_nrm_z", contactInfo.ContactNormal.z);
+
+    //            // 디버깅 로그 (새로운 데이터 형식에 맞게 수정)
+    //            if (contactInfo.IsContacting)
+    //            {
+    //                Debug.Log($"[{loc}] Contact Point: {contactInfo.ContactPoint.ToString("F3")}, Normal: {contactInfo.ContactNormal.ToString("F3")}");
+    //            }
+    //        }
+    //        catch (System.Exception e)
+    //        {
+    //            Debug.LogError($"FMU SetReal for Ground Info (Wheel: {loc}) failed: {e.Message}. Check variable names in modelDescription.xml.");
+    //        }
+    //    }
+    //}
     void OnDestroy()
     {
         // clean up
