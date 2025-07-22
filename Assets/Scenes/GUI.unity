@@ -4709,7 +4709,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 255
   m_WholeNumbers: 0
-  m_Value: 73
+  m_Value: 53
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9471,7 +9471,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 255
   m_WholeNumbers: 0
-  m_Value: 60
+  m_Value: 143
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13301,7 +13301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rosTopicName: /potential_field/compressed
   displayImage: {fileID: 156837693}
-  timeout: 0.3
+  timeout: 1
 --- !u!1 &1203827542
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,7 +14719,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 255
   m_WholeNumbers: 0
-  m_Value: 255
+  m_Value: 210
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15297,9 +15297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopicName: /potential_field/compressed
+  rosTopicName: /hsv_mask
   displayImage: {fileID: 1139074342}
-  timeout: 0.3
+  timeout: 1
 --- !u!1 &1403777935
 GameObject:
   m_ObjectHideFlags: 0
@@ -15384,7 +15384,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1412314178}
-  - component: {fileID: 1412314179}
   - component: {fileID: 1412314180}
   m_Layer: 5
   m_Name: CAM 1 HSV Controller
@@ -15419,31 +15418,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1412314179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412314177}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a3efe7aa5a3674a982a1ae185c0cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetNodeName: marker_lifecycle_node
-  minH_Slider: {fileID: 839931554}
-  maxH_Slider: {fileID: 1329081603}
-  minS_Slider: {fileID: 1453731203}
-  maxS_Slider: {fileID: 612733539}
-  minV_Slider: {fileID: 299983194}
-  maxV_Slider: {fileID: 1874078609}
-  minH_Text: {fileID: 807224203}
-  maxH_Text: {fileID: 1895367302}
-  minS_Text: {fileID: 169167174}
-  maxS_Text: {fileID: 2129226303}
-  minV_Text: {fileID: 1415432342}
-  maxV_Text: {fileID: 1086712190}
 --- !u!114 &1412314180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15456,29 +15430,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79284e23f2e94fc4cbc56beccad59e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetNodeName: marker_lifecycle_node
+  targetNodeName: hsv_tracking_lifecycle_node
   parameterSliders:
-  - parameterName: minH
+  - parameterName: h_min
     slider: {fileID: 839931554}
     valueText: {fileID: 807224203}
     parameterType: 1
-  - parameterName: maxH
+  - parameterName: h_max
     slider: {fileID: 1329081603}
     valueText: {fileID: 1895367302}
     parameterType: 1
-  - parameterName: minS
+  - parameterName: s_min
     slider: {fileID: 1453731203}
     valueText: {fileID: 169167174}
     parameterType: 1
-  - parameterName: maxS
+  - parameterName: s_max
     slider: {fileID: 612733539}
     valueText: {fileID: 2129226303}
     parameterType: 1
-  - parameterName: minV
+  - parameterName: v_min
     slider: {fileID: 299983194}
     valueText: {fileID: 1415432342}
     parameterType: 1
-  - parameterName: maxV
+  - parameterName: v_max
     slider: {fileID: 1874078609}
     valueText: {fileID: 1086712190}
     parameterType: 1
@@ -16399,7 +16373,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500739028}
-  - component: {fileID: 1500739029}
   - component: {fileID: 1500739030}
   m_Layer: 5
   m_Name: CAM 2 HSV Controller
@@ -16434,31 +16407,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -330}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1500739029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500739027}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a3efe7aa5a3674a982a1ae185c0cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetNodeName: zenith/marker_lifecycle_node
-  minH_Slider: {fileID: 1177603015}
-  maxH_Slider: {fileID: 2134753245}
-  minS_Slider: {fileID: 1915381773}
-  maxS_Slider: {fileID: 202001742}
-  minV_Slider: {fileID: 269179192}
-  maxV_Slider: {fileID: 1338308198}
-  minH_Text: {fileID: 17687213}
-  maxH_Text: {fileID: 1243466487}
-  minS_Text: {fileID: 87414824}
-  maxS_Text: {fileID: 149794753}
-  minV_Text: {fileID: 734002971}
-  maxV_Text: {fileID: 252952803}
 --- !u!114 &1500739030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21073,8 +21021,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionPanel_Left: {fileID: 1197511476}
   missionPanel_Right: {fileID: 1403690036}
-  main_Left_Topic: 
-  main_Right_Topic: 
+  main_Left_Topic: /potential_field/compressed
+  main_Right_Topic: /potential_field/compressed
   auto1_Left_Topic: 
   auto1_Right_Topic: 
   auto2_Left_Topic: 

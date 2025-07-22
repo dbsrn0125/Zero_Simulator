@@ -83,11 +83,12 @@ public class RosVideoSubscriber : MonoBehaviour
     }
     public void ChangeTopic(string newTopic)
     {
-        // 이미 같은 토픽을 구독 중이면 아무것도 하지 않음
-        if (rosTopicName == newTopic)
-        {
-            return;
-        }
+        //// 이미 같은 토픽을 구독 중이면 아무것도 하지 않음
+        //if (string.Equals(rosTopicName, newTopic))
+        //{
+        //    Debug.Log(1);
+        //    return;
+        //}
 
         
         // 이전에 구독 중인 토픽이 있었다면 구독 해제
@@ -117,6 +118,6 @@ public class RosVideoSubscriber : MonoBehaviour
         // ? isDisplaying을 false로 바꿔서 이 함수가 중복 호출되는 것을 방지
         isDisplaying = false;
         displayImage.texture = null;
-        Debug.Log("Display cleared.");
+        Debug.Log($"{gameObject.name}Display cleared.");
     }
 }
