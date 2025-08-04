@@ -33,7 +33,16 @@ public class RosParameterController : MonoBehaviour
 
     void Start()
     {
-        ros = ROSConnection.GetOrCreateInstance();
+        // 1. ROSConnectionManager 싱글턴 인스턴스가 있는지 확인합니다.
+        if (ROSManager.instance == null)
+        {
+            Debug.LogError("ROSConnectionManager가 씬에 존재하지 않습니다! RosVideoSubscriber를 사용할 수 없습니다.");
+            enabled = false;
+            return;
+        }
+
+        // 2. Manager로부터 중앙 관리되는 ROSConnection 객체를 받아옵니다.
+        ros = ROSManager.instance.ROSConnection;
         setParametersServiceName = $"/{targetNodeName}/set_parameters";
         ros.RegisterRosService<SetParametersRequest, SetParametersResponse>(setParametersServiceName);
 
