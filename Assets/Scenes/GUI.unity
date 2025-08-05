@@ -8099,6 +8099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROSConnection: {fileID: 943092558}
+  videoTopicsToSubscribe: []
 --- !u!1 &996243315
 GameObject:
   m_ObjectHideFlags: 0

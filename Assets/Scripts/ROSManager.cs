@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Sensor;
+using System;
 
 public class ROSManager : MonoBehaviour
 {
     public static ROSManager instance = null;
     public ROSConnection ROSConnection;
-
-    [Header("Topic List")]
-    public List<string> videoTopicsToSubscribe;
-
-    private Dictionary<string, Texture2D> receivedTextures = new Dictionary<string, Texture2D>();
-    private readonly object _lock = new object();
-
+    public static event Action OnRosConnectionReady;
+    private bool wasConnected = false;
     private void Awake()
     {
         if (instance == null)
@@ -22,7 +18,6 @@ public class ROSManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             ROSConnection = GetComponent<ROSConnection>();
-            UnityEngine.Debug.LogException(new System.Exception("범인 발견: 누군가 GetOrCreateInstance()를 호출함!"));
         }
         else
         {
@@ -31,44 +26,52 @@ public class ROSManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void Update()
     {
-        // 리스트에 있는 모든 토픽에 대해 구독을 시작합니다.
-        foreach (string topicName in videoTopicsToSubscribe)
-        {
-            // 각 토픽에 대한 텍스처를 저장할 공간을 미리 만듭니다.
-            receivedTextures[topicName] = new Texture2D(2, 2);
+        // ROSConnection이 할당되지 않았으면 아무것도 하지 않음
+        if (ROSConnection == null) return;
 
-            // Subscribe 메서드에 람다식을 사용하여, 콜백 함수가 자신이 어떤 토픽에서 왔는지 알게 합니다.
-            ROSConnection.Subscribe<CompressedImageMsg>(topicName, (msg) => CompressedImageCallback(topicName, msg));
-            Debug.Log($"[ROSManager] {topicName} 토픽 구독 시작.");
+        // 현재 연결 상태를 가져옴
+        bool isConnected = ROSConnection.HasConnectionThread;
+
+        // "이전에는 연결이 안 됐었는데, 지금은 연결이 된" 순간을 포착!
+        if (isConnected && !wasConnected)
+        {
+            Debug.Log("ROS 연결 상태 변경 감지 (연결됨)! OnRosConnectionReady 이벤트를 방송합니다.");
+
+            // 연결 준비 완료 이벤트를 방송합니다.
+            OnRosConnectionReady?.Invoke();
+        }
+
+        // 현재 상태를 다음 프레임을 위해 저장합니다.
+        wasConnected = isConnected;
+    }
+    public void OnReconnectButtonClick()
+    {
+        if (ROSConnection != null)
+        {
+            Debug.Log("재연결 시도: 기존 연결 해제 후 새 연결 시작");
+            ROSConnection.Disconnect(); // Disconnect하면 HasConnectionThread가 false가 됨
+
+            // Disconnect 후 잠시 기다렸다가 Connect를 호출하면 더 안정적입니다.
+            // 아래 코루틴을 사용하거나, 그냥 바로 Connect()를 호출해도 됩니다.
+            StartCoroutine(DelayedConnect(0.5f));
         }
     }
-
-    // 콜백 함수는 이제 어떤 토픽에서 메시지가 왔는지 'topicName' 인자를 통해 알 수 있습니다.
-    void CompressedImageCallback(string topicName, CompressedImageMsg msg)
+    private IEnumerator DelayedConnect(float delay)
     {
-        lock (_lock)
-        {
-            // 해당 토픽 이름에 맞는 텍스처에 이미지를 로드합니다.
-            if (receivedTextures.ContainsKey(topicName))
-            {
-                receivedTextures[topicName].LoadImage(msg.data);
-            }
-        }
+        yield return new WaitForSeconds(delay);
+        ROSConnection.Connect(); // Connect하면 HasConnectionThread가 true가 됨
     }
 
-    // 다른 스크립트(RosVideoSubscriber)가 이 함수를 호출하여 이미지를 가져갑니다.
-    public Texture2D GetTexture(string topicName)
+    void OnApplicationQuit()
     {
-        lock (_lock)
-        {
-            if (receivedTextures.ContainsKey(topicName))
-            {
-                return receivedTextures[topicName];
-            }
-            return null;
-        }
+        ROSConnection.Disconnect();
     }
 
+    void OnDestroy()
+    {
+        Debug.Log("OnDestroy called. Disconnecting from ROS...");
+        ROSConnection.Disconnect();
+    }
 }

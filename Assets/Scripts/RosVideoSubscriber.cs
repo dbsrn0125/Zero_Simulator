@@ -53,7 +53,6 @@ public class RosVideoSubscriber : MonoBehaviour
 
         // 받아온 rosConnection 객체를 사용하여 토픽을 구독합니다.
         rosConnection.Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
-        rosConnection.Subscribe<CompressedImageMsg>(rosTopicName2, CompressedImageCallback);
         Debug.Log($"'{rosTopicName}' 토픽 구독을 시작합니다.");
     }
 
