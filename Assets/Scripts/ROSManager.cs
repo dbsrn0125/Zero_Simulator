@@ -51,11 +51,11 @@ public class ROSManager : MonoBehaviour
         if (ROSConnection != null)
         {
             Debug.Log("재연결 시도: 기존 연결 해제 후 새 연결 시작");
-            ROSConnection.Disconnect(); // Disconnect하면 HasConnectionThread가 false가 됨
-
+            //ROSConnection.Disconnect(); // Disconnect하면 HasConnectionThread가 false가 됨
+            ROSConnection.Connect();
             // Disconnect 후 잠시 기다렸다가 Connect를 호출하면 더 안정적입니다.
             // 아래 코루틴을 사용하거나, 그냥 바로 Connect()를 호출해도 됩니다.
-            StartCoroutine(DelayedConnect(0.5f));
+            //StartCoroutine(DelayedConnect(1f));
         }
     }
     private IEnumerator DelayedConnect(float delay)

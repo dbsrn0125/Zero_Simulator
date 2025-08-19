@@ -83,7 +83,7 @@ public class GroundSensor : MonoBehaviour
         // 이 부분이 바퀴(transform)의 회전을 그대로 따라가서 문제가 됨
         Vector3 forwardRayOrigin = transform.position + transform.forward * raycastOffset;
         Vector3 sideRayOrigin = transform.position + transform.right * raycastOffset;
-        Debug.Log(chassisTransform.forward);
+        //Debug.Log(chassisTransform.forward);
         // 올바른 기준: 섀시의 방향을 따라가야 함
         // Vector3 correctForwardRayOrigin = transform.position + chassisTransformForGizmo.forward * raycastOffset;
         // Vector3 correctSideRayOrigin = transform.position + chassisTransformForGizmo.right * raycastOffset;

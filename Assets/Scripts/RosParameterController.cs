@@ -62,7 +62,7 @@ public class RosParameterController : MonoBehaviour
             if (ps.parameterType == RosParameterType.Double)
             {
                 // Double 타입은 소수점 두 자리까지 표시
-                ps.valueText.text = ps.slider.value.ToString("F0");
+                ps.valueText.text = ps.slider.value.ToString("F1");
             }
             else // Integer 타입
             {
