@@ -111,7 +111,7 @@ public class RosVideoSubscriber : MonoBehaviour
     {
         // Unsubscribe와 Subscribe를 할 때, Start에서 받아온 rosConnection을 사용합니다.
         if (rosConnection == null) return;
-
+        if (newTopic == rosTopicName) return;
         if (!string.IsNullOrEmpty(rosTopicName))
         {
             rosConnection.Unsubscribe(rosTopicName);

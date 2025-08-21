@@ -715,7 +715,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnAuto1ButtonClick
         m_Mode: 1
@@ -5496,7 +5496,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnAuto5ButtonClick
         m_Mode: 1
@@ -5691,7 +5691,6 @@ GameObject:
   - component: {fileID: 452173764}
   - component: {fileID: 452173766}
   - component: {fileID: 452173765}
-  - component: {fileID: 452173768}
   - component: {fileID: 452173767}
   m_Layer: 5
   m_Name: Video Panel 2
@@ -5765,7 +5764,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452173763}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
@@ -5774,20 +5773,6 @@ MonoBehaviour:
   rosTopicName2: 
   displayImage: {fileID: 2033373677}
   timeout: 1
---- !u!114 &452173768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452173763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035971aa366e6334b8882dc3561d798c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rosTopicName: /zenith/color/image_raw/compressed
-  displayImage: {fileID: 2033373677}
 --- !u!1 &453372194
 GameObject:
   m_ObjectHideFlags: 0
@@ -7168,7 +7153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnAuto4ButtonClick
         m_Mode: 1
@@ -9941,7 +9926,6 @@ GameObject:
   - component: {fileID: 1009184904}
   - component: {fileID: 1009184906}
   - component: {fileID: 1009184905}
-  - component: {fileID: 1009184908}
   - component: {fileID: 1009184907}
   m_Layer: 5
   m_Name: Video Panel 1
@@ -10015,7 +9999,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009184903}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
@@ -10024,20 +10008,6 @@ MonoBehaviour:
   rosTopicName2: 
   displayImage: {fileID: 691637476}
   timeout: 1
---- !u!114 &1009184908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009184903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035971aa366e6334b8882dc3561d798c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rosTopicName: /zenith/front/image/compressed
-  displayImage: {fileID: 691637476}
 --- !u!1 &1015829772
 GameObject:
   m_ObjectHideFlags: 0
@@ -12104,7 +12074,6 @@ GameObject:
   - component: {fileID: 1197511473}
   - component: {fileID: 1197511475}
   - component: {fileID: 1197511474}
-  - component: {fileID: 1197511477}
   - component: {fileID: 1197511476}
   m_Layer: 5
   m_Name: Video Panel 3
@@ -12178,7 +12147,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197511472}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
@@ -12187,20 +12156,6 @@ MonoBehaviour:
   rosTopicName2: 
   displayImage: {fileID: 156837693}
   timeout: 1
---- !u!114 &1197511477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197511472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035971aa366e6334b8882dc3561d798c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rosTopicName: /zenith/backLeft/image/compressed
-  displayImage: {fileID: 156837693}
 --- !u!1 &1203021660
 GameObject:
   m_ObjectHideFlags: 0
@@ -13773,7 +13728,6 @@ GameObject:
   - component: {fileID: 1403690033}
   - component: {fileID: 1403690035}
   - component: {fileID: 1403690034}
-  - component: {fileID: 1403690037}
   - component: {fileID: 1403690036}
   m_Layer: 5
   m_Name: Video Panel 4
@@ -13847,7 +13801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403690032}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29f965d21edfa3a4ea42b6d0f19b7744, type: 3}
   m_Name: 
@@ -13856,20 +13810,6 @@ MonoBehaviour:
   rosTopicName2: 
   displayImage: {fileID: 1139074342}
   timeout: 1
---- !u!114 &1403690037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403690032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035971aa366e6334b8882dc3561d798c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rosTopicName: /zenith/backRight/image/compressed
-  displayImage: {fileID: 1139074342}
 --- !u!1 &1417710414
 GameObject:
   m_ObjectHideFlags: 0
@@ -14736,7 +14676,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnAuto3ButtonClick
         m_Mode: 1
@@ -17792,7 +17732,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnMainButtonClick
         m_Mode: 1
@@ -17854,7 +17794,7 @@ GameObject:
   - component: {fileID: 1973506604}
   - component: {fileID: 1973506603}
   - component: {fileID: 1973506602}
-  - component: {fileID: 1973506606}
+  - component: {fileID: 1973506607}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -17953,7 +17893,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1973506606
+--- !u!114 &1973506607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17962,23 +17902,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 1973506601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf5628d3e834364aa11e5b649f166a7, type: 3}
+  m_Script: {fileID: 11500000, guid: b6759cb46a07dfe4389be999b582390c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionPanel_Left: {fileID: 1197511476}
-  missionPanel_Right: {fileID: 1403690036}
-  main_Left_Topic: /zenith/back/image/compressed
-  main_Right_Topic: /zenith/depth/image_viz/compressed
-  auto1_Left_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto1_Right_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto2_Left_Topic: /zenith/potential_field/compressed
-  auto2_Right_Topic: /zenith/traffic_light/image/compressed
-  auto3_Left_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto3_Right_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto4_Left_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto4_Right_Topic: /marker_lifecycle_node/image_raw/compressed
-  auto5_Left_Topic: /zenith/traffic_light/image/compressed
-  auto5_Right_Topic: /zenith/traffic_light/image/compressed
+  missionConfigurations:
+  - missionName: Main Setting
+    triggerButton: {fileID: 1965116003}
+    topicAssignments:
+    - panel: {fileID: 1009184907}
+      topicName: /zenith/front/image/compressed
+    - panel: {fileID: 452173767}
+      topicName: /zenith/color/image_raw/compressed
+    - panel: {fileID: 1197511476}
+      topicName: /zenith/backLeft/image/compressed
+    - panel: {fileID: 1403690036}
+      topicName: /zenith/backRight/image/compressed
+  - missionName: Spring
+    triggerButton: {fileID: 56484768}
+    topicAssignments: []
+  - missionName: Summer
+    triggerButton: {fileID: 2081708151}
+    topicAssignments:
+    - panel: {fileID: 1009184907}
+      topicName: /zenith/front/image/compressed
+    - panel: {fileID: 452173767}
+      topicName: /zenith/color/image_raw/compressed
+    - panel: {fileID: 1197511476}
+      topicName: /zenith/hsv_mask
+    - panel: {fileID: 1403690036}
+      topicName: /zenith/traffic_light/image/compressed
+  - missionName: Autumn
+    triggerButton: {fileID: 1533439309}
+    topicAssignments:
+    - panel: {fileID: 1009184907}
+      topicName: /zenith/front/image/compressed
+    - panel: {fileID: 452173767}
+      topicName: /zenith/color/image_raw/compressed
+    - panel: {fileID: 1197511476}
+      topicName: /zenith/marker_lifecycle_node/image_raw/compressed
+    - panel: {fileID: 1403690036}
+      topicName: /zenith/marker_lifecycle_node/image_raw/compressed
+  - missionName: Winter
+    triggerButton: {fileID: 592402492}
+    topicAssignments:
+    - panel: {fileID: 1009184907}
+      topicName: /zenith/front/image/compressed
+    - panel: {fileID: 452173767}
+      topicName: /zenith/color/image_raw/compressed
+    - panel: {fileID: 1197511476}
+      topicName: /zenith/potential_field/compressed
+    - panel: {fileID: 1403690036}
+      topicName: /zenith/potential_field/compressed
+  - missionName: 5th
+    triggerButton: {fileID: 435005172}
+    topicAssignments:
+    - panel: {fileID: 1009184907}
+      topicName: /zenith/front/image/compressed
+    - panel: {fileID: 452173767}
+      topicName: /zenith/color/image_raw/compressed
+    - panel: {fileID: 1197511476}
+      topicName: /zenith/tracker/debug_image/compressed
+    - panel: {fileID: 1403690036}
+      topicName: /zenith/tracker/debug_image/compressed
 --- !u!1 &1974265477
 GameObject:
   m_ObjectHideFlags: 0
@@ -18507,7 +18492,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1973506606}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIMainController, Assembly-CSharp
         m_MethodName: OnAuto2ButtonClick
         m_Mode: 1
