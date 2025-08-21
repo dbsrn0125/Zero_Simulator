@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Sensor;
+using System.Collections;
 
 public class RosVideoSubscriber : MonoBehaviour
 {
     [Header("ROS Settings")]
     [Tooltip("구독할 ROS 토픽 이름")]
     public string rosTopicName = "/marker_lifecycle_node/image_raw/compressed";
-    public string rosTopicName2 = string.Empty;
     [Header("UI Display")]
     [Tooltip("UI RawImage 컴포넌트")]
     public RawImage displayImage;
@@ -25,7 +25,7 @@ public class RosVideoSubscriber : MonoBehaviour
 
     // 이 스크립트에서 직접 ROSConnection을 생성하지 않고, Manager로부터 받아옵니다.
     private ROSConnection rosConnection;
-
+    private bool isChangingTopic = false;
     void Start()
     {
         if (displayImage == null)
@@ -109,27 +109,32 @@ public class RosVideoSubscriber : MonoBehaviour
 
     public void ChangeTopic(string newTopic)
     {
-        // Unsubscribe와 Subscribe를 할 때, Start에서 받아온 rosConnection을 사용합니다.
-        if (rosConnection == null) return;
-        if (newTopic == rosTopicName) return;
-        if (!string.IsNullOrEmpty(rosTopicName))
+        if (isChangingTopic || newTopic == rosTopicName) return;
+        StartCoroutine(Co_ChangeTopic(newTopic));
+        
+    }
+
+    private IEnumerator Co_ChangeTopic(string newTopic)
+    {
+        isChangingTopic = true;
+        if(rosConnection !=null && !string.IsNullOrEmpty(rosTopicName))
         {
             rosConnection.Unsubscribe(rosTopicName);
+            Debug.Log($"UnSubcribe '{rosTopicName}'");
         }
-
         ClearDisplay();
-
-        if (!string.IsNullOrEmpty(newTopic))
+        yield return new WaitForSeconds(0.1f);
+        if(rosConnection != null && !string.IsNullOrEmpty(newTopic))
         {
             rosTopicName = newTopic;
-            // rosConnection.RefreshTopicsList(); // 토픽 변경 시에는 보통 필요 없습니다.
             rosConnection.Subscribe<CompressedImageMsg>(rosTopicName, CompressedImageCallback);
-            Debug.Log($"새로운 토픽 구독: {rosTopicName}");
+            Debug.Log($"Subscribe {rosTopicName}");
         }
         else
         {
             rosTopicName = "";
         }
+        isChangingTopic = false;
     }
 
     private void ClearDisplay()

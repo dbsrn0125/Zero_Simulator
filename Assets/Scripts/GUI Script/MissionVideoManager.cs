@@ -26,6 +26,7 @@ public class MissionVideoManager : MonoBehaviour
     [Header("Configuration List")]
     [Tooltip("Add mission Configurations")]
     public List<MissionVideoConfiguration> missionConfigurations;
+    private Coroutine _activeChangeRoutine = null;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class MissionVideoManager : MonoBehaviour
         {
             if(config.triggerButton != null)
             {
-                config.triggerButton.onClick.AddListener(()=> ActivateMissionConfiguration(config));
+                config.triggerButton.onClick.AddListener(()=> RequestMissionChange(config));
             }
             else
             {
@@ -41,8 +42,15 @@ public class MissionVideoManager : MonoBehaviour
             }
         }
     }
-
-    public void ActivateMissionConfiguration(MissionVideoConfiguration config)
+    public void RequestMissionChange(MissionVideoConfiguration config)
+    {
+        if(_activeChangeRoutine !=null)
+        {
+            StopCoroutine(_activeChangeRoutine);
+        }
+        _activeChangeRoutine = StartCoroutine(Co_ActivateMissionConfiguration(config));
+    }
+    public IEnumerator Co_ActivateMissionConfiguration(MissionVideoConfiguration config)
     {
         Debug.Log($"'Subscribe {config.missionName}'");
         foreach (var assignment in config.topicAssignments)
@@ -51,6 +59,8 @@ public class MissionVideoManager : MonoBehaviour
             {
                 assignment.panel.ChangeTopic(assignment.topicName);
             }
+            yield return null;
+            _activeChangeRoutine = null;
         }
     }
 }
