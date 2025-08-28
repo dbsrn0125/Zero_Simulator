@@ -54,9 +54,9 @@ public class LaunchController : MonoBehaviour
         ros = ROSManager.instance.ROSConnection;
 
         // 토픽 구독
-        ros.Subscribe<StringMsg>("/zenith/launch_feedback", OnFeedback);
-        ros.Subscribe<LaunchResultMsg>("/zenith/launch_result", OnResult);
-        ros.RegisterRosService<StartLaunchRequest, StartLaunchResponse>("/zenith/start_launch");
+        ros.Subscribe<StringMsg>("/zero_launch_feedback", OnFeedback);
+        ros.Subscribe<LaunchResultMsg>("/zero_aunch_result", OnResult);
+        ros.RegisterRosService<StartLaunchRequest, StartLaunchResponse>("/zero_start_launch");
         // 버튼 리스너 연결
         launchButton.onClick.AddListener(OnLaunchButtonClick);
 
@@ -93,7 +93,7 @@ public class LaunchController : MonoBehaviour
 
         try
         {
-            StartLaunchResponse response = await ros.SendServiceMessage<StartLaunchResponse>("/zenith/start_launch", request);
+            StartLaunchResponse response = await ros.SendServiceMessage<StartLaunchResponse>("/zero_start_launch", request);
             if (response.success)
             {
                 statusText.text = "Launch process started...";

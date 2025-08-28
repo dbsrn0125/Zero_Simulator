@@ -1,0 +1,6 @@
+# 요청: 문자열 명령
+string command
+---
+# 응답: 성공 여부와 메시지
+bool success
+string message

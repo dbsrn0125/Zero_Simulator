@@ -97,7 +97,7 @@ public class HSVController : MonoBehaviour
 
     IEnumerator DelayedDropdownInit()
     {
-        yield return new WaitForSeconds(5f); // 1~2프레임 또는 약간 대기
+        yield return new WaitForSeconds(7f); // 1~2프레임 또는 약간 대기
         OnDropdownValueChanged(0);
     }
     // (이하 다른 함수들은 이전 코드와 모두 동일합니다)

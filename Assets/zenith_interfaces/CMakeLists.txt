@@ -13,6 +13,9 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/ChangeState.srv"
   "srv/StartLaunch.srv"
+  "srv/GetTopicList.srv"
+  "srv/Command.srv"
+  "srv/Emergency.srv"
   "msg/LaunchResult.msg"
 )
 

@@ -42,7 +42,7 @@ public class StateController : MonoBehaviour
         //ros = ROSManager.instance.ROSConnection;
         //ros.RegisterRosService<ChangeStateRequest, ChangeStateResponse>(ChangeStateServiceName);
         launchButton.onClick.AddListener(OnNormalStateChangeClick);
-        emergencyButton.onClick.AddListener(OnEmergencyButtonClick);
+        //emergencyButton.onClick.AddListener(OnEmergencyButtonClick);
         statusText.text = "waiting...";
         statusText.color = Color.white;
     }
@@ -74,10 +74,10 @@ public class StateController : MonoBehaviour
         RequestStateChange(selectedState);
     }
 
-    private void OnEmergencyButtonClick()
-    {
-        RequestStateChange("EMERGENCY");
-    }
+    //private void OnEmergencyButtonClick()
+    //{
+    //    RequestStateChange("EMERGENCY");
+    //}
     private void RequestStateChange(string state)
     {
         ChangeStateRequest request = new ChangeStateRequest(state);

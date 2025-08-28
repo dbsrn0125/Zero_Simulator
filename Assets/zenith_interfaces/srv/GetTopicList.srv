@@ -1,0 +1,5 @@
+# 요청은 비어있음
+---
+# 응답: 토픽 이름 목록과 타입 목록
+string[] topic_names
+string[] topic_types

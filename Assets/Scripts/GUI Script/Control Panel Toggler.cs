@@ -5,11 +5,11 @@ using UnityEngine;
 public class ControlPanelToggler : MonoBehaviour
 {
     public CanvasGroup targetCanvasGroup;
-    private bool isPanelVisible = false;
+    private bool isPanelVisible = true;
     // Start is called before the first frame update
     void Start()
     {
-        SetPanelVisibility(false);
+        SetPanelVisibility(true);
     }
     public void TogglePanelVisibility()
     {
