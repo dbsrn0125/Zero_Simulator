@@ -13,6 +13,7 @@ namespace RosMessageTypes.ZenithInterfaces
         public const string k_RosMessageName = "zenith_interfaces/ChangeState";
         public override string RosMessageName => k_RosMessageName;
 
+        //  요청(Request) 부분
         public string requested_state;
 
         public ChangeStateRequest()

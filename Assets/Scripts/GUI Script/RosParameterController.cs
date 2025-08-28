@@ -30,30 +30,42 @@ public class RosParameterController : MonoBehaviour
 
     private ROSConnection ros;
     private string setParametersServiceName;
+    void OnEnable()
+    {
+        SystemEventManager.OnMainNodesReady += Initialize;
+    }
+
+    // ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
+    void OnDisable()
+    {
+        SystemEventManager.OnMainNodesReady -= Initialize;
+    }
 
     void Start()
     {
-        // 1. ROSConnectionManager 싱글턴 인스턴스가 있는지 확인합니다.
-        if (ROSManager.instance == null)
+        foreach (var ps in parameterSliders)
         {
-            Debug.LogError("ROSConnectionManager가 씬에 존재하지 않습니다! RosVideoSubscriber를 사용할 수 없습니다.");
-            enabled = false;
-            return;
+            ps.slider.interactable = false;
         }
+    }
 
-        // 2. Manager로부터 중앙 관리되는 ROSConnection 객체를 받아옵니다.
+    private void Initialize()
+    {
+        Debug.Log($"[{gameObject.name}] 'Main Nodes Ready' event received. Initializing ROS parameters.");
+
         ros = ROSManager.instance.ROSConnection;
         setParametersServiceName = $"/{targetNodeName}/set_parameters";
         ros.RegisterRosService<SetParametersRequest, SetParametersResponse>(setParametersServiceName);
 
         foreach (var ps in parameterSliders)
         {
+            // 리스너를 추가하고, 텍스트를 업데이트하고, 슬라이더를 활성화합니다.
             ParameterSlider capturedPs = ps;
             UpdateSliderText(capturedPs);
             ps.slider.onValueChanged.AddListener(value => OnSliderValueChanged(capturedPs, value));
+            ps.slider.interactable = true; // ? 이제 슬라이더를 활성화!
         }
     }
-
     void UpdateSliderText(ParameterSlider ps)
     {
         if (ps.valueText != null)

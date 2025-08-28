@@ -1,0 +1,7 @@
+# 요청: 실행할 런치 파일 정보
+string package_name
+string launch_file_name
+---
+# 응답: 요청이 잘 접수되었는지 여부
+bool success
+string message

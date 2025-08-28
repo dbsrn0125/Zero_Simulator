@@ -8,30 +8,30 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 namespace RosMessageTypes.ZenithInterfaces
 {
     [Serializable]
-    public class ChangeStateResponse : Message
+    public class LaunchResultMsg : Message
     {
-        public const string k_RosMessageName = "zenith_interfaces/ChangeState";
+        public const string k_RosMessageName = "zenith_interfaces/LaunchResult";
         public override string RosMessageName => k_RosMessageName;
 
-        //  응답(Response) 부분
+        //  런치 실행의 최종 결과
         public bool success;
         public string message;
 
-        public ChangeStateResponse()
+        public LaunchResultMsg()
         {
             this.success = false;
             this.message = "";
         }
 
-        public ChangeStateResponse(bool success, string message)
+        public LaunchResultMsg(bool success, string message)
         {
             this.success = success;
             this.message = message;
         }
 
-        public static ChangeStateResponse Deserialize(MessageDeserializer deserializer) => new ChangeStateResponse(deserializer);
+        public static LaunchResultMsg Deserialize(MessageDeserializer deserializer) => new LaunchResultMsg(deserializer);
 
-        private ChangeStateResponse(MessageDeserializer deserializer)
+        private LaunchResultMsg(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.success);
             deserializer.Read(out this.message);
@@ -45,7 +45,7 @@ namespace RosMessageTypes.ZenithInterfaces
 
         public override string ToString()
         {
-            return "ChangeStateResponse: " +
+            return "LaunchResultMsg: " +
             "\nsuccess: " + success.ToString() +
             "\nmessage: " + message.ToString();
         }
@@ -57,7 +57,7 @@ namespace RosMessageTypes.ZenithInterfaces
 #endif
         public static void Register()
         {
-            MessageRegistry.Register(k_RosMessageName, Deserialize, MessageSubtopic.Response);
+            MessageRegistry.Register(k_RosMessageName, Deserialize);
         }
     }
 }

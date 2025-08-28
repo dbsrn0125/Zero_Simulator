@@ -8,30 +8,30 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 namespace RosMessageTypes.ZenithInterfaces
 {
     [Serializable]
-    public class ChangeStateResponse : Message
+    public class StartLaunchResponse : Message
     {
-        public const string k_RosMessageName = "zenith_interfaces/ChangeState";
+        public const string k_RosMessageName = "zenith_interfaces/StartLaunch";
         public override string RosMessageName => k_RosMessageName;
 
-        //  응답(Response) 부분
+        //  응답: 요청이 잘 접수되었는지 여부
         public bool success;
         public string message;
 
-        public ChangeStateResponse()
+        public StartLaunchResponse()
         {
             this.success = false;
             this.message = "";
         }
 
-        public ChangeStateResponse(bool success, string message)
+        public StartLaunchResponse(bool success, string message)
         {
             this.success = success;
             this.message = message;
         }
 
-        public static ChangeStateResponse Deserialize(MessageDeserializer deserializer) => new ChangeStateResponse(deserializer);
+        public static StartLaunchResponse Deserialize(MessageDeserializer deserializer) => new StartLaunchResponse(deserializer);
 
-        private ChangeStateResponse(MessageDeserializer deserializer)
+        private StartLaunchResponse(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.success);
             deserializer.Read(out this.message);
@@ -45,7 +45,7 @@ namespace RosMessageTypes.ZenithInterfaces
 
         public override string ToString()
         {
-            return "ChangeStateResponse: " +
+            return "StartLaunchResponse: " +
             "\nsuccess: " + success.ToString() +
             "\nmessage: " + message.ToString();
         }

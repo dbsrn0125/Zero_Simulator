@@ -1,4 +1,6 @@
+# 요청(Request) 부분
 string requested_state
 ---
+# 응답(Response) 부분
 bool success
 string message

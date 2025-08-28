@@ -5,43 +5,62 @@ using TMPro;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.RclInterfaces;
 using System.Linq;
+using System.Collections;
 
 public class HSVController : MonoBehaviour
 {
     [Header("ROS Settings")]
     [Tooltip("제어할 ROS 노드 이름들의 목록. 네임스페이스를 포함한 전체 이름을 입력하세요.")]
-    public List<string> targetNodeNames; // ? 제어할 노드 목록
+    public List<string> targetNodeNames;
 
     [Header("UI Controls")]
     [Tooltip("노드 선택용 TextMeshPro 드롭다운")]
-    public TMP_Dropdown nodeSelectorDropdown; // ? 노드 선택 드롭다운
+    public TMP_Dropdown nodeSelectorDropdown;
     public Slider minH_Slider, maxH_Slider, minS_Slider, maxS_Slider, minV_Slider, maxV_Slider;
     public TMP_Text minH_Text, maxH_Text, minS_Text, maxS_Text, minV_Text, maxV_Text;
 
     private ROSConnection ros;
-    private string currentTargetNode; // 현재 선택된 노드 이름
-
-    // ? 여러 서비스 클라이언트를 관리할 Dictionary
+    private string currentTargetNode;
     private Dictionary<string, string> setServiceNames = new Dictionary<string, string>();
     private Dictionary<string, string> getServiceNames = new Dictionary<string, string>();
 
+    // ? 1. 스크립트가 켜질 때, '준비 완료' 신호를 구독 신청합니다.
+    void OnEnable()
+    {
+        SystemEventManager.OnMainNodesReady += Initialize;
+    }
+
+    // ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
+    void OnDisable()
+    {
+        SystemEventManager.OnMainNodesReady -= Initialize;
+    }
+
     void Start()
     {
-        // 1. ROSConnectionManager 싱글턴 인스턴스가 있는지 확인합니다.
         if (ROSManager.instance == null)
         {
-            Debug.LogError("ROSConnectionManager가 씬에 존재하지 않습니다! RosVideoSubscriber를 사용할 수 없습니다.");
+            Debug.LogError("ROSConnectionManager가 씬에 존재하지 않습니다!");
             enabled = false;
             return;
         }
 
-        // 2. Manager로부터 중앙 관리되는 ROSConnection 객체를 받아옵니다.
-        ros = ROSManager.instance.ROSConnection;
+        // ? 3. 시작 시점에는 모든 UI를 비활성화시켜 사용자의 오작동을 막습니다.
+        SetSlidersInteractable(false);
+        nodeSelectorDropdown.interactable = false;
 
-        // --- 드롭다운 메뉴 설정 ---
+        // 드롭다운의 옵션은 미리 채워두어도 좋습니다.
         nodeSelectorDropdown.ClearOptions();
         nodeSelectorDropdown.AddOptions(targetNodeNames);
-        nodeSelectorDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+        currentTargetNode = targetNodeNames[0];
+    }
+
+    // ? 4. '준비 완료' 신호가 오면 이 함수가 호출됩니다!
+    private void Initialize()
+    {
+        Debug.Log($"[{gameObject.name}] 'Main Nodes Ready' event received. Initializing HSV Controller.");
+
+        ros = ROSManager.instance.ROSConnection;
 
         // --- 모든 대상 노드의 서비스를 미리 등록 ---
         foreach (var nodeName in targetNodeNames)
@@ -62,35 +81,39 @@ public class HSVController : MonoBehaviour
         minV_Slider.onValueChanged.AddListener(value => OnSliderValueChanged("v_min", value));
         maxV_Slider.onValueChanged.AddListener(value => OnSliderValueChanged("v_max", value));
 
-        // --- 초기화 ---
-        // 드롭다운의 첫 번째 항목으로 초기 설정 실행
+        // 드롭다운 리스너 연결
+        nodeSelectorDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
+
+        // --- UI 활성화 및 초기화 ---
+        SetSlidersInteractable(true);
+        nodeSelectorDropdown.interactable = true;
+
         if (targetNodeNames.Count > 0)
         {
-            OnDropdownValueChanged(0);
+            // 드롭다운의 첫 번째 항목으로 초기 설정 실행
+            StartCoroutine(DelayedDropdownInit());
         }
     }
 
-    // ? 드롭다운 값이 변경될 때 호출되는 '컨트롤 타워' 함수
+    IEnumerator DelayedDropdownInit()
+    {
+        yield return new WaitForSeconds(5f); // 1~2프레임 또는 약간 대기
+        OnDropdownValueChanged(0);
+    }
+    // (이하 다른 함수들은 이전 코드와 모두 동일합니다)
+
     void OnDropdownValueChanged(int index)
     {
         currentTargetNode = targetNodeNames[index];
         Debug.Log($"Target node changed to: {currentTargetNode}");
-
-        // 새로 선택된 노드의 현재 파라미터 값을 읽어와서 슬라이더에 반영
         FetchAndUpdateSliders();
     }
 
-    // ? 슬라이더 값이 변경될 때 ROS로 파라미터 설정 요청
     void OnSliderValueChanged(string paramName, float paramValue)
     {
-        // 현재 타겟 노드가 설정되지 않았으면 무시
         if (string.IsNullOrEmpty(currentTargetNode)) return;
-
         int intValue = (int)paramValue;
-
-        // UI 텍스트 업데이트
         UpdateText(paramName, intValue);
-
         var request = new SetParametersRequest
         {
             parameters = new ParameterMsg[]
@@ -106,7 +129,6 @@ public class HSVController : MonoBehaviour
                 }
             }
         };
-
         ros.SendServiceMessage<SetParametersResponse>(setServiceNames[currentTargetNode], request, response =>
         {
             if (response.results.Length > 0 && !response.results[0].successful)
@@ -116,43 +138,43 @@ public class HSVController : MonoBehaviour
         });
     }
 
-    // ? ROS 노드로부터 현재 파라미터 값을 가져와 슬라이더에 반영
     void FetchAndUpdateSliders()
     {
         var paramNames = new List<string> { "h_min", "h_max", "s_min", "s_max", "v_min", "v_max" };
         var request = new GetParametersRequest { names = paramNames.ToArray() };
-
         ros.SendServiceMessage<GetParametersResponse>(getServiceNames[currentTargetNode], request, response =>
         {
-            // 요청한 파라미터 개수와 응답으로 온 값의 개수가 같은지 확인
             if (response.values.Length != paramNames.Count)
             {
                 Debug.LogError("Requested parameter count does not match received values count.");
                 return;
             }
-
             Debug.Log($"Received parameters from {currentTargetNode}");
-
-            // ? foreach 대신 for 반복문을 사용하여 이름과 값을 인덱스로 매칭합니다.
             for (int i = 0; i < paramNames.Count; i++)
             {
-                string name = paramNames[i];         // 요청했던 이름 목록에서 이름 가져오기
-                ParameterValueMsg value = response.values[i]; // 응답 값 목록에서 값 가져오기
-
+                string name = paramNames[i];
+                ParameterValueMsg value = response.values[i];
                 if (value.type == ParameterTypeMsg.PARAMETER_INTEGER)
                 {
-                    // SetSliderValue의 두 번째 인자는 int 타입이므로 캐스팅합니다.
                     SetSliderValue(name, (int)value.integer_value);
                 }
             }
         });
     }
 
-    // --- UI 업데이트 헬퍼 함수들 ---
+    void SetSlidersInteractable(bool isInteractable)
+    {
+        minH_Slider.interactable = isInteractable;
+        maxH_Slider.interactable = isInteractable;
+        minS_Slider.interactable = isInteractable;
+        maxS_Slider.interactable = isInteractable;
+        minV_Slider.interactable = isInteractable;
+        maxV_Slider.interactable = isInteractable;
+    }
+
+    // (UpdateText, GetSlider, GetText 함수들은 이전 코드와 모두 동일합니다.)
     void SetSliderValue(string paramName, int value)
     {
-        // 슬라이더 값을 변경할 때 onValueChanged 이벤트가 또 발생하는 것을 막기 위해
-        // 리스너를 잠시 해제했다가 다시 연결합니다.
         Slider targetSlider = GetSlider(paramName);
         if (targetSlider != null)
         {
