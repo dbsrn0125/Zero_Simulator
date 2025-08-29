@@ -1754,12 +1754,12 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 14
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9551,11 +9551,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 1
@@ -10226,7 +10226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1961519227}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -11023,6 +11023,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emergencyStopButton: {fileID: 996243317}
+  subscribers:
+  - {fileID: 1009184907}
+  - {fileID: 452173767}
+  - {fileID: 1197511476}
+  - {fileID: 1403690036}
+  missionVideoManager: {fileID: 1973506607}
 --- !u!1 &1002225080
 GameObject:
   m_ObjectHideFlags: 0
@@ -18916,7 +18922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b30dc0de4e31af459b1a4d10c746812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultIPAddress: 192.168.1.147
+  defaultIPAddress: 172.30.1.91
   ipAddressInputField: {fileID: 175360819}
   rosConnectionPrefab: {fileID: 943092558}
   statusIndicatorImage: {fileID: 1396049905}
@@ -18943,6 +18949,7 @@ MonoBehaviour:
   logEntryPrefab: {fileID: 6870652376202552685, guid: a8830e30d226c8b439b29e661dc13fa6,
     type: 3}
   maxLogCount: 200
+  missionVideoManager: {fileID: 1973506607}
 --- !u!1 &1844959541
 GameObject:
   m_ObjectHideFlags: 0
@@ -20720,6 +20727,7 @@ MonoBehaviour:
       topicName: /zenith/tracker/debug_image/compressed
     - panel: {fileID: 1403690036}
       topicName: /zenith/tracker/debug_image/compressed
+  IsStreaming: 0
 --- !u!1 &1974265477
 GameObject:
   m_ObjectHideFlags: 0
@@ -21388,7 +21396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1014771055}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1

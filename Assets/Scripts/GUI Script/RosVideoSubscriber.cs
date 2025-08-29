@@ -1,49 +1,54 @@
-// RosVideoSubscriber.cs (수정된 버전)
+// RosVideoSubscriber.cs (최종 완성 버전)
 
 using UnityEngine;
 using UnityEngine.UI;
-using RosMessageTypes.Sensor; // CompressedImageMsg 사용을 위해
+using RosMessageTypes.Sensor;
 
 public class RosVideoSubscriber : MonoBehaviour
 {
     [Header("UI Display")]
     public RawImage displayImage;
 
+    // ? 1. 모든 인스턴스가 공유할 '정적(static)' 변수로 선언합니다.
+    private static Texture2D blankTexture;
+
     private Texture2D receivedTexture;
 
-    void Start()
+    void Awake()
     {
-        // Start에서는 아무것도 하지 않거나, UI 초기화만 합니다.
         if (displayImage == null)
+            displayImage = GetComponent<RawImage>();
+
+        // ? 2. blankTexture가 아직 만들어지지 않았다면(null), 딱 한 번만 생성합니다.
+        if (blankTexture == null)
         {
-            Debug.LogError($"'{gameObject.name}'의 'Display Image'가 할당되지 않았습니다!");
-            enabled = false;
+            blankTexture = new Texture2D(1, 1);
+            blankTexture.SetPixel(0, 0, Color.black);
+            blankTexture.Apply();
         }
+
+        // receivedTexture는 각 인스턴스마다 개별적으로 생성합니다.
         receivedTexture = new Texture2D(2, 2);
         ClearDisplay();
     }
 
-    // ? 1. 외부(새로운 Manager)에서 호출할 공개 함수를 만듭니다.
-    //    이 함수는 ROS 메시지 데이터를 직접 받아서 화면에 표시합니다.
+    // 외부(MissionVideoManager)에서 호출하는 이미지 업데이트 함수
     public void UpdateImage(CompressedImageMsg msg)
     {
         if (msg == null) return;
 
-        // 받은 이미지 데이터를 텍스처로 변환하여 RawImage에 적용
         receivedTexture.LoadImage(msg.data);
-        if (displayImage.texture == null)
-        {
-            displayImage.texture = receivedTexture;
-        }
+
+        // ? 3. RawImage가 비디오 텍스처를 보도록 다시 지정합니다.
+        displayImage.texture = receivedTexture;
         displayImage.color = Color.white;
     }
 
-    // ? 2. 화면을 깨끗하게 지우는 함수도 외부에서 호출할 수 있도록 public으로 둡니다.
+    // 외부(EmergencyStopController)에서 호출하는 화면 클리어 함수
     public void ClearDisplay()
     {
-        displayImage.texture = null;
-        displayImage.color = new Color(0, 0, 0, 0);
+        // ? 4. RawImage가 미리 만들어둔 '빈 텍스처'를 보도록 지정합니다.
+        displayImage.texture = blankTexture;
+        displayImage.color = new Color(0, 0, 0, 0.5f); // 텍스처가 잘 보이도록 색상은 흰색으로
     }
-
-    // OnDestroy, Callback, Update, ChangeTopic 등 기존의 ROS 관련 함수들은 모두 삭제합니다.
 }

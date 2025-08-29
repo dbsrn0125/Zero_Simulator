@@ -26,6 +26,7 @@ public class MissionVideoManager : MonoBehaviour
 {
     public List<MissionVideoConfiguration> missionConfigurations;
     private MissionVideoConfiguration activeMission = null;
+    public bool IsStreaming = false;
     // ? 1. 모든 가능한 토픽의 최신 이미지 데이터를 저장할 Dictionary
     private Dictionary<string, CompressedImageMsg> latestImages = new Dictionary<string, CompressedImageMsg>();
 
@@ -83,10 +84,14 @@ public class MissionVideoManager : MonoBehaviour
         // 활성화된 미션의 설정에 따라 각 패널의 영상을 업데이트합니다.
         foreach (var assignment in activeMission.topicAssignments)
         {
-            if (assignment.panel != null && latestImages.ContainsKey(assignment.topicName))
+            if (assignment.panel != null && latestImages.ContainsKey(assignment.topicName) && IsStreaming)
             {
                 // 해당 토픽의 최신 이미지를 가져와서 패널에 업데이트하라고 '매 프레임' 명령합니다.
                 assignment.panel.UpdateImage(latestImages[assignment.topicName]);
+            }
+            else
+            {
+                assignment.panel.ClearDisplay();
             }
         }
     }

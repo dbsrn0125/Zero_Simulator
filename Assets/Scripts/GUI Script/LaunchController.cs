@@ -20,7 +20,7 @@ public class LaunchController : MonoBehaviour
     public GameObject logEntryPrefab;
 
     public int maxLogCount = 200;
-
+    public MissionVideoManager missionVideoManager;
     private Queue<GameObject> logQueue = new Queue<GameObject>();
 
     private ROSConnection ros;
@@ -55,7 +55,7 @@ public class LaunchController : MonoBehaviour
 
         // 토픽 구독
         ros.Subscribe<StringMsg>("/zero_launch_feedback", OnFeedback);
-        ros.Subscribe<LaunchResultMsg>("/zero_aunch_result", OnResult);
+        ros.Subscribe<LaunchResultMsg>("/zero_launch_result", OnResult);
         ros.RegisterRosService<StartLaunchRequest, StartLaunchResponse>("/zero_start_launch");
         // 버튼 리스너 연결
         launchButton.onClick.AddListener(OnLaunchButtonClick);
@@ -75,6 +75,7 @@ public class LaunchController : MonoBehaviour
             statusText.color = Color.red;
             return;
         }
+        missionVideoManager.IsStreaming = true;
 
         string packageName = "zenith_bringup";
         string launchFileName = "zenith_main.launch.py";
@@ -148,4 +149,6 @@ public class LaunchController : MonoBehaviour
         // 이제 스크롤 위치를 맨 아래(0)로 설정합니다.
         logScrollRect.verticalNormalizedPosition = 0f;
     }
+
+
 }
