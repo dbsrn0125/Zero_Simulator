@@ -18,23 +18,24 @@ public class HSVController : MonoBehaviour
     public TMP_Dropdown nodeSelectorDropdown;
     public Slider minH_Slider, maxH_Slider, minS_Slider, maxS_Slider, minV_Slider, maxV_Slider;
     public TMP_Text minH_Text, maxH_Text, minS_Text, maxS_Text, minV_Text, maxV_Text;
+    public Button launchBtn;
 
     private ROSConnection ros;
     private string currentTargetNode;
     private Dictionary<string, string> setServiceNames = new Dictionary<string, string>();
     private Dictionary<string, string> getServiceNames = new Dictionary<string, string>();
 
-    // ? 1. 스크립트가 켜질 때, '준비 완료' 신호를 구독 신청합니다.
-    void OnEnable()
-    {
-        SystemEventManager.OnMainNodesReady += Initialize;
-    }
+     //? 1. 스크립트가 켜질 때, '준비 완료' 신호를 구독 신청합니다.
+    //void OnEnable()
+    //{
+    //    SystemEventManager.OnMainNodesReady += Initialize;
+    //}
 
-    // ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
-    void OnDisable()
-    {
-        SystemEventManager.OnMainNodesReady -= Initialize;
-    }
+    //// ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
+    //void OnDisable()
+    //{
+    //    SystemEventManager.OnMainNodesReady -= Initialize;
+    //}
 
     void Start()
     {
@@ -91,17 +92,13 @@ public class HSVController : MonoBehaviour
         if (targetNodeNames.Count > 0)
         {
             // 드롭다운의 첫 번째 항목으로 초기 설정 실행
-            StartCoroutine(DelayedDropdownInit());
+            OnDropdownValueChanged(0);
         }
     }
-
-    IEnumerator DelayedDropdownInit()
+    public void OnLaunchBtnClicked()
     {
-        yield return new WaitForSeconds(7f); // 1~2프레임 또는 약간 대기
-        OnDropdownValueChanged(0);
+        Initialize();
     }
-    // (이하 다른 함수들은 이전 코드와 모두 동일합니다)
-
     void OnDropdownValueChanged(int index)
     {
         currentTargetNode = targetNodeNames[index];
