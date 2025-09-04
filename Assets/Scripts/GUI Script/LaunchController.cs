@@ -75,7 +75,7 @@ public class LaunchController : MonoBehaviour
             statusText.color = Color.red;
             return;
         }
-        missionVideoManager.IsStreaming = true;
+        missionVideoManager.StartStreaming();
 
         string packageName = "zenith_bringup";
         string launchFileName = "zenith_main.launch.py";

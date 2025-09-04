@@ -25,17 +25,17 @@ public class HSVController : MonoBehaviour
     private Dictionary<string, string> setServiceNames = new Dictionary<string, string>();
     private Dictionary<string, string> getServiceNames = new Dictionary<string, string>();
 
-     //? 1. 스크립트가 켜질 때, '준비 완료' 신호를 구독 신청합니다.
-    //void OnEnable()
-    //{
-    //    SystemEventManager.OnMainNodesReady += Initialize;
-    //}
+    //? 1. 스크립트가 켜질 때, '준비 완료' 신호를 구독 신청합니다.
+    void OnEnable()
+    {
+        SystemEventManager.OnMainNodesReady += Initialize;
+    }
 
-    //// ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
-    //void OnDisable()
-    //{
-    //    SystemEventManager.OnMainNodesReady -= Initialize;
-    //}
+    // ? 2. 스크립트가 꺼질 때, 구독을 해제합니다.
+    void OnDisable()
+    {
+        SystemEventManager.OnMainNodesReady -= Initialize;
+    }
 
     void Start()
     {
@@ -92,7 +92,7 @@ public class HSVController : MonoBehaviour
         if (targetNodeNames.Count > 0)
         {
             // 드롭다운의 첫 번째 항목으로 초기 설정 실행
-            OnDropdownValueChanged(0);
+            //OnDropdownValueChanged(0);
         }
     }
     public void OnLaunchBtnClicked()

@@ -52,6 +52,6 @@ public class EmergencyStopController : MonoBehaviour
             Debug.LogError("Failed to send command: " + e.Message);
         }
 
-        missionVideoManager.IsStreaming = false;
+        missionVideoManager.StopStreaming();
     }
 }

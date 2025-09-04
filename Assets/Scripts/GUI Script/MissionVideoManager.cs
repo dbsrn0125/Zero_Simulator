@@ -26,7 +26,7 @@ public class MissionVideoManager : MonoBehaviour
 {
     public List<MissionVideoConfiguration> missionConfigurations;
     private MissionVideoConfiguration activeMission = null;
-    public bool IsStreaming = false;
+    public bool isStreaming = false;
     // ? 1. 모든 가능한 토픽의 최신 이미지 데이터를 저장할 Dictionary
     private Dictionary<string, CompressedImageMsg> latestImages = new Dictionary<string, CompressedImageMsg>();
 
@@ -76,15 +76,41 @@ public class MissionVideoManager : MonoBehaviour
         Debug.Log($"'{config.missionName}' 미션 활성화. 실시간 업데이트를 시작합니다.");
         activeMission = config;
     }
+    public void StartStreaming()
+    {
+        Debug.Log("Video streaming started.");
+        isStreaming = true;
+    }
+    public void StopStreaming()
+    {
+        Debug.Log("Video streaming stopped. Clearing data.");
+        isStreaming = false;
+
+        // ? 여기가 핵심! 저장된 모든 이미지 데이터를 깨끗하게 비웁니다.
+        latestImages.Clear();
+
+        // 추가적으로 모든 패널의 화면도 즉시 지워줍니다.
+        foreach (var config in missionConfigurations)
+        {
+            foreach (var assignment in config.topicAssignments)
+            {
+                if (assignment.panel != null)
+                {
+                    assignment.panel.ClearDisplay();
+                }
+            }
+        }
+    }
     void Update()
     {
+        if (!isStreaming) return;
         // 활성화된 미션이 없으면 아무것도 하지 않습니다.
         if (activeMission == null) return;
 
         // 활성화된 미션의 설정에 따라 각 패널의 영상을 업데이트합니다.
         foreach (var assignment in activeMission.topicAssignments)
         {
-            if (assignment.panel != null && latestImages.ContainsKey(assignment.topicName) && IsStreaming)
+            if (assignment.panel != null && latestImages.ContainsKey(assignment.topicName))
             {
                 // 해당 토픽의 최신 이미지를 가져와서 패널에 업데이트하라고 '매 프레임' 명령합니다.
                 assignment.panel.UpdateImage(latestImages[assignment.topicName]);
