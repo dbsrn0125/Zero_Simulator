@@ -10,6 +10,7 @@ public class EmergencyStopController : MonoBehaviour
     private ROSConnection ros;
     public List<RosVideoSubscriber> subscribers;
     public MissionVideoManager missionVideoManager;
+    public StateController stateController;
     void Start()
     {
         emergencyStopButton.interactable = false;
@@ -41,6 +42,15 @@ public class EmergencyStopController : MonoBehaviour
         }
         // ? 요청 객체를 CommandRequest로 만들고, command 필드에 값을 넣어줍니다.
         CommandRequest request = new CommandRequest { command = "EMERGENCY" };
+        //try
+        //{
+        //    string state = "UNKNOWN";
+        //    stateController.OnNormalStateChangeClick(state);
+        //}
+        //catch (System.Exception e)
+        //{
+        //    Debug.LogError("Failed to send command: " + e.Message);
+        //}
 
         try
         {
@@ -51,6 +61,7 @@ public class EmergencyStopController : MonoBehaviour
         {
             Debug.LogError("Failed to send command: " + e.Message);
         }
+
 
         missionVideoManager.StopStreaming();
     }

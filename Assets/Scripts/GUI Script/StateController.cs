@@ -74,6 +74,11 @@ public class StateController : MonoBehaviour
         RequestStateChange(selectedState);
     }
 
+    public void OnNormalStateChangeClick(string state)
+    {
+        RequestStateChange(state);
+    }
+
     //private void OnEmergencyButtonClick()
     //{
     //    RequestStateChange("EMERGENCY");
