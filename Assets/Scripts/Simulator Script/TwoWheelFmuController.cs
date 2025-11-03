@@ -3,6 +3,7 @@ using UnityEngine.UI; // UI 요소를 사용하기 위해 필요
 using FMI2;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class TwoWheelFmuController : MonoBehaviour
 {

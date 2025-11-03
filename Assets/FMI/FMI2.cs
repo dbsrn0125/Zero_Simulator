@@ -198,8 +198,8 @@ namespace FMI2 {
             dll = LoadLibrary(dllPath);
             Debug.Log("Path : " + dllPath + " DLL : " + dll);
 #else
-                        dllPath += "darwin64/" + modelIdentifier + ".dylib";
-                        //dll = dlopen(dllPath, RTLD_NOW);
+            dllPath += "darwin64/" + modelIdentifier + ".dylib";
+            dll = dlopen(dllPath, RTLD_NOW);
 #endif
             fmi2CallbackFunctions functions;
 
