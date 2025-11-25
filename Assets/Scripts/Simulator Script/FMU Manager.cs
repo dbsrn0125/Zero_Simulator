@@ -114,7 +114,7 @@ public class FMUManager : MonoBehaviour
             }
             catch(System.Exception e)
             {
-                Debug.LogError($"FMI SetReal Error (Wheel: {wheel.wheelId}): {e.Message}. FMI 변수명('{wheel.fmi_Fz_In}')이 정확한지 확인하세요.");
+                //Debug.LogError($"FMI SetReal Error (Wheel: {wheel.wheelId}): {e.Message}. FMI 변수명('{wheel.fmi_Fz_In}')이 정확한지 확인하세요.");
             }
         }
     }

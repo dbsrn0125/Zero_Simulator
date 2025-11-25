@@ -4912,7 +4912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ecec37d0a9663409816540d6e1c1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fmuName: mfeval_robot
+  fmuName: mfeval_robot_test
   initialPosition: {x: 0, y: 1, z: 0}
   translator: {fileID: 997977585}
   wheels:

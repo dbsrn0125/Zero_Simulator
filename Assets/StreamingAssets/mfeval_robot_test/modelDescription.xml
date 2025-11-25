@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-11-25T09:11:19Z" generationTool="Simulink (R2024b)" guid="{4d4ed979-1efd-cf07-5c20-bb6f4d7af094}" modelName="mfeval_robot_test" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.11">
+  <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="false" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="false" modelIdentifier="mfeval_robot_test"/>
+  <UnitDefinitions>
+    <Unit name="1"/>
+    <Unit name="m"/>
+    <Unit name="rad"/>
+  </UnitDefinitions>
+  <DefaultExperiment startTime="0" stepSize="0.001" stopTime="10"/>
+  <VendorAnnotations>
+    <Tool name="Simulink">
+      <Simulink>
+        <ImportCompatibility FMUProduct="standalone FMU" requireMATLABOnPath="no" requireRelease="all"/>
+        <SimulinkModelInterface>
+          <Inport blockPath="mfeval_robot_test/Left Wheel w Input" dataType="double" dimension="[1]" portName="Left Wheel w Input" portNumber="1" sampleTime="[0 0]" uniquePortName="LeftWheelWInput" unit=""/>
+          <Inport blockPath="mfeval_robot_test/Right Wheel w Input" dataType="double" dimension="[1]" portName="Right Wheel w Input" portNumber="2" sampleTime="[0 0]" uniquePortName="RightWheelWInput" unit=""/>
+          <Outport blockPath="mfeval_robot_test/Left Wheel Angle Output" dataType="double" dimension="[1]" portName="Left Wheel Angle Output" portNumber="1" sampleTime="[0 0]" uniquePortName="LeftWheelAngleOutput" unit="rad"/>
+          <Outport blockPath="mfeval_robot_test/Right Wheel Angle Output" dataType="double" dimension="[1]" portName="Right Wheel Angle Output" portNumber="2" sampleTime="[0 0]" uniquePortName="RightWheelAngleOutput" unit="rad"/>
+          <Outport blockPath="mfeval_robot_test/Position.x" dataType="double" dimension="[1]" portName="Position.x" portNumber="3" sampleTime="[0 0]" uniquePortName="Position_x" unit="m"/>
+          <Outport blockPath="mfeval_robot_test/Position.y" dataType="double" dimension="[1]" portName="Position.y" portNumber="4" sampleTime="[0 0]" uniquePortName="Position_y" unit="m"/>
+          <Outport blockPath="mfeval_robot_test/Position.z" dataType="double" dimension="[1]" portName="Position.z" portNumber="5" sampleTime="[0 0]" uniquePortName="Position_z" unit="m"/>
+          <Outport blockPath="mfeval_robot_test/Orientation" dataType="double" dimension="[4  1]" portName="Orientation" portNumber="6" sampleTime="[0 0]" uniquePortName="Orientation" unit="1"/>
+        </SimulinkModelInterface>
+      </Simulink>
+    </Tool>
+  </VendorAnnotations>
+  <ModelVariables>
+    <ScalarVariable causality="input" description="Left Wheel w Input" name="LeftWheelWInput" valueReference="0" variability="continuous">
+      <Real start="0"/>
+      <!--Index = 1-->
+    </ScalarVariable>
+    <ScalarVariable causality="input" description="Right Wheel w Input" name="RightWheelWInput" valueReference="1" variability="continuous">
+      <Real start="0"/>
+      <!--Index = 2-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Left Wheel Angle Output" initial="calculated" name="LeftWheelAngleOutput" valueReference="2" variability="continuous">
+      <Real unit="rad"/>
+      <!--Index = 3-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Right Wheel Angle Output" initial="calculated" name="RightWheelAngleOutput" valueReference="3" variability="continuous">
+      <Real unit="rad"/>
+      <!--Index = 4-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Position.x" initial="calculated" name="Position_x" valueReference="4" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 5-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Position.y" initial="calculated" name="Position_y" valueReference="5" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 6-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Position.z" initial="calculated" name="Position_z" valueReference="6" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 7-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Orientation(1,1)" initial="calculated" name="Orientation[1,1]" valueReference="7" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 8-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Orientation(2,1)" initial="calculated" name="Orientation[2,1]" valueReference="8" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 9-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Orientation(3,1)" initial="calculated" name="Orientation[3,1]" valueReference="9" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 10-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="Orientation(4,1)" initial="calculated" name="Orientation[4,1]" valueReference="10" variability="continuous">
+      <Real unit="1"/>
+      <!--Index = 11-->
+    </ScalarVariable>
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="11" variability="continuous">
+      <Real/>
+      <!--Index = 12-->
+    </ScalarVariable>
+  </ModelVariables>
+  <ModelStructure>
+    <Outputs>
+      <Unknown index="3"/>
+      <Unknown index="4"/>
+      <Unknown index="5"/>
+      <Unknown index="6"/>
+      <Unknown index="7"/>
+      <Unknown index="8"/>
+      <Unknown index="9"/>
+      <Unknown index="10"/>
+      <Unknown index="11"/>
+    </Outputs>
+    <InitialUnknowns>
+      <Unknown index="3"/>
+      <Unknown index="4"/>
+      <Unknown index="5"/>
+      <Unknown index="6"/>
+      <Unknown index="7"/>
+      <Unknown index="8"/>
+      <Unknown index="9"/>
+      <Unknown index="10"/>
+      <Unknown index="11"/>
+    </InitialUnknowns>
+  </ModelStructure>
+</fmiModelDescription>
