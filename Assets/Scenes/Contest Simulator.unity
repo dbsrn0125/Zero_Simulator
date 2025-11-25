@@ -2452,6 +2452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 180654427}
+  - component: {fileID: 180654428}
   m_Layer: 0
   m_Name: Left Wheel
   m_TagString: Untagged
@@ -2467,14 +2468,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180654426}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.6, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1853168476}
   m_Father: {fileID: 997977583}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &180654428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180654426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537dbb45668f2bb4e8660da0416545fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chassisTransform: {fileID: 997977583}
+  wheelRadius: 0.3943
+  raycastDistance: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  springStiffness: 950000
+  springDamper: 9750
 --- !u!1 &203150630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3544954464707363040, guid: 6b36de40488c5b04dbf807af0669cb2f,
@@ -2647,6 +2668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 292496329}
+  - component: {fileID: 292496330}
   m_Layer: 0
   m_Name: Right Wheel
   m_TagString: Untagged
@@ -2662,14 +2684,34 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292496328}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1225107982}
   m_Father: {fileID: 997977583}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &292496330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292496328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537dbb45668f2bb4e8660da0416545fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chassisTransform: {fileID: 997977583}
+  wheelRadius: 0.3943
+  raycastDistance: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  springStiffness: 950000
+  springDamper: 9750
 --- !u!1 &300056834 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4884753265764036224, guid: 6b36de40488c5b04dbf807af0669cb2f,
@@ -4574,6 +4616,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundSensor
       objectReference: {fileID: 0}
+    - target: {fileID: 63837077491657070, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854803489394952405, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4782,6 +4829,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997977583}
+  - component: {fileID: 997977586}
+  - component: {fileID: 997977585}
   - component: {fileID: 997977582}
   m_Layer: 0
   m_Name: Robot chassis
@@ -4797,7 +4846,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997977581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 970f69c00b24a434ea11873d5b2635a0, type: 3}
   m_Name: 
@@ -4831,6 +4880,62 @@ Transform:
   - {fileID: 292496329}
   m_Father: {fileID: 699326752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &997977585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997977581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa7e49b1d035f64090b0b8cee708036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityX_From: 0
+  unityX_Direction: 1
+  unityY_From: 2
+  unityY_Direction: 1
+  unityZ_From: 1
+  unityZ_Direction: 1
+  rotationFixEuler: {x: 0, y: 0, z: 0}
+  fixRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &997977586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997977581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ecec37d0a9663409816540d6e1c1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fmuName: mfeval_robot
+  initialPosition: {x: 0, y: 1, z: 0}
+  translator: {fileID: 997977585}
+  wheels:
+  - wheelId: Left
+    sensor: {fileID: 180654428}
+    wheelTransform: {fileID: 180654427}
+    fmi_Fz_In: Fz_in_left
+    fmi_w_In: LeftWheelWInput
+    fmi_Angle_Out: LeftWheelAngleOutput
+    targetSpeed: 0
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  - wheelId: Right
+    sensor: {fileID: 292496330}
+    wheelTransform: {fileID: 292496329}
+    fmi_Fz_In: Fz_in_right
+    fmi_w_In: RightWheelWInput
+    fmi_Angle_Out: RightWheelAngleOutput
+    targetSpeed: 0
+    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetWheelSpeed_RadPerSec: 5
+  forwardKey: 119
+  backwardKey: 115
+  stopKey: 120
 --- !u!1 &1009485785 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7360404537570822321, guid: 6b36de40488c5b04dbf807af0669cb2f,
@@ -7370,6 +7475,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundSensor
       objectReference: {fileID: 0}
+    - target: {fileID: 63837077491657070, guid: 10fa264fc8409e648b6eea038299bad4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 854803489394952405, guid: 10fa264fc8409e648b6eea038299bad4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7614,7 +7724,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 997977583}

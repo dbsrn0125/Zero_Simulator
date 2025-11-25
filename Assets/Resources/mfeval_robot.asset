@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ae089dd87dc0478b8764182759ebb, type: 3}
+  m_Name: mfeval_robot
+  m_EditorClassIdentifier: 
+  fmiVersion: 2.0
+  guid: 7b00330064006300330039003000320033002d0038003500330038002d0030006200310064002d0065003200650032002d003700370036003100330039006100350038003600330033007d00
+  modelName: mfeval_robot
+  coSimulation:
+    modelIdentifier: mfeval_robot
+  modelVariables:
+  - name: LeftWheelWInput
+    valueReference: 0
+    description: Left Wheel w Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Fz_in_left
+    valueReference: 1
+    description: Fz_in_left
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RightWheelWInput
+    valueReference: 2
+    description: Right Wheel w Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: Fz_in_right
+    valueReference: 3
+    description: Fz_in_right
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: LeftWheelAngleOutput
+    valueReference: 4
+    description: Left Wheel Angle Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RightWheelAngleOutput
+    valueReference: 5
+    description: Right Wheel Angle Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_x
+    valueReference: 6
+    description: Position.x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_y
+    valueReference: 7
+    description: Position.y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Position_z
+    valueReference: 8
+    description: Position.z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[1,1]
+    valueReference: 9
+    description: Orientation(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[2,1]
+    valueReference: 10
+    description: Orientation(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[3,1]
+    valueReference: 11
+    description: Orientation(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: Orientation[4,1]
+    valueReference: 12
+    description: Orientation(4,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 13
+    description: time
+    causality: independent
+    variability: continuous
+    initial: 
+    type: 0
+    start: 
