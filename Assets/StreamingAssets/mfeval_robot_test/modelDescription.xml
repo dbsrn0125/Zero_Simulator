@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-11-25T09:11:19Z" generationTool="Simulink (R2024b)" guid="{4d4ed979-1efd-cf07-5c20-bb6f4d7af094}" modelName="mfeval_robot_test" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.11">
+<fmiModelDescription fmiVersion="2.0" generationDateAndTime="2025-11-25T12:40:47Z" generationTool="Simulink (R2024b)" guid="{4317dcb6-f40e-4838-2c21-67e58c7550f0}" modelName="mfeval_robot_test" numberOfEventIndicators="0" variableNamingConvention="structured" version="1.25">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="false" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="false" modelIdentifier="mfeval_robot_test"/>
   <UnitDefinitions>
-    <Unit name="1"/>
     <Unit name="m"/>
     <Unit name="rad"/>
   </UnitDefinitions>
@@ -19,7 +18,7 @@
           <Outport blockPath="mfeval_robot_test/Position.x" dataType="double" dimension="[1]" portName="Position.x" portNumber="3" sampleTime="[0 0]" uniquePortName="Position_x" unit="m"/>
           <Outport blockPath="mfeval_robot_test/Position.y" dataType="double" dimension="[1]" portName="Position.y" portNumber="4" sampleTime="[0 0]" uniquePortName="Position_y" unit="m"/>
           <Outport blockPath="mfeval_robot_test/Position.z" dataType="double" dimension="[1]" portName="Position.z" portNumber="5" sampleTime="[0 0]" uniquePortName="Position_z" unit="m"/>
-          <Outport blockPath="mfeval_robot_test/Orientation" dataType="double" dimension="[4  1]" portName="Orientation" portNumber="6" sampleTime="[0 0]" uniquePortName="Orientation" unit="1"/>
+          <Outport blockPath="mfeval_robot_test/Orientation" dataType="double" dimension="[4  1]" portName="Orientation" portNumber="6" sampleTime="[0 0]" uniquePortName="Orientation" unit=""/>
         </SimulinkModelInterface>
       </Simulink>
     </Tool>
@@ -54,19 +53,19 @@
       <!--Index = 7-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="Orientation(1,1)" initial="calculated" name="Orientation[1,1]" valueReference="7" variability="continuous">
-      <Real unit="1"/>
+      <Real/>
       <!--Index = 8-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="Orientation(2,1)" initial="calculated" name="Orientation[2,1]" valueReference="8" variability="continuous">
-      <Real unit="1"/>
+      <Real/>
       <!--Index = 9-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="Orientation(3,1)" initial="calculated" name="Orientation[3,1]" valueReference="9" variability="continuous">
-      <Real unit="1"/>
+      <Real/>
       <!--Index = 10-->
     </ScalarVariable>
     <ScalarVariable causality="output" description="Orientation(4,1)" initial="calculated" name="Orientation[4,1]" valueReference="10" variability="continuous">
-      <Real unit="1"/>
+      <Real/>
       <!--Index = 11-->
     </ScalarVariable>
     <ScalarVariable causality="independent" description="time" name="time" valueReference="11" variability="continuous">

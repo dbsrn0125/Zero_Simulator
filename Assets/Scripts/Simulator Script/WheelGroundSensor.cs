@@ -8,7 +8,7 @@ public class WheelGroundSensor : MonoBehaviour
     public Transform chassisTransform;
 
     [Header("2. Wheel Parameters")]
-    public float wheelRadius = 0.3943f;
+    public float wheelRadius = 0.35f;
 
     [Header("3. Raycast settings")]
     public float raycastDistance = 0.5f;

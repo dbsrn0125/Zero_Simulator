@@ -11,7 +11,6 @@ public class WheelController
     public Transform wheelTransform;
 
     [Header("2. FMI Variable Names")]
-    public string fmi_Fz_In;
     public string fmi_w_In;
     public string fmi_Angle_Out;
 

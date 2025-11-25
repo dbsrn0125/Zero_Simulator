@@ -32,9 +32,9 @@ public class CoordinateTranslator : MonoBehaviour, ICoordinateTranslator
             (float)fmiPosition[(int)unityX_From],
             (float)fmiPosition[(int)unityY_From],
             (float)fmiPosition[(int)unityZ_From]
-            //(float)fmiPosition[(int)unityX_From] * (int)unityX_Direction,
-            //(float)fmiPosition[(int)unityY_From] * (int)unityY_Direction,
-            //(float)fmiPosition[(int)unityZ_From] * (int)unityZ_Direction
+        //(float)fmiPosition[(int)unityX_From] * (int)unityX_Direction,
+        //(float)fmiPosition[(int)unityY_From] * (int)unityY_Direction,
+        //(float)fmiPosition[(int)unityZ_From] * (int)unityZ_Direction
         );
     }
 
