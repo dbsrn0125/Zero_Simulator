@@ -13,6 +13,7 @@ public class WheelController
     [Header("2. FMI Variable Names")]
     public string fmi_w_In;
     public string fmi_Angle_Out;
+    public string fmi_gz;
 
     public float targetSpeed = 0.0f;
     public Quaternion initialRotation;

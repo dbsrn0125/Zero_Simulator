@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-11-24T11:27:31Z" generationTool="Simulink (R2024b)" guid="{f8dd4a74-acbc-2ff7-5dc9-fdf9699fdeaa}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.86">
+<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-11-26T07:37:45Z" generationTool="Simulink (R2024b)" guid="{f6c4058e-3e4e-0fc8-b099-ad3382e16ed1}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.99">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="HeaveRollCar"/>
   <UnitDefinitions>
-    <Unit name="N*m"/>
+    <Unit name="m"/>
+    <Unit name="rad"/>
   </UnitDefinitions>
   <DefaultExperiment startTime="0" stepSize="0.001" stopTime="10"/>
   <VendorAnnotations>
@@ -11,19 +12,22 @@
         <ImportCompatibility FMUProduct="standalone FMU" requireMATLABOnPath="no" requireRelease="all"/>
         <SimulinkModelInterface>
           <Inport blockPath="HeaveRollCar/qWhl" dataType="double" dimension="[1]" portName="qWhl" portNumber="1" sampleTime="[0 0]" uniquePortName="qWhl" unit=""/>
-          <Inport blockPath="HeaveRollCar/trqFL" dataType="double" dimension="[1]" portName="trqFL" portNumber="2" sampleTime="[0 0]" uniquePortName="trqFL" unit="N*m"/>
-          <Inport blockPath="HeaveRollCar/trqFR" dataType="double" dimension="[1]" portName="trqFR" portNumber="3" sampleTime="[0 0]" uniquePortName="trqFR" unit="N*m"/>
-          <Inport blockPath="HeaveRollCar/trqRL" dataType="double" dimension="[1]" portName="trqRL" portNumber="4" sampleTime="[0 0]" uniquePortName="trqRL" unit="N*m"/>
-          <Inport blockPath="HeaveRollCar/trqRR" dataType="double" dimension="[1]" portName="trqRR" portNumber="5" sampleTime="[0 0]" uniquePortName="trqRR" unit="N*m"/>
-          <Inport blockPath="HeaveRollCar/Input" dataType="double" dimension="[1]" portName="Input" portNumber="6" sampleTime="[0 0]" uniquePortName="Input" unit=""/>
-          <Inport blockPath="HeaveRollCar/Input1" dataType="double" dimension="[1]" portName="Input1" portNumber="7" sampleTime="[0 0]" uniquePortName="Input1" unit=""/>
-          <Inport blockPath="HeaveRollCar/Input2" dataType="double" dimension="[1]" portName="Input2" portNumber="8" sampleTime="[0 0]" uniquePortName="Input2" unit=""/>
-          <Inport blockPath="HeaveRollCar/Input3" dataType="double" dimension="[1]" portName="Input3" portNumber="9" sampleTime="[0 0]" uniquePortName="Input3" unit=""/>
-          <Outport blockPath="HeaveRollCar/Out5" dataType="double" dimension="[33]" portName="Out5" portNumber="1" sampleTime="[0 0]" uniquePortName="Out5" unit=""/>
-          <Outport blockPath="HeaveRollCar/Out1" dataType="double" dimension="[6]" portName="Out1" portNumber="2" sampleTime="[0 0]" uniquePortName="Out1" unit=""/>
-          <Outport blockPath="HeaveRollCar/Out2" dataType="double" dimension="[6]" portName="Out2" portNumber="3" sampleTime="[0 0]" uniquePortName="Out2" unit=""/>
-          <Outport blockPath="HeaveRollCar/Out3" dataType="double" dimension="[6]" portName="Out3" portNumber="4" sampleTime="[0 0]" uniquePortName="Out3" unit=""/>
-          <Outport blockPath="HeaveRollCar/Out4" dataType="double" dimension="[6]" portName="Out4" portNumber="5" sampleTime="[0 0]" uniquePortName="Out4" unit=""/>
+          <Inport blockPath="HeaveRollCar/FL W In" dataType="double" dimension="[1]" portName="FL W In" portNumber="2" sampleTime="[0 0]" uniquePortName="FLWIn" unit=""/>
+          <Inport blockPath="HeaveRollCar/FR W In" dataType="double" dimension="[1]" portName="FR W In" portNumber="3" sampleTime="[0 0]" uniquePortName="FRWIn" unit=""/>
+          <Inport blockPath="HeaveRollCar/RL W In" dataType="double" dimension="[1]" portName="RL W In" portNumber="4" sampleTime="[0 0]" uniquePortName="RLWIn" unit=""/>
+          <Inport blockPath="HeaveRollCar/RR W In" dataType="double" dimension="[1]" portName="RR W In" portNumber="5" sampleTime="[0 0]" uniquePortName="RRWIn" unit=""/>
+          <Inport blockPath="HeaveRollCar/FL_gz" dataType="double" dimension="[1]" portName="FL_gz" portNumber="6" sampleTime="[0 0]" uniquePortName="FL_gz" unit=""/>
+          <Inport blockPath="HeaveRollCar/FR_gz" dataType="double" dimension="[1]" portName="FR_gz" portNumber="7" sampleTime="[0 0]" uniquePortName="FR_gz" unit=""/>
+          <Inport blockPath="HeaveRollCar/RL_gz" dataType="double" dimension="[1]" portName="RL_gz" portNumber="8" sampleTime="[0 0]" uniquePortName="RL_gz" unit=""/>
+          <Inport blockPath="HeaveRollCar/RR_gz" dataType="double" dimension="[1]" portName="RR_gz" portNumber="9" sampleTime="[0 0]" uniquePortName="RR_gz" unit=""/>
+          <Outport blockPath="HeaveRollCar/FL Wheel Output" dataType="double" dimension="[1]" portName="FL Wheel Output" portNumber="1" sampleTime="[0 0]" uniquePortName="FLWheelOutput" unit="rad"/>
+          <Outport blockPath="HeaveRollCar/FR Wheel Output" dataType="double" dimension="[1]" portName="FR Wheel Output" portNumber="2" sampleTime="[0 0]" uniquePortName="FRWheelOutput" unit="rad"/>
+          <Outport blockPath="HeaveRollCar/RL Wheel Output" dataType="double" dimension="[1]" portName="RL Wheel Output" portNumber="3" sampleTime="[0 0]" uniquePortName="RLWheelOutput" unit="rad"/>
+          <Outport blockPath="HeaveRollCar/RR Wheel Output" dataType="double" dimension="[1]" portName="RR Wheel Output" portNumber="4" sampleTime="[0 0]" uniquePortName="RRWheelOutput" unit="rad"/>
+          <Outport blockPath="HeaveRollCar/Position.x" dataType="double" dimension="[1]" portName="Position.x" portNumber="5" sampleTime="[0 0]" uniquePortName="Position_x" unit="m"/>
+          <Outport blockPath="HeaveRollCar/Position.y" dataType="double" dimension="[1]" portName="Position.y" portNumber="6" sampleTime="[0 0]" uniquePortName="Position_y" unit="m"/>
+          <Outport blockPath="HeaveRollCar/Position.z" dataType="double" dimension="[1]" portName="Position.z" portNumber="7" sampleTime="[0 0]" uniquePortName="Position_z" unit="m"/>
+          <Outport blockPath="HeaveRollCar/Orientation" dataType="double" dimension="[4  1]" portName="Orientation" portNumber="8" sampleTime="[0 0]" uniquePortName="Orientation" unit=""/>
         </SimulinkModelInterface>
       </Simulink>
     </Tool>
@@ -33,293 +37,85 @@
       <Real start="0"/>
       <!--Index = 1-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="trqFL" name="trqFL" valueReference="1" variability="continuous">
-      <Real start="0" unit="N*m"/>
+    <ScalarVariable causality="input" description="FL W In" name="FLWIn" valueReference="1" variability="continuous">
+      <Real start="0"/>
       <!--Index = 2-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="trqFR" name="trqFR" valueReference="2" variability="continuous">
-      <Real start="0" unit="N*m"/>
+    <ScalarVariable causality="input" description="FR W In" name="FRWIn" valueReference="2" variability="continuous">
+      <Real start="0"/>
       <!--Index = 3-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="trqRL" name="trqRL" valueReference="3" variability="continuous">
-      <Real start="0" unit="N*m"/>
+    <ScalarVariable causality="input" description="RL W In" name="RLWIn" valueReference="3" variability="continuous">
+      <Real start="0"/>
       <!--Index = 4-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="trqRR" name="trqRR" valueReference="4" variability="continuous">
-      <Real start="0" unit="N*m"/>
+    <ScalarVariable causality="input" description="RR W In" name="RRWIn" valueReference="4" variability="continuous">
+      <Real start="0"/>
       <!--Index = 5-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="Input" name="Input" valueReference="5" variability="continuous">
+    <ScalarVariable causality="input" description="FL_gz" name="FL_gz" valueReference="5" variability="continuous">
       <Real start="0"/>
       <!--Index = 6-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="Input1" name="Input1" valueReference="6" variability="continuous">
+    <ScalarVariable causality="input" description="FR_gz" name="FR_gz" valueReference="6" variability="continuous">
       <Real start="0"/>
       <!--Index = 7-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="Input2" name="Input2" valueReference="7" variability="continuous">
+    <ScalarVariable causality="input" description="RL_gz" name="RL_gz" valueReference="7" variability="continuous">
       <Real start="0"/>
       <!--Index = 8-->
     </ScalarVariable>
-    <ScalarVariable causality="input" description="Input3" name="Input3" valueReference="8" variability="continuous">
+    <ScalarVariable causality="input" description="RR_gz" name="RR_gz" valueReference="8" variability="continuous">
       <Real start="0"/>
       <!--Index = 9-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(1)" initial="calculated" name="Out5[1]" valueReference="9" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="FL Wheel Output" initial="calculated" name="FLWheelOutput" valueReference="9" variability="continuous">
+      <Real unit="rad"/>
       <!--Index = 10-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(2)" initial="calculated" name="Out5[2]" valueReference="10" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="FR Wheel Output" initial="calculated" name="FRWheelOutput" valueReference="10" variability="continuous">
+      <Real unit="rad"/>
       <!--Index = 11-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(3)" initial="calculated" name="Out5[3]" valueReference="11" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="RL Wheel Output" initial="calculated" name="RLWheelOutput" valueReference="11" variability="continuous">
+      <Real unit="rad"/>
       <!--Index = 12-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(4)" initial="calculated" name="Out5[4]" valueReference="12" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="RR Wheel Output" initial="calculated" name="RRWheelOutput" valueReference="12" variability="continuous">
+      <Real unit="rad"/>
       <!--Index = 13-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(5)" initial="calculated" name="Out5[5]" valueReference="13" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="Position.x" initial="calculated" name="Position_x" valueReference="13" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 14-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(6)" initial="calculated" name="Out5[6]" valueReference="14" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="Position.y" initial="calculated" name="Position_y" valueReference="14" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 15-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(7)" initial="calculated" name="Out5[7]" valueReference="15" variability="continuous">
-      <Real/>
+    <ScalarVariable causality="output" description="Position.z" initial="calculated" name="Position_z" valueReference="15" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 16-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(8)" initial="calculated" name="Out5[8]" valueReference="16" variability="continuous">
+    <ScalarVariable causality="output" description="Orientation(1,1)" initial="calculated" name="Orientation[1,1]" valueReference="16" variability="continuous">
       <Real/>
       <!--Index = 17-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(9)" initial="calculated" name="Out5[9]" valueReference="17" variability="continuous">
+    <ScalarVariable causality="output" description="Orientation(2,1)" initial="calculated" name="Orientation[2,1]" valueReference="17" variability="continuous">
       <Real/>
       <!--Index = 18-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(10)" initial="calculated" name="Out5[10]" valueReference="18" variability="continuous">
+    <ScalarVariable causality="output" description="Orientation(3,1)" initial="calculated" name="Orientation[3,1]" valueReference="18" variability="continuous">
       <Real/>
       <!--Index = 19-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(11)" initial="calculated" name="Out5[11]" valueReference="19" variability="continuous">
+    <ScalarVariable causality="output" description="Orientation(4,1)" initial="calculated" name="Orientation[4,1]" valueReference="19" variability="continuous">
       <Real/>
       <!--Index = 20-->
     </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(12)" initial="calculated" name="Out5[12]" valueReference="20" variability="continuous">
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="20" variability="continuous">
       <Real/>
       <!--Index = 21-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(13)" initial="calculated" name="Out5[13]" valueReference="21" variability="continuous">
-      <Real/>
-      <!--Index = 22-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(14)" initial="calculated" name="Out5[14]" valueReference="22" variability="continuous">
-      <Real/>
-      <!--Index = 23-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(15)" initial="calculated" name="Out5[15]" valueReference="23" variability="continuous">
-      <Real/>
-      <!--Index = 24-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(16)" initial="calculated" name="Out5[16]" valueReference="24" variability="continuous">
-      <Real/>
-      <!--Index = 25-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(17)" initial="calculated" name="Out5[17]" valueReference="25" variability="continuous">
-      <Real/>
-      <!--Index = 26-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(18)" initial="calculated" name="Out5[18]" valueReference="26" variability="continuous">
-      <Real/>
-      <!--Index = 27-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(19)" initial="calculated" name="Out5[19]" valueReference="27" variability="continuous">
-      <Real/>
-      <!--Index = 28-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(20)" initial="calculated" name="Out5[20]" valueReference="28" variability="continuous">
-      <Real/>
-      <!--Index = 29-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(21)" initial="calculated" name="Out5[21]" valueReference="29" variability="continuous">
-      <Real/>
-      <!--Index = 30-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(22)" initial="calculated" name="Out5[22]" valueReference="30" variability="continuous">
-      <Real/>
-      <!--Index = 31-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(23)" initial="calculated" name="Out5[23]" valueReference="31" variability="continuous">
-      <Real/>
-      <!--Index = 32-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(24)" initial="calculated" name="Out5[24]" valueReference="32" variability="continuous">
-      <Real/>
-      <!--Index = 33-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(25)" initial="calculated" name="Out5[25]" valueReference="33" variability="continuous">
-      <Real/>
-      <!--Index = 34-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(26)" initial="calculated" name="Out5[26]" valueReference="34" variability="continuous">
-      <Real/>
-      <!--Index = 35-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(27)" initial="calculated" name="Out5[27]" valueReference="35" variability="continuous">
-      <Real/>
-      <!--Index = 36-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(28)" initial="calculated" name="Out5[28]" valueReference="36" variability="continuous">
-      <Real/>
-      <!--Index = 37-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(29)" initial="calculated" name="Out5[29]" valueReference="37" variability="continuous">
-      <Real/>
-      <!--Index = 38-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(30)" initial="calculated" name="Out5[30]" valueReference="38" variability="continuous">
-      <Real/>
-      <!--Index = 39-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(31)" initial="calculated" name="Out5[31]" valueReference="39" variability="continuous">
-      <Real/>
-      <!--Index = 40-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(32)" initial="calculated" name="Out5[32]" valueReference="40" variability="continuous">
-      <Real/>
-      <!--Index = 41-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out5(33)" initial="calculated" name="Out5[33]" valueReference="41" variability="continuous">
-      <Real/>
-      <!--Index = 42-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(1)" initial="calculated" name="Out1[1]" valueReference="42" variability="continuous">
-      <Real/>
-      <!--Index = 43-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(2)" initial="calculated" name="Out1[2]" valueReference="43" variability="continuous">
-      <Real/>
-      <!--Index = 44-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(3)" initial="calculated" name="Out1[3]" valueReference="44" variability="continuous">
-      <Real/>
-      <!--Index = 45-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(4)" initial="calculated" name="Out1[4]" valueReference="45" variability="continuous">
-      <Real/>
-      <!--Index = 46-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(5)" initial="calculated" name="Out1[5]" valueReference="46" variability="continuous">
-      <Real/>
-      <!--Index = 47-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out1(6)" initial="calculated" name="Out1[6]" valueReference="47" variability="continuous">
-      <Real/>
-      <!--Index = 48-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(1)" initial="calculated" name="Out2[1]" valueReference="48" variability="continuous">
-      <Real/>
-      <!--Index = 49-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(2)" initial="calculated" name="Out2[2]" valueReference="49" variability="continuous">
-      <Real/>
-      <!--Index = 50-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(3)" initial="calculated" name="Out2[3]" valueReference="50" variability="continuous">
-      <Real/>
-      <!--Index = 51-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(4)" initial="calculated" name="Out2[4]" valueReference="51" variability="continuous">
-      <Real/>
-      <!--Index = 52-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(5)" initial="calculated" name="Out2[5]" valueReference="52" variability="continuous">
-      <Real/>
-      <!--Index = 53-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out2(6)" initial="calculated" name="Out2[6]" valueReference="53" variability="continuous">
-      <Real/>
-      <!--Index = 54-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(1)" initial="calculated" name="Out3[1]" valueReference="54" variability="continuous">
-      <Real/>
-      <!--Index = 55-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(2)" initial="calculated" name="Out3[2]" valueReference="55" variability="continuous">
-      <Real/>
-      <!--Index = 56-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(3)" initial="calculated" name="Out3[3]" valueReference="56" variability="continuous">
-      <Real/>
-      <!--Index = 57-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(4)" initial="calculated" name="Out3[4]" valueReference="57" variability="continuous">
-      <Real/>
-      <!--Index = 58-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(5)" initial="calculated" name="Out3[5]" valueReference="58" variability="continuous">
-      <Real/>
-      <!--Index = 59-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out3(6)" initial="calculated" name="Out3[6]" valueReference="59" variability="continuous">
-      <Real/>
-      <!--Index = 60-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(1)" initial="calculated" name="Out4[1]" valueReference="60" variability="continuous">
-      <Real/>
-      <!--Index = 61-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(2)" initial="calculated" name="Out4[2]" valueReference="61" variability="continuous">
-      <Real/>
-      <!--Index = 62-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(3)" initial="calculated" name="Out4[3]" valueReference="62" variability="continuous">
-      <Real/>
-      <!--Index = 63-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(4)" initial="calculated" name="Out4[4]" valueReference="63" variability="continuous">
-      <Real/>
-      <!--Index = 64-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(5)" initial="calculated" name="Out4[5]" valueReference="64" variability="continuous">
-      <Real/>
-      <!--Index = 65-->
-    </ScalarVariable>
-    <ScalarVariable causality="output" description="Out4(6)" initial="calculated" name="Out4[6]" valueReference="65" variability="continuous">
-      <Real/>
-      <!--Index = 66-->
-    </ScalarVariable>
-    <ScalarVariable causality="independent" description="time" name="time" valueReference="66" variability="continuous">
-      <Real/>
-      <!--Index = 67-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Target.vx0" initial="exact" name="Kimm.Target.vx0" valueReference="67" variability="tunable">
-      <Real start="20"/>
-      <!--Index = 68-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Target.w0" initial="exact" name="Kimm.Target.w0" valueReference="68" variability="tunable">
-      <Real start="57.14285714285715"/>
-      <!--Index = 69-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.mass" initial="exact" name="Kimm.Body.mass" valueReference="69" variability="tunable">
-      <Real start="1600"/>
-      <!--Index = 70-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,1)" initial="exact" name="Kimm.Body.Inertia[1,1]" valueReference="70" variability="tunable">
-      <Real start="600"/>
-      <!--Index = 71-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,2)" initial="exact" name="Kimm.Body.Inertia[1,2]" valueReference="71" variability="tunable">
-      <Real start="3000"/>
-      <!--Index = 72-->
-    </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,3)" initial="exact" name="Kimm.Body.Inertia[1,3]" valueReference="72" variability="tunable">
-      <Real start="3200"/>
-      <!--Index = 73-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
@@ -335,52 +131,6 @@
       <Unknown index="18"/>
       <Unknown index="19"/>
       <Unknown index="20"/>
-      <Unknown index="21"/>
-      <Unknown index="22"/>
-      <Unknown index="23"/>
-      <Unknown index="24"/>
-      <Unknown index="25"/>
-      <Unknown index="26"/>
-      <Unknown index="27"/>
-      <Unknown index="28"/>
-      <Unknown index="29"/>
-      <Unknown index="30"/>
-      <Unknown index="31"/>
-      <Unknown index="32"/>
-      <Unknown index="33"/>
-      <Unknown index="34"/>
-      <Unknown index="35"/>
-      <Unknown index="36"/>
-      <Unknown index="37"/>
-      <Unknown index="38"/>
-      <Unknown index="39"/>
-      <Unknown index="40"/>
-      <Unknown index="41"/>
-      <Unknown index="42"/>
-      <Unknown index="43"/>
-      <Unknown index="44"/>
-      <Unknown index="45"/>
-      <Unknown index="46"/>
-      <Unknown index="47"/>
-      <Unknown index="48"/>
-      <Unknown index="49"/>
-      <Unknown index="50"/>
-      <Unknown index="51"/>
-      <Unknown index="52"/>
-      <Unknown index="53"/>
-      <Unknown index="54"/>
-      <Unknown index="55"/>
-      <Unknown index="56"/>
-      <Unknown index="57"/>
-      <Unknown index="58"/>
-      <Unknown index="59"/>
-      <Unknown index="60"/>
-      <Unknown index="61"/>
-      <Unknown index="62"/>
-      <Unknown index="63"/>
-      <Unknown index="64"/>
-      <Unknown index="65"/>
-      <Unknown index="66"/>
     </Outputs>
     <InitialUnknowns>
       <Unknown index="10"/>
@@ -394,52 +144,6 @@
       <Unknown index="18"/>
       <Unknown index="19"/>
       <Unknown index="20"/>
-      <Unknown index="21"/>
-      <Unknown index="22"/>
-      <Unknown index="23"/>
-      <Unknown index="24"/>
-      <Unknown index="25"/>
-      <Unknown index="26"/>
-      <Unknown index="27"/>
-      <Unknown index="28"/>
-      <Unknown index="29"/>
-      <Unknown index="30"/>
-      <Unknown index="31"/>
-      <Unknown index="32"/>
-      <Unknown index="33"/>
-      <Unknown index="34"/>
-      <Unknown index="35"/>
-      <Unknown index="36"/>
-      <Unknown index="37"/>
-      <Unknown index="38"/>
-      <Unknown index="39"/>
-      <Unknown index="40"/>
-      <Unknown index="41"/>
-      <Unknown index="42"/>
-      <Unknown index="43"/>
-      <Unknown index="44"/>
-      <Unknown index="45"/>
-      <Unknown index="46"/>
-      <Unknown index="47"/>
-      <Unknown index="48"/>
-      <Unknown index="49"/>
-      <Unknown index="50"/>
-      <Unknown index="51"/>
-      <Unknown index="52"/>
-      <Unknown index="53"/>
-      <Unknown index="54"/>
-      <Unknown index="55"/>
-      <Unknown index="56"/>
-      <Unknown index="57"/>
-      <Unknown index="58"/>
-      <Unknown index="59"/>
-      <Unknown index="60"/>
-      <Unknown index="61"/>
-      <Unknown index="62"/>
-      <Unknown index="63"/>
-      <Unknown index="64"/>
-      <Unknown index="65"/>
-      <Unknown index="66"/>
     </InitialUnknowns>
   </ModelStructure>
 </fmiModelDescription>

@@ -37,41 +37,42 @@ public class WheelGroundSensor : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,raycastDistance,groundLayer))
+
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
         {
             Penetration = wheelRadius - hit.distance;
 
-            if (Penetration>0)
-            {
-                IsGrounded = true;
+            //    if (Penetration > 0)
+            //    {
+            //        IsGrounded = true;
 
-                float springForce = Penetration * springStiffness;
+            //        //float springForce = Penetration * springStiffness;
 
-                float penetrationVelocity = (Penetration-lastPenetration)/Time.fixedDeltaTime;
-                lastPenetration=Penetration;
-                float damperForce = penetrationVelocity * springDamper;
+            //        //float penetrationVelocity = (Penetration - lastPenetration) / Time.fixedDeltaTime;
+            //        //lastPenetration = Penetration;
+            //        //float damperForce = penetrationVelocity * springDamper;
 
-                VerticalForce=springForce + damperForce;
+            //        //VerticalForce = springForce + damperForce;
 
-                if(VerticalForce<0)
-                {
-                    VerticalForce = 0.0f;
-                }
-            }
-            else
-            {
-                IsGrounded=false;
-                VerticalForce = 0.0f;
-                Penetration=0.0f;
-                lastPenetration = 0.0f;
-            }
-        }
-        else
-        {
-            IsGrounded = false;
-            VerticalForce = 0.0f;
-            Penetration = 0.0f;
-            lastPenetration = 0.0f;
+            //        //if (VerticalForce < 0)
+            //        //{
+            //        //    VerticalForce = 0.0f;
+            //        //}
+            //    }
+            //    else
+            //    {
+            //        IsGrounded = false;
+            //        VerticalForce = 0.0f;
+            //        Penetration = wheelRadius - raycastDistance; ;
+            //        lastPenetration = 0.0f;
+            //    }
+            //}
+            //else
+            //{
+            //    IsGrounded = false;
+            //    VerticalForce = 0.0f;
+            //    Penetration = wheelRadius - raycastDistance;
+            //    lastPenetration = 0.0f;
         }
     }
 #if UNITY_EDITOR

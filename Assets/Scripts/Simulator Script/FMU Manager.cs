@@ -20,6 +20,9 @@ public class FMUManager : MonoBehaviour
     public KeyCode forwardKey = KeyCode.W;
     public KeyCode backwardKey = KeyCode.S;
     public KeyCode stopKey = KeyCode.X;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode rightKey = KeyCode.D;
+
 
     private FMU fmu;
     private enum DriveState {Idle, Forward, Backward };
@@ -47,6 +50,7 @@ public class FMUManager : MonoBehaviour
             return;
         }
         Debug.Log($"Loading FMU: {fmuName}");
+        
         fmu = new FMU(fmuName, this.name);
         ResetFmu();
 
@@ -110,6 +114,9 @@ public class FMUManager : MonoBehaviour
             try
             {
                 fmu.SetReal(wheel.fmi_w_In, (double)wheel.targetSpeed);
+                //fmu.SetReal(wheel.fmi_gz, (double)wheel.sensor.Penetration);
+                fmu.SetReal(wheel.fmi_gz, 0);
+                Debug.Log($"Wheel {wheel.wheelId} Ground Penetration (m): {wheel.sensor.Penetration}");
             }
             catch(System.Exception e)
             {
@@ -136,9 +143,10 @@ public class FMUManager : MonoBehaviour
             fmu.GetReal("Orientation[3,1]") ,
             fmu.GetReal("Orientation[4,1]"),
         };
-        //transform.position = initialPosition + translator.TranslatePositionFromFMI(simPos);
-        transform.position = initialPosition;
-        //transform.position =  new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
+        transform.position = initialPosition + translator.TranslatePositionFromFMI(simPos);
+        //transform.position = new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
+        //transform.position = initialPosition + new Vector3((float)simPos[0], 0, 0);
+        transform.position = initialPosition + new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
         //transform.rotation = translator.TranslateRotationFromFMI(simRot);
         transform.rotation = new Quaternion((float)simRot[0], (float)simRot[1], (float)simRot[2], (float)simRot[3]);
 

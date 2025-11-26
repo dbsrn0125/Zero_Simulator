@@ -13,45 +13,109 @@ MonoBehaviour:
   m_Name: mfeval_robot_test
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00340033003100370064006300620036002d0066003400300065002d0034003800330038002d0032006300320031002d003600370065003500380063003700350035003000660030007d00
+  guid: 7b00310032003900320061006500340063002d0033006600340064002d0034006400370038002d0061003600380031002d003400330064006100390066003300340037006200620031007d00
   modelName: mfeval_robot_test
   coSimulation:
     modelIdentifier: mfeval_robot_test
   modelVariables:
-  - name: LeftWheelWInput
+  - name: FLWInput
     valueReference: 0
-    description: Left Wheel w Input
+    description: FL W Input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: RightWheelWInput
+  - name: FRWInput
     valueReference: 1
-    description: Right Wheel w Input
+    description: FR W Input
     causality: input
     variability: continuous
     initial: 
     type: 0
     start: 0
-  - name: LeftWheelAngleOutput
+  - name: RLWInput
     valueReference: 2
-    description: Left Wheel Angle Output
+    description: RL W Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RRWInput
+    valueReference: 3
+    description: RR W Input
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: FL_gz
+    valueReference: 4
+    description: FL_gz
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: FR_gz
+    valueReference: 5
+    description: FR_gz
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RL_gz
+    valueReference: 6
+    description: RL_gz
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: RR_gz
+    valueReference: 7
+    description: RR_gz
+    causality: input
+    variability: continuous
+    initial: 
+    type: 0
+    start: 0
+  - name: FLWheelOutput
+    valueReference: 8
+    description: FL Wheel Output
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
-  - name: RightWheelAngleOutput
-    valueReference: 3
-    description: Right Wheel Angle Output
+  - name: FRWheelOutput
+    valueReference: 9
+    description: FR Wheel Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RLWheelOutput
+    valueReference: 10
+    description: RL Wheel Output
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: RRWheelOutput
+    valueReference: 11
+    description: RR Wheel Output
     causality: output
     variability: continuous
     initial: calculated
     type: 0
     start: 
   - name: Position_x
-    valueReference: 4
+    valueReference: 12
     description: Position.x
     causality: output
     variability: continuous
@@ -59,7 +123,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Position_y
-    valueReference: 5
+    valueReference: 13
     description: Position.y
     causality: output
     variability: continuous
@@ -67,7 +131,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Position_z
-    valueReference: 6
+    valueReference: 14
     description: Position.z
     causality: output
     variability: continuous
@@ -75,7 +139,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Orientation[1,1]
-    valueReference: 7
+    valueReference: 15
     description: Orientation(1,1)
     causality: output
     variability: continuous
@@ -83,7 +147,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Orientation[2,1]
-    valueReference: 8
+    valueReference: 16
     description: Orientation(2,1)
     causality: output
     variability: continuous
@@ -91,7 +155,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Orientation[3,1]
-    valueReference: 9
+    valueReference: 17
     description: Orientation(3,1)
     causality: output
     variability: continuous
@@ -99,7 +163,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Orientation[4,1]
-    valueReference: 10
+    valueReference: 18
     description: Orientation(4,1)
     causality: output
     variability: continuous
@@ -107,7 +171,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: time
-    valueReference: 11
+    valueReference: 19
     description: time
     causality: independent
     variability: continuous
