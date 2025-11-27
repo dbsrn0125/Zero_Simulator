@@ -17,12 +17,14 @@ public class FMUManager : MonoBehaviour
 
     [Header("4. Keyboard Controls")]
     public float targetWheelSpeed_RadPerSec = 5.0f;
+    public float acceleration = 50.0f; // 초당 증가할 속도 (가속도)
+    public float maxSpeed = 500.0f;    // 최대 속도 제한
     public KeyCode forwardKey = KeyCode.W;
     public KeyCode backwardKey = KeyCode.S;
     public KeyCode stopKey = KeyCode.X;
     public KeyCode leftKey = KeyCode.A;
     public KeyCode rightKey = KeyCode.D;
-
+    
 
     private FMU fmu;
     private enum DriveState {Idle, Forward, Backward };
@@ -114,9 +116,10 @@ public class FMUManager : MonoBehaviour
             try
             {
                 fmu.SetReal(wheel.fmi_w_In, (double)wheel.targetSpeed);
-                //fmu.SetReal(wheel.fmi_gz, (double)wheel.sensor.Penetration);
-                fmu.SetReal(wheel.fmi_gz, 0);
-                Debug.Log($"Wheel {wheel.wheelId} Ground Penetration (m): {wheel.sensor.Penetration}");
+                Debug.Log($"Wheel {wheel.wheelId} Target Speed (rad/s): {wheel.targetSpeed}");
+                fmu.SetReal(wheel.fmi_gz, (double)wheel.sensor.Penetration);
+                //fmu.SetReal(wheel.fmi_gz, 0);
+                //Debug.Log($"Wheel {wheel.wheelId} Ground Penetration (m): {wheel.sensor.Penetration}");
             }
             catch(System.Exception e)
             {
@@ -143,7 +146,7 @@ public class FMUManager : MonoBehaviour
             fmu.GetReal("Orientation[3,1]") ,
             fmu.GetReal("Orientation[4,1]"),
         };
-        transform.position = initialPosition + translator.TranslatePositionFromFMI(simPos);
+        //transform.position = initialPosition + translator.TranslatePositionFromFMI(simPos);
         //transform.position = new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
         //transform.position = initialPosition + new Vector3((float)simPos[0], 0, 0);
         transform.position = initialPosition + new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
@@ -156,11 +159,12 @@ public class FMUManager : MonoBehaviour
             {
                 // 각 WheelController에 설정된 FMI 출력 변수명(string)을 사용
                 double wheelAngleRad = fmu.GetReal(wheel.fmi_Angle_Out);
-                Debug.Log($"Wheel {wheel.wheelId} Angle (rad): {wheelAngleRad}");
+                //Debug.Log($"Wheel {wheel.wheelId} Angle (rad): {wheelAngleRad}");
 
                 // 휠 Transform에 로컬 회전값 적용
                 Quaternion fmiRotation = Quaternion.Euler(0, (float)wheelAngleRad * Mathf.Rad2Deg, 0);
-                wheel.wheelTransform.localRotation = wheel.initialRotation * fmiRotation;
+                Quaternion zRotation = Quaternion.Euler(0, 0, 0);
+                wheel.wheelTransform.localRotation = wheel.initialRotation * zRotation * fmiRotation ;
             }
             catch (System.Exception e)
             {

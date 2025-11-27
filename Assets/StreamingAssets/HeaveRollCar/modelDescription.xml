@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-11-26T07:37:45Z" generationTool="Simulink (R2024b)" guid="{f6c4058e-3e4e-0fc8-b099-ad3382e16ed1}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.99">
+<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-11-27T11:39:06Z" generationTool="Simulink (R2024b)" guid="{f6c4058e-3e4e-0fc8-b099-ad3382e16ed1}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.101">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="HeaveRollCar"/>
   <UnitDefinitions>
     <Unit name="m"/>
@@ -116,6 +116,30 @@
     <ScalarVariable causality="independent" description="time" name="time" valueReference="20" variability="continuous">
       <Real/>
       <!--Index = 21-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Target.vx0" initial="exact" name="Kimm.Target.vx0" valueReference="21" variability="tunable">
+      <Real start="20"/>
+      <!--Index = 22-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Target.w0" initial="exact" name="Kimm.Target.w0" valueReference="22" variability="tunable">
+      <Real start="57.14285714285715"/>
+      <!--Index = 23-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.mass" initial="exact" name="Kimm.Body.mass" valueReference="23" variability="tunable">
+      <Real start="1600"/>
+      <!--Index = 24-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,1)" initial="exact" name="Kimm.Body.Inertia[1,1]" valueReference="24" variability="tunable">
+      <Real start="600"/>
+      <!--Index = 25-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,2)" initial="exact" name="Kimm.Body.Inertia[1,2]" valueReference="25" variability="tunable">
+      <Real start="3000"/>
+      <!--Index = 26-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,3)" initial="exact" name="Kimm.Body.Inertia[1,3]" valueReference="26" variability="tunable">
+      <Real start="3200"/>
+      <!--Index = 27-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
