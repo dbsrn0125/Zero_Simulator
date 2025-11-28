@@ -147,9 +147,9 @@ public class FMUManager : MonoBehaviour
             fmu.GetReal("Orientation[4,1]"),
         };
         //transform.position = initialPosition + translator.TranslatePositionFromFMI(simPos);
-        //transform.position = new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
+        transform.position = new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
         //transform.position = initialPosition + new Vector3((float)simPos[0], 0, 0);
-        transform.position = initialPosition + new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
+        //transform.position = initialPosition + new Vector3((float)simPos[0], (float)simPos[1], (float)simPos[2]);
         //transform.rotation = translator.TranslateRotationFromFMI(simRot);
         transform.rotation = new Quaternion((float)simRot[0], (float)simRot[1], (float)simRot[2], (float)simRot[3]);
 
@@ -161,10 +161,25 @@ public class FMUManager : MonoBehaviour
                 double wheelAngleRad = fmu.GetReal(wheel.fmi_Angle_Out);
                 //Debug.Log($"Wheel {wheel.wheelId} Angle (rad): {wheelAngleRad}");
 
+                wheel.fmi_wheelPosition = new Vector3(
+                    (float)fmu.GetReal($"{wheel.wheelId}_x"),
+                    (float)fmu.GetReal($"{wheel.wheelId}_y"),
+                    (float)fmu.GetReal($"{wheel.wheelId}_z")
+                );
+                double[] wheelrotation = new double[]
+                {
+                    fmu.GetReal($"{wheel.wheelId}_q[1,1]"),
+                    fmu.GetReal($"{wheel.wheelId}_q[2,1]"),
+                    fmu.GetReal($"{wheel.wheelId}_q[3,1]"),
+                    fmu.GetReal($"{wheel.wheelId}_q[4,1]")
+                };
+
+                wheel.fmi_wheelRotation = new Quaternion((float)wheelrotation[0], (float)wheelrotation[1], (float)wheelrotation[2], (float)wheelrotation[3]);
+
                 // 휠 Transform에 로컬 회전값 적용
                 Quaternion fmiRotation = Quaternion.Euler(0, (float)wheelAngleRad * Mathf.Rad2Deg, 0);
                 Quaternion zRotation = Quaternion.Euler(0, 0, 0);
-                wheel.wheelTransform.localRotation = wheel.initialRotation * zRotation * fmiRotation ;
+                wheel.wheelTransform.localRotation = wheel.initialRotation * wheel.fmi_wheelRotation * fmiRotation ;
             }
             catch (System.Exception e)
             {

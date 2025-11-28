@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeaveRollCar
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00660036006300340030003500380065002d0033006500340065002d0030006600630038002d0062003000390039002d006100640033003300380032006500310036006500640031007d00
+  guid: 7b00650066003600340064003900630063002d0062003800650031002d0031006100640039002d0066003600640065002d003700650033003800360037003200630064003500630034007d00
   modelName: HeaveRollCar
   coSimulation:
     modelIdentifier: HeaveRollCar
@@ -178,8 +178,120 @@ MonoBehaviour:
     initial: calculated
     type: 0
     start: 
-  - name: time
+  - name: FL_q[1,1]
     valueReference: 20
+    description: FL_q(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_q[2,1]
+    valueReference: 21
+    description: FL_q(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_q[3,1]
+    valueReference: 22
+    description: FL_q(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_q[4,1]
+    valueReference: 23
+    description: FL_q(4,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_x
+    valueReference: 24
+    description: FL_x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_y
+    valueReference: 25
+    description: FL_y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FL_z
+    valueReference: 26
+    description: FL_z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_q[1,1]
+    valueReference: 27
+    description: FR_q(1,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_q[2,1]
+    valueReference: 28
+    description: FR_q(2,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_q[3,1]
+    valueReference: 29
+    description: FR_q(3,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_q[4,1]
+    valueReference: 30
+    description: FR_q(4,1)
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_x
+    valueReference: 31
+    description: FR_x
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_y
+    valueReference: 32
+    description: FR_y
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: FR_z
+    valueReference: 33
+    description: FR_z
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 34
     description: time
     causality: independent
     variability: continuous
@@ -187,7 +299,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Kimm.Target.vx0
-    valueReference: 21
+    valueReference: 35
     description: Kimm.Target.vx0
     causality: parameter
     variability: tunable
@@ -195,7 +307,7 @@ MonoBehaviour:
     type: 0
     start: 20
   - name: Kimm.Target.w0
-    valueReference: 22
+    valueReference: 36
     description: Kimm.Target.w0
     causality: parameter
     variability: tunable
@@ -203,7 +315,7 @@ MonoBehaviour:
     type: 0
     start: 57.14285714285715
   - name: Kimm.Body.mass
-    valueReference: 23
+    valueReference: 37
     description: Kimm.Body.mass
     causality: parameter
     variability: tunable
@@ -211,7 +323,7 @@ MonoBehaviour:
     type: 0
     start: 1600
   - name: Kimm.Body.Inertia[1,1]
-    valueReference: 24
+    valueReference: 38
     description: Kimm.Body.Inertia(1,1)
     causality: parameter
     variability: tunable
@@ -219,7 +331,7 @@ MonoBehaviour:
     type: 0
     start: 600
   - name: Kimm.Body.Inertia[1,2]
-    valueReference: 25
+    valueReference: 39
     description: Kimm.Body.Inertia(1,2)
     causality: parameter
     variability: tunable
@@ -227,7 +339,7 @@ MonoBehaviour:
     type: 0
     start: 3000
   - name: Kimm.Body.Inertia[1,3]
-    valueReference: 26
+    valueReference: 40
     description: Kimm.Body.Inertia(1,3)
     causality: parameter
     variability: tunable

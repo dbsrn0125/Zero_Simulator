@@ -2204,7 +2204,7 @@ GameObject:
   - component: {fileID: 124956445}
   - component: {fileID: 124956446}
   m_Layer: 0
-  m_Name: Rear Left Wheel
+  m_Name: RL Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2507,7 +2507,7 @@ GameObject:
   - component: {fileID: 180654427}
   - component: {fileID: 180654428}
   m_Layer: 0
-  m_Name: Left Wheel
+  m_Name: FL Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,7 +2711,7 @@ GameObject:
   - component: {fileID: 277387365}
   - component: {fileID: 277387366}
   m_Layer: 0
-  m_Name: Rear Right Wheel
+  m_Name: RR Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2776,7 +2776,7 @@ GameObject:
   - component: {fileID: 292496329}
   - component: {fileID: 292496330}
   m_Layer: 0
-  m_Name: Right Wheel
+  m_Name: FR Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5094,10 +5094,10 @@ Transform:
   - {fileID: 1658684074}
   - {fileID: 1343007884}
   - {fileID: 180654427}
-  - {fileID: 124956445}
-  - {fileID: 265695804}
   - {fileID: 292496329}
+  - {fileID: 124956445}
   - {fileID: 277387365}
+  - {fileID: 265695804}
   m_Father: {fileID: 699326752}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &997977585
@@ -5142,6 +5142,8 @@ MonoBehaviour:
     fmi_w_In: FLWIn
     fmi_Angle_Out: FLWheelOutput
     fmi_gz: FL_gz
+    fmi_wheelPosition: {x: 0, y: 0, z: 0}
+    fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
   - wheelId: FR
@@ -5150,6 +5152,8 @@ MonoBehaviour:
     fmi_w_In: FRWIn
     fmi_Angle_Out: FRWheelOutput
     fmi_gz: FR_gz
+    fmi_wheelPosition: {x: 0, y: 0, z: 0}
+    fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
   - wheelId: RL
@@ -5158,6 +5162,8 @@ MonoBehaviour:
     fmi_w_In: RLWIn
     fmi_Angle_Out: RLWheelOutput
     fmi_gz: RL_gz
+    fmi_wheelPosition: {x: 0, y: 0, z: 0}
+    fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
   - wheelId: RR
@@ -5166,9 +5172,13 @@ MonoBehaviour:
     fmi_w_In: RRWIn
     fmi_Angle_Out: RRWheelOutput
     fmi_gz: RR_gz
+    fmi_wheelPosition: {x: 0, y: 0, z: 0}
+    fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
   targetWheelSpeed_RadPerSec: 5
+  acceleration: 50
+  maxSpeed: 500
   forwardKey: 119
   backwardKey: 115
   stopKey: 120
@@ -7951,7 +7961,7 @@ GameObject:
   - component: {fileID: 1658684076}
   - component: {fileID: 1658684075}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

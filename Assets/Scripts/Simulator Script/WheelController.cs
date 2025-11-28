@@ -14,6 +14,8 @@ public class WheelController
     public string fmi_w_In;
     public string fmi_Angle_Out;
     public string fmi_gz;
+    public Vector3 fmi_wheelPosition;
+    public Quaternion fmi_wheelRotation;
 
     public float targetSpeed = 0.0f;
     public Quaternion initialRotation;
