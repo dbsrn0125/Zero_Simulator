@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-11-28T06:42:55Z" generationTool="Simulink (R2024b)" guid="{ef64d9cc-b8e1-1ad9-f6de-7e38672cd5c4}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.110">
+<fmiModelDescription description="Vehicle Dynamics, Heave and Roll DOFs Per Axle" fmiVersion="2.0" generationDateAndTime="2025-12-01T09:00:55Z" generationTool="Simulink (R2024b)" guid="{f41ef2c9-2831-8c32-dcee-32cc93e4c1d5}" modelName="HeaveRollCar" numberOfEventIndicators="0" variableNamingConvention="structured" version="12.124">
   <CoSimulation canBeInstantiatedOnlyOncePerProcess="true" canGetAndSetFMUstate="true" canHandleVariableCommunicationStepSize="false" canNotUseMemoryManagementFunctions="true" canSerializeFMUstate="true" modelIdentifier="HeaveRollCar"/>
   <UnitDefinitions>
     <Unit name="m"/>
@@ -36,6 +36,14 @@
           <Outport blockPath="HeaveRollCar/FR_x" dataType="double" dimension="[1]" portName="FR_x" portNumber="14" sampleTime="[0 0]" uniquePortName="FR_x" unit="m"/>
           <Outport blockPath="HeaveRollCar/FR_y" dataType="double" dimension="[1]" portName="FR_y" portNumber="15" sampleTime="[0 0]" uniquePortName="FR_y" unit="m"/>
           <Outport blockPath="HeaveRollCar/FR_z" dataType="double" dimension="[1]" portName="FR_z" portNumber="16" sampleTime="[0 0]" uniquePortName="FR_z" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RL_q" dataType="double" dimension="[4  1]" portName="RL_q" portNumber="17" sampleTime="[0 0]" uniquePortName="RL_q" unit=""/>
+          <Outport blockPath="HeaveRollCar/RL_x" dataType="double" dimension="[1]" portName="RL_x" portNumber="18" sampleTime="[0 0]" uniquePortName="RL_x" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RL_y" dataType="double" dimension="[1]" portName="RL_y" portNumber="19" sampleTime="[0 0]" uniquePortName="RL_y" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RL_z" dataType="double" dimension="[1]" portName="RL_z" portNumber="20" sampleTime="[0 0]" uniquePortName="RL_z" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RR_q" dataType="double" dimension="[4  1]" portName="RR_q" portNumber="21" sampleTime="[0 0]" uniquePortName="RR_q" unit=""/>
+          <Outport blockPath="HeaveRollCar/RR_x" dataType="double" dimension="[1]" portName="RR_x" portNumber="22" sampleTime="[0 0]" uniquePortName="RR_x" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RR_y" dataType="double" dimension="[1]" portName="RR_y" portNumber="23" sampleTime="[0 0]" uniquePortName="RR_y" unit="m"/>
+          <Outport blockPath="HeaveRollCar/RR_z" dataType="double" dimension="[1]" portName="RR_z" portNumber="24" sampleTime="[0 0]" uniquePortName="RR_z" unit="m"/>
         </SimulinkModelInterface>
       </Simulink>
     </Tool>
@@ -177,33 +185,89 @@
       <Real unit="m"/>
       <!--Index = 34-->
     </ScalarVariable>
-    <ScalarVariable causality="independent" description="time" name="time" valueReference="34" variability="continuous">
+    <ScalarVariable causality="output" description="RL_q(1,1)" initial="calculated" name="RL_q[1,1]" valueReference="34" variability="continuous">
       <Real/>
       <!--Index = 35-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Target.vx0" initial="exact" name="Kimm.Target.vx0" valueReference="35" variability="tunable">
-      <Real start="20"/>
+    <ScalarVariable causality="output" description="RL_q(2,1)" initial="calculated" name="RL_q[2,1]" valueReference="35" variability="continuous">
+      <Real/>
       <!--Index = 36-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Target.w0" initial="exact" name="Kimm.Target.w0" valueReference="36" variability="tunable">
-      <Real start="57.14285714285715"/>
+    <ScalarVariable causality="output" description="RL_q(3,1)" initial="calculated" name="RL_q[3,1]" valueReference="36" variability="continuous">
+      <Real/>
       <!--Index = 37-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.mass" initial="exact" name="Kimm.Body.mass" valueReference="37" variability="tunable">
-      <Real start="1600"/>
+    <ScalarVariable causality="output" description="RL_q(4,1)" initial="calculated" name="RL_q[4,1]" valueReference="37" variability="continuous">
+      <Real/>
       <!--Index = 38-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,1)" initial="exact" name="Kimm.Body.Inertia[1,1]" valueReference="38" variability="tunable">
-      <Real start="600"/>
+    <ScalarVariable causality="output" description="RL_x" initial="calculated" name="RL_x" valueReference="38" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 39-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,2)" initial="exact" name="Kimm.Body.Inertia[1,2]" valueReference="39" variability="tunable">
-      <Real start="3000"/>
+    <ScalarVariable causality="output" description="RL_y" initial="calculated" name="RL_y" valueReference="39" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 40-->
     </ScalarVariable>
-    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,3)" initial="exact" name="Kimm.Body.Inertia[1,3]" valueReference="40" variability="tunable">
-      <Real start="3200"/>
+    <ScalarVariable causality="output" description="RL_z" initial="calculated" name="RL_z" valueReference="40" variability="continuous">
+      <Real unit="m"/>
       <!--Index = 41-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_q(1,1)" initial="calculated" name="RR_q[1,1]" valueReference="41" variability="continuous">
+      <Real/>
+      <!--Index = 42-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_q(2,1)" initial="calculated" name="RR_q[2,1]" valueReference="42" variability="continuous">
+      <Real/>
+      <!--Index = 43-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_q(3,1)" initial="calculated" name="RR_q[3,1]" valueReference="43" variability="continuous">
+      <Real/>
+      <!--Index = 44-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_q(4,1)" initial="calculated" name="RR_q[4,1]" valueReference="44" variability="continuous">
+      <Real/>
+      <!--Index = 45-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_x" initial="calculated" name="RR_x" valueReference="45" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 46-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_y" initial="calculated" name="RR_y" valueReference="46" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 47-->
+    </ScalarVariable>
+    <ScalarVariable causality="output" description="RR_z" initial="calculated" name="RR_z" valueReference="47" variability="continuous">
+      <Real unit="m"/>
+      <!--Index = 48-->
+    </ScalarVariable>
+    <ScalarVariable causality="independent" description="time" name="time" valueReference="48" variability="continuous">
+      <Real/>
+      <!--Index = 49-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Target.vx0" initial="exact" name="Kimm.Target.vx0" valueReference="49" variability="tunable">
+      <Real start="20"/>
+      <!--Index = 50-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Target.w0" initial="exact" name="Kimm.Target.w0" valueReference="50" variability="tunable">
+      <Real start="57.14285714285715"/>
+      <!--Index = 51-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.mass" initial="exact" name="Kimm.Body.mass" valueReference="51" variability="tunable">
+      <Real start="1600"/>
+      <!--Index = 52-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,1)" initial="exact" name="Kimm.Body.Inertia[1,1]" valueReference="52" variability="tunable">
+      <Real start="600"/>
+      <!--Index = 53-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,2)" initial="exact" name="Kimm.Body.Inertia[1,2]" valueReference="53" variability="tunable">
+      <Real start="3000"/>
+      <!--Index = 54-->
+    </ScalarVariable>
+    <ScalarVariable causality="parameter" description="Kimm.Body.Inertia(1,3)" initial="exact" name="Kimm.Body.Inertia[1,3]" valueReference="54" variability="tunable">
+      <Real start="3200"/>
+      <!--Index = 55-->
     </ScalarVariable>
   </ModelVariables>
   <ModelStructure>
@@ -233,6 +297,20 @@
       <Unknown index="32"/>
       <Unknown index="33"/>
       <Unknown index="34"/>
+      <Unknown index="35"/>
+      <Unknown index="36"/>
+      <Unknown index="37"/>
+      <Unknown index="38"/>
+      <Unknown index="39"/>
+      <Unknown index="40"/>
+      <Unknown index="41"/>
+      <Unknown index="42"/>
+      <Unknown index="43"/>
+      <Unknown index="44"/>
+      <Unknown index="45"/>
+      <Unknown index="46"/>
+      <Unknown index="47"/>
+      <Unknown index="48"/>
     </Outputs>
     <InitialUnknowns>
       <Unknown index="10"/>
@@ -260,6 +338,20 @@
       <Unknown index="32"/>
       <Unknown index="33"/>
       <Unknown index="34"/>
+      <Unknown index="35"/>
+      <Unknown index="36"/>
+      <Unknown index="37"/>
+      <Unknown index="38"/>
+      <Unknown index="39"/>
+      <Unknown index="40"/>
+      <Unknown index="41"/>
+      <Unknown index="42"/>
+      <Unknown index="43"/>
+      <Unknown index="44"/>
+      <Unknown index="45"/>
+      <Unknown index="46"/>
+      <Unknown index="47"/>
+      <Unknown index="48"/>
     </InitialUnknowns>
   </ModelStructure>
 </fmiModelDescription>

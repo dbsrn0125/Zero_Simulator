@@ -179,7 +179,8 @@ public class FMUManager : MonoBehaviour
                 // 휠 Transform에 로컬 회전값 적용
                 Quaternion fmiRotation = Quaternion.Euler(0, (float)wheelAngleRad * Mathf.Rad2Deg, 0);
                 Quaternion zRotation = Quaternion.Euler(0, 0, 0);
-                wheel.wheelTransform.localRotation = wheel.initialRotation * wheel.fmi_wheelRotation * fmiRotation ;
+                wheel.wheelTransform.localRotation = wheel.initialRotation  * wheel.fmi_wheelRotation * fmiRotation ;
+                //wheel.wheelTransform.localRotation = wheel.initialRotation * zRotation * fmiRotation;
             }
             catch (System.Exception e)
             {

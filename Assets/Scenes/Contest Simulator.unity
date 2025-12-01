@@ -5155,7 +5155,7 @@ MonoBehaviour:
     fmi_wheelPosition: {x: 0, y: 0, z: 0}
     fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
-    initialRotation: {x: 0, y: 0, z: 0, w: 0}
+    initialRotation: {x: 0, y: 0, z: 0, w: 1}
   - wheelId: RL
     sensor: {fileID: 124956446}
     wheelTransform: {fileID: 124956445}
