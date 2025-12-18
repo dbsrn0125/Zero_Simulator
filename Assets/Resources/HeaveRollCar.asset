@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeaveRollCar
   m_EditorClassIdentifier: 
   fmiVersion: 2.0
-  guid: 7b00660034003100650066003200630039002d0032003800330031002d0038006300330032002d0064006300650065002d003300320063006300390033006500340063003100640035007d00
+  guid: 7b00660066006600640038003900350032002d0038003900620035002d0032003900660038002d0063003700320033002d006300650034003100390062003200650030006500650036007d00
   modelName: HeaveRollCar
   coSimulation:
     modelIdentifier: HeaveRollCar
@@ -402,8 +402,24 @@ MonoBehaviour:
     initial: calculated
     type: 0
     start: 
-  - name: time
+  - name: ToeLeft
     valueReference: 48
+    description: Toe Left
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: ToeRight
+    valueReference: 49
+    description: Toe Right
+    causality: output
+    variability: continuous
+    initial: calculated
+    type: 0
+    start: 
+  - name: time
+    valueReference: 50
     description: time
     causality: independent
     variability: continuous
@@ -411,7 +427,7 @@ MonoBehaviour:
     type: 0
     start: 
   - name: Kimm.Target.vx0
-    valueReference: 49
+    valueReference: 51
     description: Kimm.Target.vx0
     causality: parameter
     variability: tunable
@@ -419,7 +435,7 @@ MonoBehaviour:
     type: 0
     start: 20
   - name: Kimm.Target.w0
-    valueReference: 50
+    valueReference: 52
     description: Kimm.Target.w0
     causality: parameter
     variability: tunable
@@ -427,7 +443,7 @@ MonoBehaviour:
     type: 0
     start: 57.14285714285715
   - name: Kimm.Body.mass
-    valueReference: 51
+    valueReference: 53
     description: Kimm.Body.mass
     causality: parameter
     variability: tunable
@@ -435,7 +451,7 @@ MonoBehaviour:
     type: 0
     start: 1600
   - name: Kimm.Body.Inertia[1,1]
-    valueReference: 52
+    valueReference: 54
     description: Kimm.Body.Inertia(1,1)
     causality: parameter
     variability: tunable
@@ -443,7 +459,7 @@ MonoBehaviour:
     type: 0
     start: 600
   - name: Kimm.Body.Inertia[1,2]
-    valueReference: 53
+    valueReference: 55
     description: Kimm.Body.Inertia(1,2)
     causality: parameter
     variability: tunable
@@ -451,7 +467,7 @@ MonoBehaviour:
     type: 0
     start: 3000
   - name: Kimm.Body.Inertia[1,3]
-    valueReference: 54
+    valueReference: 56
     description: Kimm.Body.Inertia(1,3)
     causality: parameter
     variability: tunable

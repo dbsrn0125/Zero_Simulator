@@ -3724,7 +3724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699326752}
   m_Layer: 0
-  m_Name: Robot
+  m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5051,7 +5051,7 @@ GameObject:
   - component: {fileID: 997977585}
   - component: {fileID: 997977582}
   m_Layer: 0
-  m_Name: Robot chassis
+  m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5135,6 +5135,10 @@ MonoBehaviour:
   fmuName: HeaveRollCar
   initialPosition: {x: 0, y: 0, z: 0}
   translator: {fileID: 997977585}
+  fmi_qWhl: qWhl
+  fmi_toe_left: ToeLeft
+  fmi_toe_right: ToeRight
+  targetSteer: 0
   wheels:
   - wheelId: FL
     sensor: {fileID: 180654428}
@@ -5176,6 +5180,7 @@ MonoBehaviour:
     fmi_wheelRotation: {x: 0, y: 0, z: 0, w: 0}
     targetSpeed: 0
     initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetSteerAngle_Rad: 5
   targetWheelSpeed_RadPerSec: 5
   acceleration: 50
   maxSpeed: 500
